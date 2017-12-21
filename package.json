@@ -4,9 +4,15 @@
   "private": true,
   "scripts": {
     "build": "webpack",
-    "start": "npm run build && node ./bin/www"
+    "build-prod": "webpack -p",
+    "watch": "webpack -w",
+    "start": "node ./bin/www"
   },
   "dependencies": {
+    "@types/react": "^16.0.31",
+    "@types/react-dom": "^16.0.3",
+    "@types/react-redux": "^5.0.14",
+    "@types/redux": "^3.6.0",
     "awesome-typescript-loader": "^3.4.1",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
@@ -14,6 +20,10 @@
     "express": "~4.15.5",
     "morgan": "~1.9.0",
     "pug": "2.0.0-beta11",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
     "serve-favicon": "~2.4.5",
     "source-map-loader": "^0.2.3",
     "tslint": "^5.8.0",
