@@ -1,0 +1,1 @@
+export const SELECT_ARTICLE = 'SELECT_ARTICLE';

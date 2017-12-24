@@ -1,27 +1,16 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { AppState, ArticlesState } from '../types';
+import ArticleList from '../containers/ArticleList';
+import Player from './Player';
 
-interface AppProps {
-  articles: ArticlesState;
-}
-
-class App extends React.Component<AppProps> {
+class App extends React.Component {
   public render() {
-    const { articles } = this.props;
-
     return (
       <React.Fragment>
-        {articles.items}
+        <ArticleList />
+        <Player />
       </React.Fragment>
     );
   }
 }
 
-const mapStateToProps = (state: AppState) => {
-  return {
-    articles: state.articles
-  };
-};
-
-export default connect(mapStateToProps)(App);
+export default App;
