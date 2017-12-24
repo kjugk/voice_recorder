@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { MouseEvent } from 'react';
 
 interface ListItemProps {
   id: number;
@@ -7,8 +8,13 @@ interface ListItemProps {
 }
 
 export const ListItem: React.SFC<ListItemProps> = (props) => {
-  return(
-    <li onClick={() => {props.onClick(props.id); }}>
+  return (
+    <li
+      onClick={(e: MouseEvent<HTMLElement>) => {
+        e.stopPropagation();
+        props.onClick(props.id);
+      }}
+    >
       {props.title}
     </li>
   );
