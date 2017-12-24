@@ -3,5 +3,11 @@ export interface AppState {
 }
 
 export interface ArticlesState {
-  items: object[];
+  selectedId?: number;
+  items: ArticleItemState[];
+}
+
+export interface ArticleItemState {
+  id: number;
+  title: string;
 }
