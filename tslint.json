@@ -8,7 +8,8 @@
         "quotemark": [true, "single", "jsx-double"],
         "interface-name": [true, "never-prefix"],
         "ordered-imports": false,
-        "trailing-comma": [true, {"multiline": "never", "singleline": "never"}]
+        "trailing-comma": [true, {"multiline": "never", "singleline": "never"}],
+        "object-literal-sort-keys": false
     },
     "rulesDirectory": []
 }
