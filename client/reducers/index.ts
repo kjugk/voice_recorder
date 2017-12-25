@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import { articles } from './articles';
+import { player } from './player';
 
 const rootReducer = combineReducers({
-  articles
+  articles,
+  player
 });
 
 export default rootReducer;

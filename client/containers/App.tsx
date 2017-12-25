@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ArticleList from '../containers/ArticleList';
-import Player from './Player';
+import Player from './PlayerContainer';
 
 class App extends React.Component {
   public render() {

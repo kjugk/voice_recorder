@@ -10,6 +10,7 @@ export const articles = (state: ArticlesState = initialState, action: any): Arti
   switch (action.type) {
     case SELECT_ARTICLE:
       return { ...state, selectedId: action.payload.id };
+
     default:
       return state;
   }
