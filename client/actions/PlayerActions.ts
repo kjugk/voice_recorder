@@ -1,15 +1,22 @@
-import { PLAY, PAUSE } from '../constants';
+import * as Constants from '../constants';
 
 export const play = () => {
   return {
-    type: PLAY,
+    type: Constants.PLAY,
     payload: {}
   };
 };
 
 export const pause = () => {
   return {
-    type: PAUSE,
+    type: Constants.PAUSE,
+    payload: {}
+  };
+};
+
+export const loadTrack = (url: string) => {
+  return {
+    type: Constants.LOAD_TRACK,
     payload: {}
   };
 };

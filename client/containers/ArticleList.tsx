@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
-import { AppState, ArticlesState } from '../types';
+import * as Types from '../types';
+import * as ArticleActions from '../actions/ArticleActions';
 import { ListItem } from '../components/articles/ListItem';
 
-import * as ArticleActions from '../actions/ArticleActions';
-
 interface ArticleListProps {
-  articles: ArticlesState;
+  articles: Types.ArticlesState;
   selectArticle: (id: number) => any;
   fetchArticles: () => any;
 }
@@ -40,12 +39,12 @@ class ArticleList extends React.Component<ArticleListProps> {
     );
   }
 
-  private handleSelect(id: number) {
+  private handleSelect(id: number): void {
     this.props.selectArticle(id);
   }
 }
 
-const mapStateToProps = (state: AppState) => {
+const mapStateToProps = (state: Types.AppState) => {
   return {
     articles: state.articles
   };

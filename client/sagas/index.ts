@@ -14,7 +14,5 @@ function* watchFetchArticles() {
 }
 
 export default function* rootSaga() {
-  yield all([
-    fork(watchFetchArticles)
-  ]);
+  yield all([fork(watchFetchArticles)]);
 }

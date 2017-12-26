@@ -1,5 +1,5 @@
 import { PlayerState } from '../types';
-import { PLAY, PAUSE } from '../constants';
+import * as Constants from '../constants';
 
 const initialState: PlayerState = {
   isPlaying: false,
@@ -8,10 +8,10 @@ const initialState: PlayerState = {
 
 export const player = (state: PlayerState = initialState, action: any): PlayerState => {
   switch (action.type) {
-    case PLAY:
+    case Constants.PLAY:
       return { ...state, isPlaying: true, isLoading: false };
 
-    case PAUSE:
+    case Constants.PAUSE:
       return { ...state, isPlaying: false };
 
     default:
