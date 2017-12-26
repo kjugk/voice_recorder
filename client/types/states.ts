@@ -17,4 +17,5 @@ export interface ArticleItemState {
 export interface PlayerState {
   isPlaying: boolean;
   isLoading: boolean;
+  duration: number;
 }

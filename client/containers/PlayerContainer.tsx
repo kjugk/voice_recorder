@@ -1,7 +1,3 @@
-/*
-  TODO: selectedArticle が undef => articleに変わった時に、audioファイルをload して、自動playする。
-*/
-
 import * as React from 'react';
 import { AppState, ArticlesState, ArticleItemState, PlayerState } from '../types/index';
 import { connect, Dispatch } from 'react-redux';
@@ -14,14 +10,15 @@ interface PlayerProps {
   selectedArticle: ArticleItemState;
   pause: () => any;
   play: () => any;
+  load: (url: string) => any;
 }
 
 class PlayerContainer extends React.Component<PlayerProps> {
   public componentDidUpdate(prevProps: PlayerProps) {
     if (!prevProps.selectedArticle && this.props.selectedArticle) {
-      alert('start playing!');
+      this.props.load('http://localhost:3000/audio/sample.mp3');
     } else if (prevProps.selectedArticle.id !== this.props.selectedArticle.id) {
-      alert('change track!');
+      this.props.load('http://localhost:3000/audio/sample.mp3');
     }
   }
 
@@ -36,6 +33,7 @@ class PlayerContainer extends React.Component<PlayerProps> {
       <Player
         isPlaying={player.isPlaying}
         title={selectedArticle.title}
+        duration={player.duration}
         onPlay={play}
         onPause={pause}
       />
@@ -53,7 +51,8 @@ const mapStateToProps = (state: AppState) => {
 const mapDispatchToProps = (dispatch: Dispatch<any>) => {
   return {
     pause: () => dispatch(PlayerActions.pause()),
-    play: () => dispatch(PlayerActions.play())
+    play: () => dispatch(PlayerActions.play()),
+    load: (url: string) => dispatch(PlayerActions.loadTrack(url))
   };
 };
 

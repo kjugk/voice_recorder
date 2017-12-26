@@ -17,6 +17,17 @@ export const pause = () => {
 export const loadTrack = (url: string) => {
   return {
     type: Constants.LOAD_TRACK,
-    payload: {}
+    payload: {
+      url
+    }
+  };
+};
+
+export const receiveTrack = (duration: number) => {
+  return {
+    type: Constants.RECEIVE_TRACK,
+    payload: {
+      duration
+    }
   };
 };

@@ -4,7 +4,7 @@ export interface PlayerProps {
   isPlaying: boolean;
   title: string;
   duration?: number;
-  length?: number;
+  currentDuration?: number;
   onPlay: () => any;
   onPause: () => any;
 }
@@ -15,7 +15,7 @@ export class Player extends React.Component<PlayerProps> {
 
     return (
       <div>
-        <h5>{title}</h5>
+        <h5>{title}{this.props.duration}</h5>
         {this.renderButton()}
       </div>
     );
@@ -25,9 +25,9 @@ export class Player extends React.Component<PlayerProps> {
     const { isPlaying, onPause, onPlay } = this.props;
 
     if (isPlaying) {
-      return <button onClick={onPlay}>pause</button>;
+      return <button onClick={onPause}>pause</button>;
     } else {
-      return <button onClick={onPause}>play</button>;
+      return <button onClick={onPlay}>play</button>;
     }
   }
 }
