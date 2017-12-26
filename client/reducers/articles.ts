@@ -1,14 +1,21 @@
 import { ArticlesState } from '../types';
-import { SELECT_ARTICLE } from '../constants';
+import * as Constants from '../constants';
 
 export const initialState: ArticlesState = {
-  items: [{ id: 1, title: 'foo' }, { id: 2, title: 'bar' }, { id: 3, title: 'hoge' }],
+  items: [],
+  isFetching: false,
   selectedId: undefined
 };
 
 export const articles = (state: ArticlesState = initialState, action: any): ArticlesState => {
   switch (action.type) {
-    case SELECT_ARTICLE:
+    case Constants.FETCH_ARTICLES:
+      return { ...state, isFetching: true };
+
+    case Constants.RECEIVE_ARTICLES:
+      return { ...state, isFetching: false, items: action.payload.articles };
+
+    case Constants.SELECT_ARTICLE:
       return { ...state, selectedId: action.payload.id };
 
     default:
