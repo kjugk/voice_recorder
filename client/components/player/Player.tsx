@@ -12,7 +12,7 @@ export interface PlayerProps {
 
 export class Player extends React.Component<PlayerProps> {
   public render() {
-    const { title, isLoading, isPlaying } = this.props;
+    const { title, isLoading, isPlaying, curPos, duration } = this.props;
 
     if (isLoading) {
       return <div>Loading...</div>;
@@ -22,7 +22,7 @@ export class Player extends React.Component<PlayerProps> {
       <div>
         <h5>{title}</h5>
         <div>
-          {this.props.curPos}/{this.props.duration}
+          {curPos}/{duration}
         </div>
         {this.renderButton()}
       </div>

@@ -14,6 +14,7 @@ let startTime: number;
 function lll(url: string) {
   return new Promise((resolve) => {
     const xhr = new XMLHttpRequest();
+
     xhr.open('GET', url, true);
     xhr.responseType = 'arraybuffer';
     xhr.onload = () => {
@@ -30,6 +31,7 @@ function play() {
   startTime = context.currentTime;
 
   source = context.createBufferSource();
+  source.buffer = buffer;
   source.connect(context.destination);
   source.start(0, startOffset % buffer.duration);
 }
@@ -42,18 +44,44 @@ function pause() {
   source.stop(0);
 }
 
-let pos: number = 0;
+function stop() {
+  if (!source) {
+    return;
+  }
+  startOffset = 0;
+  source.stop(0);
+}
+
+function getDuration(): number {
+  return startOffset + (context.currentTime - startTime);
+}
+
+function isEnded(): boolean {
+  return getDuration() >= buffer.duration;
+}
+
 function* watchProgress() {
+  yield call(play);
+
   while (true) {
-    yield delay(100);
-    yield put(PlayerActions.progress((pos += 1000)));
+    yield delay(250);
+    yield put(PlayerActions.progress((getDuration())));
 
     const state = yield select();
-    // 終わってたら、breakする。
-    if (!state.player.isPlaying) {
+    if (isEnded()) {
+      yield call(stop);
+      yield put(PlayerActions.stop());
+      break;
+
+    } else if (!state.player.isPlaying) {
+      yield call(pause);
       break;
     }
   }
+}
+
+function* playTrack() {
+  yield put(PlayerActions.play());
 }
 
 function* fetchArticles() {
@@ -63,9 +91,11 @@ function* fetchArticles() {
 }
 
 function* loadTrack(action: any) {
+  yield call(stop);
   const duration = yield call(lll, action.payload.url);
+
   yield put(PlayerActions.receiveTrack(duration));
-  yield put(PlayerActions.play());
+  yield call(playTrack);
 }
 
 function* watchFetchArticles() {
@@ -77,7 +107,7 @@ function* watchLoadTrack() {
 }
 
 function* watchPlay() {
-  yield takeEvery(Constants.PLAY, watchProgress);
+  yield takeLatest(Constants.PLAY, watchProgress);
 }
 
 export default function* rootSaga() {

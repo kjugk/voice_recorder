@@ -1,4 +1,3 @@
-import { RECEIVE_PROGRESS } from './../constants/index';
 import * as Types from '../types';
 import * as Constants from '../constants';
 
@@ -14,7 +13,7 @@ const initialState: Types.PlayerState = {
 export const player = (state: Types.PlayerState = initialState, action: any): Types.PlayerState => {
   switch (action.type) {
     case Constants.LOAD_TRACK:
-      return { ...state, isLoading: true };
+      return { ...initialState, isLoading: true };
 
     case Constants.RECEIVE_TRACK:
       return {
@@ -30,7 +29,7 @@ export const player = (state: Types.PlayerState = initialState, action: any): Ty
       return { ...state, isPlaying: false };
 
     case Constants.STOP:
-      return initialState;
+      return { ...state, isPlaying: false };
 
     case Constants.RECEIVE_PROGRESS:
       return { ...state, curPos: action.payload.curPos };
