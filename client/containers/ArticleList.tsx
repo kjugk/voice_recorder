@@ -13,7 +13,6 @@ interface ArticleListProps {
 class ArticleList extends React.Component<ArticleListProps> {
   constructor(props: ArticleListProps) {
     super(props);
-    this.handleSelect = this.handleSelect.bind(this);
   }
 
   public componentDidMount() {
@@ -31,16 +30,12 @@ class ArticleList extends React.Component<ArticleListProps> {
               key={article.id}
               id={article.id}
               title={article.title}
-              onClick={this.handleSelect}
+              onClick={this.props.selectArticle}
             />
           );
         })}
       </ul>
     );
-  }
-
-  private handleSelect(id: number): void {
-    this.props.selectArticle(id);
   }
 }
 

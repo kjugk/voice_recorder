@@ -1,4 +1,4 @@
-import { all, call, fork, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { all, call, fork, put, select, takeEvery, takeLatest } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import * as Constants from '../constants';
 import * as ArticleActions from '../actions/ArticleActions';
@@ -35,9 +35,25 @@ function play() {
 }
 
 function pause() {
-  if (!source) { return; }
+  if (!source) {
+    return;
+  }
   startOffset = context.currentTime - startTime;
   source.stop(0);
+}
+
+let pos: number = 0;
+function* watchProgress() {
+  while (true) {
+    yield delay(100);
+    yield put(PlayerActions.progress((pos += 1000)));
+
+    const state = yield select();
+    // 終わってたら、breakする。
+    if (!state.player.isPlaying) {
+      break;
+    }
+  }
 }
 
 function* fetchArticles() {
@@ -60,6 +76,10 @@ function* watchLoadTrack() {
   yield takeEvery(Constants.LOAD_TRACK, loadTrack);
 }
 
+function* watchPlay() {
+  yield takeEvery(Constants.PLAY, watchProgress);
+}
+
 export default function* rootSaga() {
-  yield all([fork(watchFetchArticles), fork(watchLoadTrack)]);
+  yield all([fork(watchFetchArticles), fork(watchLoadTrack), fork(watchPlay)]);
 }

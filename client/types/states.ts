@@ -18,4 +18,5 @@ export interface PlayerState {
   isPlaying: boolean;
   isLoading: boolean;
   duration: number;
+  curPos: number;
 }

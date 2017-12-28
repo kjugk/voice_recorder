@@ -31,9 +31,11 @@ class PlayerContainer extends React.Component<PlayerProps> {
 
     return (
       <Player
+        isLoading={player.isLoading}
         isPlaying={player.isPlaying}
         title={selectedArticle.title}
         duration={player.duration}
+        curPos={player.curPos}
         onPlay={play}
         onPause={pause}
       />
