@@ -16,9 +16,9 @@ interface PlayerProps {
 class PlayerContainer extends React.Component<PlayerProps> {
   public componentDidUpdate(prevProps: PlayerProps) {
     if (!prevProps.selectedArticle && this.props.selectedArticle) {
-      this.props.load('http://localhost:3000/audio/sample2.mp3');
+      this.props.load('/audio/sample2.mp3');
     } else if (prevProps.selectedArticle.id !== this.props.selectedArticle.id) {
-      this.props.load('http://localhost:3000/audio/sample2.mp3');
+      this.props.load('/audio/sample2.mp3');
     }
   }
 

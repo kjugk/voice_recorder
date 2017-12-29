@@ -103,7 +103,7 @@ function* watchFetchArticles() {
 }
 
 function* watchLoadTrack() {
-  yield takeEvery(Constants.LOAD_TRACK, loadTrack);
+  yield takeLatest(Constants.LOAD_TRACK, loadTrack);
 }
 
 function* watchPlay() {
