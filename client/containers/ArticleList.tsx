@@ -1,19 +1,22 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
-import { AppState, ArticlesState } from '../types';
+import * as Types from '../types';
+import * as ArticleActions from '../actions/ArticleActions';
 import { ListItem } from '../components/articles/ListItem';
 
-import { selectArticle } from '../actions/ArticleActions';
-
 interface ArticleListProps {
-  articles: ArticlesState;
+  articles: Types.ArticlesState;
   selectArticle: (id: number) => any;
+  fetchArticles: () => any;
 }
 
 class ArticleList extends React.Component<ArticleListProps> {
   constructor(props: ArticleListProps) {
     super(props);
-    this.handleSelect = this.handleSelect.bind(this);
+  }
+
+  public componentDidMount() {
+    this.props.fetchArticles();
   }
 
   public render() {
@@ -27,20 +30,16 @@ class ArticleList extends React.Component<ArticleListProps> {
               key={article.id}
               id={article.id}
               title={article.title}
-              onClick={this.handleSelect}
+              onClick={this.props.selectArticle}
             />
           );
         })}
       </ul>
     );
   }
-
-  private handleSelect(id: number) {
-    this.props.selectArticle(id);
-  }
 }
 
-const mapStateToProps = (state: AppState) => {
+const mapStateToProps = (state: Types.AppState) => {
   return {
     articles: state.articles
   };
@@ -48,7 +47,8 @@ const mapStateToProps = (state: AppState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => {
   return {
-    selectArticle: (id: number) => dispatch(selectArticle(id))
+    selectArticle: (id: number) => dispatch(ArticleActions.selectArticle(id)),
+    fetchArticles: () => dispatch(ArticleActions.fetchArticles())
   };
 };
 

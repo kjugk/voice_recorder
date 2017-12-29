@@ -1,21 +1,29 @@
 import * as React from 'react';
 
 export interface PlayerProps {
+  isLoading: boolean;
   isPlaying: boolean;
   title: string;
   duration?: number;
-  length?: number;
+  curPos?: number;
   onPlay: () => any;
   onPause: () => any;
 }
 
 export class Player extends React.Component<PlayerProps> {
   public render() {
-    const { title, isPlaying } = this.props;
+    const { title, isLoading, isPlaying, curPos, duration } = this.props;
+
+    if (isLoading) {
+      return <div>Loading...</div>;
+    }
 
     return (
       <div>
         <h5>{title}</h5>
+        <div>
+          {curPos}/{duration}
+        </div>
         {this.renderButton()}
       </div>
     );
@@ -25,9 +33,9 @@ export class Player extends React.Component<PlayerProps> {
     const { isPlaying, onPause, onPlay } = this.props;
 
     if (isPlaying) {
-      return <button onClick={onPlay}>pause</button>;
+      return <button onClick={onPause}>pause</button>;
     } else {
-      return <button onClick={onPause}>play</button>;
+      return <button onClick={onPlay}>play</button>;
     }
   }
 }

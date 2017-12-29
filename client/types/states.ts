@@ -6,6 +6,7 @@ export interface AppState {
 export interface ArticlesState {
   selectedId?: number;
   items: ArticleItemState[];
+  isFetching: boolean;
 }
 
 export interface ArticleItemState {
@@ -16,4 +17,6 @@ export interface ArticleItemState {
 export interface PlayerState {
   isPlaying: boolean;
   isLoading: boolean;
+  duration: number;
+  curPos: number;
 }
