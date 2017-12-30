@@ -13,6 +13,7 @@ export interface ArticlesState {
 
 export interface ArticleFormState {
   title: string;
+  submitted: boolean;
 }
 
 export interface ArticleItemState {

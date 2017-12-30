@@ -3,7 +3,7 @@ import { delay } from 'redux-saga';
 import * as Constants from '../constants';
 import * as ArticleActions from '../actions/ArticleActions';
 import * as PlayerActions from '../actions/PlayerActions';
-import { LOAD_TRACK } from '../constants';
+import * as FormActions from '../actions/articleFormActions';
 
 const context: AudioContext = new AudioContext();
 let buffer: AudioBuffer;
@@ -65,14 +65,13 @@ function* watchProgress() {
 
   while (true) {
     yield delay(250);
-    yield put(PlayerActions.progress((getDuration())));
+    yield put(PlayerActions.progress(getDuration()));
 
     const state = yield select();
     if (isEnded()) {
       yield call(stop);
       yield put(PlayerActions.stop());
       break;
-
     } else if (!state.player.isPlaying) {
       yield call(pause);
       break;
@@ -98,6 +97,11 @@ function* loadTrack(action: any) {
   yield call(playTrack);
 }
 
+function* submitArticle() {
+  // TODO: save article
+  yield put(FormActions.completeSubmit());
+}
+
 function* watchFetchArticles() {
   yield takeEvery(Constants.FETCH_ARTICLES, fetchArticles);
 }
@@ -110,6 +114,10 @@ function* watchPlay() {
   yield takeLatest(Constants.PLAY, watchProgress);
 }
 
+function* watchSubmit() {
+  yield takeEvery(Constants.SUBMIT_REQUEST, submitArticle);
+}
+
 export default function* rootSaga() {
-  yield all([fork(watchFetchArticles), fork(watchLoadTrack), fork(watchPlay)]);
+  yield all([fork(watchFetchArticles), fork(watchLoadTrack), fork(watchPlay), fork(watchSubmit)]);
 }
