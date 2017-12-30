@@ -3,6 +3,8 @@ import { connect, Dispatch } from 'react-redux';
 import * as Types from '../types';
 import * as ArticleActions from '../actions/ArticleActions';
 import { ListItem } from '../components/articles/ListItem';
+import Player from './PlayerContainer';
+import { Link } from 'react-router-dom';
 
 interface ArticleListProps {
   articles: Types.ArticlesState;
@@ -23,18 +25,22 @@ class ArticleList extends React.Component<ArticleListProps> {
     const { articles } = this.props;
 
     return (
-      <ul>
-        {articles.items.map((article) => {
-          return (
-            <ListItem
-              key={article.id}
-              id={article.id}
-              title={article.title}
-              onClick={this.props.selectArticle}
-            />
-          );
-        })}
-      </ul>
+      <>
+        <ul>
+          {articles.items.map((article) => {
+            return (
+              <ListItem
+                key={article.id}
+                id={article.id}
+                title={article.title}
+                onClick={this.props.selectArticle}
+              />
+            );
+          })}
+        </ul>
+        <Link to="/new">new</Link>
+        <Player />
+      </>
     );
   }
 }
