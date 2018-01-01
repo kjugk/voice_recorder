@@ -1,16 +1,23 @@
+import { ArticleFormState } from './states';
 export interface AppState {
   articles: ArticlesState;
   player: PlayerState;
+  articleForm: ArticleFormState;
 }
 
 export interface ArticlesState {
-  selectedId?: number;
+  selectedId?: string;
   items: ArticleItemState[];
   isFetching: boolean;
 }
 
+export interface ArticleFormState {
+  title: string;
+  submitted: boolean;
+}
+
 export interface ArticleItemState {
-  id: number;
+  id: string;
   title: string;
 }
 

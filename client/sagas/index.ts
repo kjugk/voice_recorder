@@ -1,80 +1,30 @@
 import { all, call, fork, put, select, takeEvery, takeLatest } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
+import * as shortid from 'shortid';
+
 import * as Constants from '../constants';
 import * as ArticleActions from '../actions/ArticleActions';
 import * as PlayerActions from '../actions/PlayerActions';
-import { LOAD_TRACK } from '../constants';
+import * as FormActions from '../actions/articleFormActions';
 
-const context: AudioContext = new AudioContext();
-let buffer: AudioBuffer;
-let source: AudioBufferSourceNode;
-let startOffset: number = 0;
-let startTime: number;
+import * as API from '../lib/API';
+import Player from '../lib/Player';
+const player = new Player();
 
-function lll(url: string) {
-  return new Promise((resolve) => {
-    const xhr = new XMLHttpRequest();
-
-    xhr.open('GET', url, true);
-    xhr.responseType = 'arraybuffer';
-    xhr.onload = () => {
-      context.decodeAudioData(xhr.response, (decodedData) => {
-        buffer = decodedData;
-        resolve(buffer.duration);
-      });
-    };
-    xhr.send();
-  });
-}
-
-function play() {
-  startTime = context.currentTime;
-
-  source = context.createBufferSource();
-  source.buffer = buffer;
-  source.connect(context.destination);
-  source.start(0, startOffset % buffer.duration);
-}
-
-function pause() {
-  if (!source) {
-    return;
-  }
-  startOffset = context.currentTime - startTime;
-  source.stop(0);
-}
-
-function stop() {
-  if (!source) {
-    return;
-  }
-  startOffset = 0;
-  source.stop(0);
-}
-
-function getDuration(): number {
-  return startOffset + (context.currentTime - startTime);
-}
-
-function isEnded(): boolean {
-  return getDuration() >= buffer.duration;
-}
-
-function* watchProgress() {
-  yield call(play);
+function* getProgress() {
+  player.play();
 
   while (true) {
     yield delay(250);
-    yield put(PlayerActions.progress((getDuration())));
+    yield put(PlayerActions.progress(player.getDuration()));
 
     const state = yield select();
-    if (isEnded()) {
-      yield call(stop);
+    if (player.isEnded()) {
+      player.stop();
       yield put(PlayerActions.stop());
       break;
-
     } else if (!state.player.isPlaying) {
-      yield call(pause);
+      player.pause();
       break;
     }
   }
@@ -85,17 +35,25 @@ function* playTrack() {
 }
 
 function* fetchArticles() {
-  // TODO: call API.
-  const articles = [{ id: 1, title: 'foo' }, { id: 2, title: 'bar' }, { id: 3, title: 'hoge' }];
+  const articles = yield call(API.fetchArticles);
   yield put(ArticleActions.receiveArticles(articles));
 }
 
 function* loadTrack(action: any) {
-  yield call(stop);
-  const duration = yield call(lll, action.payload.url);
+  player.stop();
+  const duration = yield call(player.loadTrack, action.payload.url);
 
   yield put(PlayerActions.receiveTrack(duration));
   yield call(playTrack);
+}
+
+function* submitArticle() {
+  const id = shortid.generate();
+  const state = yield select();
+  const { title } = state.articleForm;
+
+  yield call(API.saveArticle, id, title);
+  yield put(FormActions.completeSubmit());
 }
 
 function* watchFetchArticles() {
@@ -107,9 +65,13 @@ function* watchLoadTrack() {
 }
 
 function* watchPlay() {
-  yield takeLatest(Constants.PLAY, watchProgress);
+  yield takeLatest(Constants.PLAY, getProgress);
+}
+
+function* watchSubmit() {
+  yield takeEvery(Constants.SUBMIT_REQUEST, submitArticle);
 }
 
 export default function* rootSaga() {
-  yield all([fork(watchFetchArticles), fork(watchLoadTrack), fork(watchPlay)]);
+  yield all([fork(watchFetchArticles), fork(watchLoadTrack), fork(watchPlay), fork(watchSubmit)]);
 }

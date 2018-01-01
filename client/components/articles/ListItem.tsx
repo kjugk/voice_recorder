@@ -2,9 +2,9 @@ import * as React from 'react';
 import { MouseEvent } from 'react';
 
 interface ListItemProps {
-  id: number;
+  id: string;
   title: string;
-  onClick: (id: number) => void;
+  onClick: (id: string) => void;
 }
 
 export const ListItem: React.SFC<ListItemProps> = (props) => {
