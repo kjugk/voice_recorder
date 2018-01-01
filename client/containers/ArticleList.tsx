@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 interface ArticleListProps {
   articles: Types.ArticlesState;
-  selectArticle: (id: number) => any;
+  selectArticle: (id: string) => any;
   fetchArticles: () => any;
 }
 
@@ -53,7 +53,7 @@ const mapStateToProps = (state: Types.AppState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => {
   return {
-    selectArticle: (id: number) => dispatch(ArticleActions.selectArticle(id)),
+    selectArticle: (id: string) => dispatch(ArticleActions.selectArticle(id)),
     fetchArticles: () => dispatch(ArticleActions.fetchArticles())
   };
 };

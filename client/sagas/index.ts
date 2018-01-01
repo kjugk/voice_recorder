@@ -5,6 +5,9 @@ import * as ArticleActions from '../actions/ArticleActions';
 import * as PlayerActions from '../actions/PlayerActions';
 import * as FormActions from '../actions/articleFormActions';
 
+import * as API from '../lib/API';
+import * as shortid from 'shortid';
+
 const context: AudioContext = new AudioContext();
 let buffer: AudioBuffer;
 let source: AudioBufferSourceNode;
@@ -13,17 +16,12 @@ let startTime: number;
 
 function lll(url: string) {
   return new Promise((resolve) => {
-    const xhr = new XMLHttpRequest();
-
-    xhr.open('GET', url, true);
-    xhr.responseType = 'arraybuffer';
-    xhr.onload = () => {
-      context.decodeAudioData(xhr.response, (decodedData) => {
+    API.getTrack(url).then((response: any) => {
+      context.decodeAudioData(response, (decodedData: AudioBuffer) => {
         buffer = decodedData;
         resolve(buffer.duration);
       });
-    };
-    xhr.send();
+    });
   });
 }
 
@@ -84,8 +82,7 @@ function* playTrack() {
 }
 
 function* fetchArticles() {
-  // TODO: call API.
-  const articles = [{ id: 1, title: 'foo' }, { id: 2, title: 'bar' }, { id: 3, title: 'hoge' }];
+  const articles = yield call(API.fetchArticles);
   yield put(ArticleActions.receiveArticles(articles));
 }
 
@@ -98,7 +95,11 @@ function* loadTrack(action: any) {
 }
 
 function* submitArticle() {
-  // TODO: save article
+  const id = shortid.generate();
+  const state = yield select();
+  const { title } = state.articleForm;
+
+  yield call(API.saveArticle, id, title);
   yield put(FormActions.completeSubmit());
 }
 

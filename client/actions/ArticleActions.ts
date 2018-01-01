@@ -17,7 +17,7 @@ export const receiveArticles = (articles: Types.ArticleItemState[]) => {
   };
 };
 
-export const selectArticle = (id: number) => {
+export const selectArticle = (id: string) => {
   return {
     type: Constants.SELECT_ARTICLE,
     payload: {

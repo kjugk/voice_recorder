@@ -6,7 +6,7 @@ export interface AppState {
 }
 
 export interface ArticlesState {
-  selectedId?: number;
+  selectedId?: string;
   items: ArticleItemState[];
   isFetching: boolean;
 }
@@ -17,7 +17,7 @@ export interface ArticleFormState {
 }
 
 export interface ArticleItemState {
-  id: number;
+  id: string;
   title: string;
 }
 

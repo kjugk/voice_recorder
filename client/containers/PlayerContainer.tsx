@@ -60,7 +60,7 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) => {
 
 const getSelectedArticle = (
   articles: ArticleItemState[],
-  selectedId?: number
+  selectedId?: string
 ): ArticleItemState | undefined => {
   return articles.find((article) => article.id === selectedId);
 };
