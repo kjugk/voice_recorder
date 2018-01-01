@@ -2,8 +2,8 @@ import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import * as Types from '../types';
 import * as ArticleActions from '../actions/ArticleActions';
-import { ListItem } from '../components/articles/ListItem';
 import Player from './PlayerContainer';
+import { ListItem } from '../components/articles/ListItem';
 import { Link } from 'react-router-dom';
 
 interface ArticleListProps {
@@ -13,19 +13,15 @@ interface ArticleListProps {
 }
 
 class ArticleList extends React.Component<ArticleListProps> {
-  constructor(props: ArticleListProps) {
-    super(props);
-  }
-
   public componentDidMount() {
     this.props.fetchArticles();
   }
 
   public render() {
-    const { articles } = this.props;
+    const { articles, selectArticle} = this.props;
 
     return (
-      <>
+      <React.Fragment>
         <ul>
           {articles.items.map((article) => {
             return (
@@ -33,14 +29,14 @@ class ArticleList extends React.Component<ArticleListProps> {
                 key={article.id}
                 id={article.id}
                 title={article.title}
-                onClick={this.props.selectArticle}
+                onClick={selectArticle}
               />
             );
           })}
         </ul>
         <Link to="/new">new</Link>
         <Player />
-      </>
+      </React.Fragment>
     );
   }
 }

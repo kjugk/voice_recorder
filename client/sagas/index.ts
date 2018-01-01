@@ -1,77 +1,30 @@
 import { all, call, fork, put, select, takeEvery, takeLatest } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
+import * as shortid from 'shortid';
+
 import * as Constants from '../constants';
 import * as ArticleActions from '../actions/ArticleActions';
 import * as PlayerActions from '../actions/PlayerActions';
 import * as FormActions from '../actions/articleFormActions';
 
 import * as API from '../lib/API';
-import * as shortid from 'shortid';
+import Player from '../lib/Player';
+const player = new Player();
 
-const context: AudioContext = new AudioContext();
-let buffer: AudioBuffer;
-let source: AudioBufferSourceNode;
-let startOffset: number = 0;
-let startTime: number;
-
-function lll(url: string) {
-  return new Promise((resolve) => {
-    API.getTrack(url).then((response: any) => {
-      context.decodeAudioData(response, (decodedData: AudioBuffer) => {
-        buffer = decodedData;
-        resolve(buffer.duration);
-      });
-    });
-  });
-}
-
-function play() {
-  startTime = context.currentTime;
-
-  source = context.createBufferSource();
-  source.buffer = buffer;
-  source.connect(context.destination);
-  source.start(0, startOffset % buffer.duration);
-}
-
-function pause() {
-  if (!source) {
-    return;
-  }
-  startOffset = context.currentTime - startTime;
-  source.stop(0);
-}
-
-function stop() {
-  if (!source) {
-    return;
-  }
-  startOffset = 0;
-  source.stop(0);
-}
-
-function getDuration(): number {
-  return startOffset + (context.currentTime - startTime);
-}
-
-function isEnded(): boolean {
-  return getDuration() >= buffer.duration;
-}
-
-function* watchProgress() {
-  yield call(play);
+function* getProgress() {
+  player.play();
 
   while (true) {
     yield delay(250);
-    yield put(PlayerActions.progress(getDuration()));
+    yield put(PlayerActions.progress(player.getDuration()));
 
     const state = yield select();
-    if (isEnded()) {
-      yield call(stop);
+    if (player.isEnded()) {
+      player.stop();
       yield put(PlayerActions.stop());
       break;
     } else if (!state.player.isPlaying) {
-      yield call(pause);
+      player.pause();
       break;
     }
   }
@@ -87,8 +40,8 @@ function* fetchArticles() {
 }
 
 function* loadTrack(action: any) {
-  yield call(stop);
-  const duration = yield call(lll, action.payload.url);
+  player.stop();
+  const duration = yield call(player.loadTrack, action.payload.url);
 
   yield put(PlayerActions.receiveTrack(duration));
   yield call(playTrack);
@@ -112,7 +65,7 @@ function* watchLoadTrack() {
 }
 
 function* watchPlay() {
-  yield takeLatest(Constants.PLAY, watchProgress);
+  yield takeLatest(Constants.PLAY, getProgress);
 }
 
 function* watchSubmit() {
