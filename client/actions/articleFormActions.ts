@@ -9,14 +9,14 @@ export const changeTitle = (title: string) => {
   };
 };
 
-export const reset = () => {
+export const resetForm = () => {
   return {
     type: Constants.RESET_FORM,
     payload: {}
   };
 };
 
-export const submit = () => {
+export const submitForm = () => {
   return {
     type: Constants.SUBMIT_REQUEST,
     payload: {}

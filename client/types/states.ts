@@ -3,6 +3,7 @@ export interface AppState {
   articles: ArticlesState;
   player: PlayerState;
   articleForm: ArticleFormState;
+  recorder: RecorderState;
 }
 
 export interface ArticlesState {
@@ -26,4 +27,9 @@ export interface PlayerState {
   isLoading: boolean;
   duration: number;
   curPos: number;
+}
+
+export interface RecorderState {
+  isRecording: boolean;
+  recordingCompleted?: boolean;
 }
