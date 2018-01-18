@@ -18,7 +18,7 @@ class ArticleList extends React.Component<ArticleListProps> {
   }
 
   public render() {
-    const { articles, selectArticle} = this.props;
+    const { articles, selectArticle } = this.props;
 
     return (
       <React.Fragment>
