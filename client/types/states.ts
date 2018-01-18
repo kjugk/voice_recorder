@@ -4,6 +4,11 @@ export interface AppState {
   player: PlayerState;
   articleForm: ArticleFormState;
   recorder: RecorderState;
+  media: MediaState;
+}
+
+export interface MediaState {
+  micPremitted: boolean;
 }
 
 export interface ArticlesState {

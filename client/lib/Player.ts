@@ -1,4 +1,4 @@
-import * as API from '../lib/API';
+import * as Api from '../lib/Api';
 
 const AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext;
 
@@ -18,7 +18,7 @@ export default class Player {
     this.context = new AudioContext();
 
     return new Promise((resolve) => {
-      API.getTrack(url).then((response: any) => {
+      Api.getTrack(url).then((response: any) => {
         this.context.decodeAudioData(response, (decodedData: AudioBuffer) => {
           this.buffer = decodedData;
           resolve(this.buffer.duration);

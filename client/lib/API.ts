@@ -17,7 +17,7 @@ export const saveArticle = (id: string, title: string) => {
       if (!items) {
         items = [];
       }
-      items = [{id, title}, ...items];
+      items = [{ id, title }, ...items];
       localforage.setItem('articles', items).then(() => {
         resolve();
       });

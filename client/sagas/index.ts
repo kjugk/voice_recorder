@@ -6,8 +6,10 @@ import * as Constants from '../constants';
 import * as ArticleActions from '../actions/ArticleActions';
 import * as PlayerActions from '../actions/PlayerActions';
 import * as FormActions from '../actions/articleFormActions';
+import * as MediaActions from '../actions/mediaActions';
 
-import * as API from '../lib/API';
+import * as Api from '../lib/Api';
+import * as Media from '../lib/Media';
 import Player from '../lib/Player';
 const player = new Player();
 
@@ -35,7 +37,7 @@ function* playTrack() {
 }
 
 function* fetchArticles() {
-  const articles = yield call(API.fetchArticles);
+  const articles = yield call(Api.fetchArticles);
   yield put(ArticleActions.receiveArticles(articles));
 }
 
@@ -52,8 +54,14 @@ function* submitArticle() {
   const state = yield select();
   const { title } = state.articleForm;
 
-  yield call(API.saveArticle, id, title);
+  yield call(Api.saveArticle, id, title);
   yield put(FormActions.completeSubmit());
+}
+
+function* requestMicPermission() {
+  const stream = yield call(Media.requestMicPermission);
+  yield put(MediaActions.successMicPermission());
+  console.log(stream);
 }
 
 function* watchFetchArticles() {
@@ -72,6 +80,16 @@ function* watchSubmit() {
   yield takeEvery(Constants.SUBMIT_REQUEST, submitArticle);
 }
 
+function* watchMicPermissionRequest() {
+  yield takeEvery(Constants.REQUEST_MIC_PERMISSION, requestMicPermission);
+}
+
 export default function* rootSaga() {
-  yield all([fork(watchFetchArticles), fork(watchLoadTrack), fork(watchPlay), fork(watchSubmit)]);
+  yield all([
+    fork(watchFetchArticles),
+    fork(watchLoadTrack),
+    fork(watchPlay),
+    fork(watchSubmit),
+    fork(watchMicPermissionRequest)
+  ]);
 }
