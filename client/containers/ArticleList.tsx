@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
-import * as Types from '../types';
-import * as ArticleActions from '../actions/ArticleActions';
-import Player from './PlayerContainer';
-import { ListItem } from '../components/articles/ListItem';
 import { Link } from 'react-router-dom';
+
+import * as Types from '../types';
+import * as articleActions from '../actions/articleActions';
+import { ListItem } from '../components/articles/ListItem';
+import Player from './PlayerContainer';
 
 interface ArticleListProps {
   articles: Types.ArticlesState;
@@ -49,8 +50,8 @@ const mapStateToProps = (state: Types.AppState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => {
   return {
-    selectArticle: (id: string) => dispatch(ArticleActions.selectArticle(id)),
-    fetchArticles: () => dispatch(ArticleActions.fetchArticles())
+    selectArticle: (id: string) => dispatch(articleActions.selectArticle(id)),
+    fetchArticles: () => dispatch(articleActions.fetchArticles())
   };
 };
 

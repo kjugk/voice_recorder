@@ -52,6 +52,7 @@ class ArticleForm extends React.Component<ArticleFormProps> {
             stopRecording={this.props.stopRecording}
           />
         )}
+
         {recorder.recordingCompleted && (
           <form onSubmit={this.handleSubmit.bind(this)}>
             <input type="text" value={form.title} onChange={this.handleTitleChange.bind(this)} />

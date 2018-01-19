@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { AppState, ArticlesState, ArticleItemState, PlayerState } from '../types/index';
 import { connect, Dispatch } from 'react-redux';
-import * as PlayerActions from '../actions/PlayerActions';
+import * as playerActions from '../actions/playerActions';
 
 import { Player } from '../components/player/Player';
 
@@ -52,9 +52,9 @@ const mapStateToProps = (state: AppState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => {
   return {
-    pause: () => dispatch(PlayerActions.pause()),
-    play: () => dispatch(PlayerActions.play()),
-    load: (url: string) => dispatch(PlayerActions.loadTrack(url))
+    pause: () => dispatch(playerActions.pause()),
+    play: () => dispatch(playerActions.play()),
+    load: (url: string) => dispatch(playerActions.loadTrack(url))
   };
 };
 

@@ -3,10 +3,10 @@ import { delay } from 'redux-saga';
 import * as shortid from 'shortid';
 
 import * as Constants from '../constants';
-import * as ArticleActions from '../actions/ArticleActions';
-import * as PlayerActions from '../actions/PlayerActions';
-import * as FormActions from '../actions/articleFormActions';
-import * as MediaActions from '../actions/mediaActions';
+import * as articleActions from '../actions/articleActions';
+import * as playerActions from '../actions/playerActions';
+import * as formActions from '../actions/articleFormActions';
+import * as mediaActions from '../actions/mediaActions';
 
 import * as Api from '../lib/Api';
 import * as Media from '../lib/Media';
@@ -18,12 +18,12 @@ function* getProgress() {
 
   while (true) {
     yield delay(250);
-    yield put(PlayerActions.progress(player.getDuration()));
+    yield put(playerActions.progress(player.getDuration()));
 
     const state = yield select();
     if (player.isEnded()) {
       player.stop();
-      yield put(PlayerActions.stop());
+      yield put(playerActions.stop());
       break;
     } else if (!state.player.isPlaying) {
       player.pause();
@@ -33,19 +33,19 @@ function* getProgress() {
 }
 
 function* playTrack() {
-  yield put(PlayerActions.play());
+  yield put(playerActions.play());
 }
 
 function* fetchArticles() {
   const articles = yield call(Api.fetchArticles);
-  yield put(ArticleActions.receiveArticles(articles));
+  yield put(articleActions.receiveArticles(articles));
 }
 
 function* loadTrack(action: any) {
   player.stop();
   const duration = yield call(player.loadTrack, action.payload.url);
 
-  yield put(PlayerActions.receiveTrack(duration));
+  yield put(playerActions.receiveTrack(duration));
   yield call(playTrack);
 }
 
@@ -55,12 +55,12 @@ function* submitArticle() {
   const { title } = state.articleForm;
 
   yield call(Api.saveArticle, id, title);
-  yield put(FormActions.completeSubmit());
+  yield put(formActions.completeSubmit());
 }
 
 function* requestMicPermission() {
   const stream = yield call(Media.requestMicPermission);
-  yield put(MediaActions.successMicPermission());
+  yield put(mediaActions.successMicPermission());
   console.log(stream);
 }
 

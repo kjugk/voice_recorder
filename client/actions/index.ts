@@ -1,2 +1,2 @@
-export * from './ArticleActions';
-export * from './PlayerActions';
+export * from './articleActions';
+export * from './playerActions';
