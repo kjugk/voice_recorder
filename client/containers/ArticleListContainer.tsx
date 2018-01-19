@@ -4,16 +4,16 @@ import { Link } from 'react-router-dom';
 
 import * as Types from '../types';
 import * as articleActions from '../actions/articleActions';
-import { ListItem } from '../components/articles/ListItem';
-import Player from './PlayerContainer';
+import { List } from '../components/articles/List';
+import PlayerContainer from './PlayerContainer';
 
-interface ArticleListProps {
+interface ArticleListContainerProps {
   articles: Types.ArticlesState;
   selectArticle: (id: string) => any;
   fetchArticles: () => any;
 }
 
-class ArticleList extends React.Component<ArticleListProps> {
+class ArticleListContainer extends React.Component<ArticleListContainerProps> {
   public componentDidMount() {
     this.props.fetchArticles();
   }
@@ -22,22 +22,11 @@ class ArticleList extends React.Component<ArticleListProps> {
     const { articles, selectArticle } = this.props;
 
     return (
-      <React.Fragment>
-        <ul>
-          {articles.items.map((article) => {
-            return (
-              <ListItem
-                key={article.id}
-                id={article.id}
-                title={article.title}
-                onClick={selectArticle}
-              />
-            );
-          })}
-        </ul>
+      <>
+        <List articles={articles} onItemClick={selectArticle} />
         <Link to="/new">new</Link>
-        <Player />
-      </React.Fragment>
+        <PlayerContainer />
+      </>
     );
   }
 }
@@ -55,4 +44,4 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleList);
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleListContainer);

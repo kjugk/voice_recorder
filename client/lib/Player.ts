@@ -25,7 +25,7 @@ export default class Player {
         });
       });
     });
-  }
+  };
 
   public play() {
     this.startTime = this.context.currentTime;

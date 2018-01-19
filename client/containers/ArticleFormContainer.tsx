@@ -6,10 +6,12 @@ import * as RecorderActions from '../actions/RecorderActions';
 import * as mediaActions from '../actions/mediaActions';
 
 import { Redirect } from 'react-router-dom';
-import { Recorder } from '../components/recorder/Recorder';
 import { resetRecorder } from '../actions/RecorderActions';
 
-interface ArticleFormProps {
+import { Recorder } from '../components/recorder/Recorder';
+import { Form } from '../components/articles/Form';
+
+interface ArticleFormContainerProps {
   form: Types.ArticleFormState;
   recorder: Types.RecorderState;
   media: Types.MediaState;
@@ -22,7 +24,7 @@ interface ArticleFormProps {
   requestMicPermission: () => void;
 }
 
-class ArticleForm extends React.Component<ArticleFormProps> {
+class ArticleFormContainer extends React.Component<ArticleFormContainerProps> {
   public componentDidMount() {
     this.props.requestMicPermission();
   }
@@ -33,7 +35,15 @@ class ArticleForm extends React.Component<ArticleFormProps> {
   }
 
   public render() {
-    const { form, recorder, media } = this.props;
+    const {
+      form,
+      recorder,
+      media,
+      startRecording,
+      stopRecording,
+      submitForm,
+      changeTitle
+    } = this.props;
 
     if (!media.micPremitted) {
       return <div>マイクが許可されていません。</div>;
@@ -44,33 +54,20 @@ class ArticleForm extends React.Component<ArticleFormProps> {
     }
 
     return (
-      <React.Fragment>
+      <>
         {!recorder.recordingCompleted && (
           <Recorder
             isRecording={recorder.isRecording}
-            startRecording={this.props.startRecording}
-            stopRecording={this.props.stopRecording}
+            startRecording={startRecording}
+            stopRecording={stopRecording}
           />
         )}
 
         {recorder.recordingCompleted && (
-          <form onSubmit={this.handleSubmit.bind(this)}>
-            <input type="text" value={form.title} onChange={this.handleTitleChange.bind(this)} />
-            <input type="submit" />
-          </form>
+          <Form onSubmit={submitForm} onTitleChange={changeTitle} title={form.title} />
         )}
-      </React.Fragment>
+      </>
     );
-  }
-
-  private handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
-    evt.preventDefault();
-    this.props.submitForm();
-  }
-
-  private handleTitleChange(evt: React.FormEvent<HTMLInputElement>) {
-    evt.stopPropagation();
-    this.props.changeTitle(evt.currentTarget.value);
   }
 }
 
@@ -108,4 +105,4 @@ export const mapDispatchToProps = (dispatch: Dispatch<any>) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleFormContainer);

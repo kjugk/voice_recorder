@@ -1,20 +1,20 @@
 import * as React from 'react';
-import ArticleList from '../containers/ArticleList';
-import ArticleForm from '../containers/ArticleForm';
+import ArticleListContainer from '../containers/ArticleListContainer';
+import ArticleFormContainer from '../containers/ArticleFormContainer';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 class App extends React.Component {
   public render() {
     return (
-      <React.Fragment>
+      <>
         <Router>
           <>
-            <Route exact path="/" component={ArticleList} />
-            <Route exact path="/new" component={ArticleForm} />
+            <Route exact path="/" component={ArticleListContainer} />
+            <Route exact path="/new" component={ArticleFormContainer} />
           </>
         </Router>
-      </React.Fragment>
+      </>
     );
   }
 }
