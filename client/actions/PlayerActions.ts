@@ -4,7 +4,7 @@ import { FSA } from '../types';
 export type PlayerAction = FSA<LoadTrackAction | ReceiveTrackAction | ReceiveProgressAction>;
 
 export interface LoadTrackAction {
-  url: string;
+  id: string;
 }
 
 export interface ReceiveTrackAction {
@@ -36,11 +36,11 @@ export const stop = (): FSA<{}> => {
   };
 };
 
-export const loadTrack = (url: string): FSA<LoadTrackAction> => {
+export const loadTrack = (id: string): FSA<LoadTrackAction> => {
   return {
     type: Constants.LOAD_TRACK,
     payload: {
-      url
+      id
     }
   };
 };

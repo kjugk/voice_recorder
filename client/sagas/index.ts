@@ -11,6 +11,8 @@ import * as mediaActions from '../actions/mediaActions';
 import * as Api from '../lib/Api';
 import * as Media from '../lib/Media';
 import Player from '../lib/Player';
+import * as RecordRTC from '../lib/Recorder';
+
 const player = new Player();
 
 function* getProgress() {
@@ -43,7 +45,7 @@ function* fetchArticles() {
 
 function* loadTrack(action: any) {
   player.stop();
-  const duration = yield call(player.loadTrack, action.payload.url);
+  const duration = yield call(player.loadTrack, action.payload.id);
 
   yield put(playerActions.receiveTrack(duration));
   yield call(playTrack);
@@ -52,16 +54,25 @@ function* loadTrack(action: any) {
 function* submitArticle() {
   const id = shortid.generate();
   const state = yield select();
-  const { title } = state.articleForm;
+  const { title, audio } = state.articleForm;
 
-  yield call(Api.saveArticle, id, title);
+  yield call(Api.saveArticle, id, title, audio);
   yield put(formActions.completeSubmit());
 }
 
 function* requestMicPermission() {
   const stream = yield call(Media.requestMicPermission);
   yield put(mediaActions.successMicPermission());
-  console.log(stream);
+  RecordRTC.build(stream);
+}
+
+function startRecording() {
+  RecordRTC.startRecording();
+}
+
+function* stopRecording() {
+  const blob = yield call(RecordRTC.stopRecording);
+  yield put(formActions.receiveAudio(blob));
 }
 
 function* watchFetchArticles() {
@@ -84,12 +95,22 @@ function* watchMicPermissionRequest() {
   yield takeEvery(Constants.REQUEST_MIC_PERMISSION, requestMicPermission);
 }
 
+function* watchStartRecording() {
+  yield takeEvery(Constants.START_RECORDING, startRecording);
+}
+
+function* watchStopRecording() {
+  yield takeEvery(Constants.STOP_RECORDING, stopRecording);
+}
+
 export default function* rootSaga() {
   yield all([
     fork(watchFetchArticles),
     fork(watchLoadTrack),
     fork(watchPlay),
     fork(watchSubmit),
-    fork(watchMicPermissionRequest)
+    fork(watchMicPermissionRequest),
+    fork(watchStartRecording),
+    fork(watchStopRecording)
   ]);
 }

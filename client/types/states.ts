@@ -20,6 +20,7 @@ export interface ArticlesState {
 export interface ArticleFormState {
   title: string;
   submitted: boolean;
+  audio: any;
 }
 
 export interface ArticleItemState {
