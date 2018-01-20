@@ -14,18 +14,18 @@ export default class Player {
     this.startTime = 0;
   }
 
-  public loadTrack = (url: string) => {
+  public loadTrack = (id: string) => {
     this.context = new AudioContext();
 
     return new Promise((resolve) => {
-      Api.getTrack(url).then((response: any) => {
+      Api.getTrackFromStorage(id).then((response: any) => {
         this.context.decodeAudioData(response, (decodedData: AudioBuffer) => {
           this.buffer = decodedData;
           resolve(this.buffer.duration);
         });
       });
     });
-  };
+  }
 
   public play() {
     this.startTime = this.context.currentTime;

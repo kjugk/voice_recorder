@@ -18,9 +18,9 @@ class PlayerContainer extends React.Component<PlayerContainerProps> {
     const { selectedArticle, loadTrack } = this.props;
 
     if (!prevProps.selectedArticle && selectedArticle) {
-      loadTrack('/audio/sample2.mp3');
+      loadTrack(selectedArticle.id);
     } else if (prevProps.selectedArticle.id !== this.props.selectedArticle.id) {
-      loadTrack('/audio/sample2.mp3');
+      loadTrack(selectedArticle.id);
     }
   }
 

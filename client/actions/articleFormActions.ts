@@ -9,6 +9,15 @@ export const changeTitle = (title: string) => {
   };
 };
 
+export const receiveAudio = (audio: any) => {
+  return {
+    type: Constants.RECEIVE_AUDIO,
+    payload: {
+      audio
+    }
+  };
+};
+
 export const resetForm = () => {
   return {
     type: Constants.RESET_FORM,

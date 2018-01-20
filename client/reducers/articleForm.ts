@@ -3,7 +3,8 @@ import * as Constants from '../constants';
 
 export const initialState: ArticleFormState = {
   title: '',
-  submitted: false
+  submitted: false,
+  audio: undefined
 };
 
 export const articleForm = (
@@ -13,6 +14,9 @@ export const articleForm = (
   switch (action.type) {
     case Constants.CHANGE_TITLE:
       return { ...state, title: action.payload.title };
+
+    case Constants.RECEIVE_AUDIO:
+      return { ...state, audio: action.payload.audio };
 
     case Constants.SUBMIT_COMPLETE:
       return { ...state, submitted: true };
