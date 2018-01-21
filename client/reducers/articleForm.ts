@@ -13,7 +13,7 @@ export const articleForm = (
 ): ArticleFormState => {
   switch (action.type) {
     case Constants.CHANGE_TITLE:
-      return { ...state, title: action.payload.title };
+      return { ...state, title: action.payload.newTitle };
 
     case Constants.RECEIVE_AUDIO:
       return { ...state, audio: action.payload.audio };

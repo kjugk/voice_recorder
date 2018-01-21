@@ -1,10 +1,10 @@
 import * as Constants from '../constants';
 
-export const changeTitle = (title: string) => {
+export const changeTitle = (newTitle: string) => {
   return {
     type: Constants.CHANGE_TITLE,
     payload: {
-      title
+      newTitle
     }
   };
 };
