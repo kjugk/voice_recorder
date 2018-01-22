@@ -43,14 +43,13 @@ class ArticleFormContainer extends React.Component<ArticleFormContainerProps> {
     return (
       <>
         {!recorder.recordingCompleted && <RecorderContainer />}
-
         {recorder.recordingCompleted && <FormContainer />}
       </>
     );
   }
 }
 
-export const mapStateToProps = (state: Types.AppState) => {
+const mapStateToProps = (state: Types.AppState) => {
   return {
     form: state.articleForm,
     recorder: state.recorder,
@@ -58,7 +57,7 @@ export const mapStateToProps = (state: Types.AppState) => {
   };
 };
 
-export const mapDispatchToProps = (dispatch: Dispatch<any>) => {
+const mapDispatchToProps = (dispatch: Dispatch<any>) => {
   return {
     requestMicPermission: () => {
       dispatch(mediaActions.requestMicPermission());

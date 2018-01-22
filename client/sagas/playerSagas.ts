@@ -6,11 +6,13 @@ import * as playerActions from '../actions/playerActions';
 import Player from '../lib/Player';
 const player = new Player();
 
+const PROGRESS_INTERVAL = 250;
+
 function* getProgress() {
   player.play();
 
   while (true) {
-    yield delay(250);
+    yield delay(PROGRESS_INTERVAL);
     yield put(playerActions.progress(player.getDuration()));
 
     const state = yield select();
