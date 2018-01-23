@@ -1,1 +1,26 @@
 @import "~bulma/bulma.sass";
+
+$color-border: $grey-lighter;
+
+html,body{
+  font-size: 16px;
+  height: 100%;
+}
+
+#app{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.section-main{
+  flex: 1
+}
+
+.c-list{
+  margin-bottom: $size-6;
+  .c-list-item{
+    border-bottom: 1px solid $color-border;
+    padding: $size-4;
+  }
+}

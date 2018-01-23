@@ -8,20 +8,24 @@ interface RecorderProps {
 
 export class Recorder extends React.Component<RecorderProps> {
   public render() {
-    return(
-      <div>
-        {this.renderButton()}
-      </div>
-    );
+    return <div>{this.renderButton()}</div>;
   }
 
   private renderButton() {
     const { isRecording, startRecording, stopRecording } = this.props;
 
     if (isRecording) {
-      return <button onClick={stopRecording}>stop</button>;
+      return (
+        <button className="button is-primary" onClick={stopRecording}>
+          stop
+        </button>
+      );
     } else {
-      return <button onClick={startRecording}>start</button>;
+      return (
+        <button className="button is-danger" onClick={startRecording}>
+          start
+        </button>
+      );
     }
   }
 }

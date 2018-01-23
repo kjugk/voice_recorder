@@ -22,11 +22,15 @@ class ArticleListContainer extends React.Component<ArticleListContainerProps> {
     const { articles, selectArticle } = this.props;
 
     return (
-      <>
-        <List articles={articles} onItemClick={selectArticle} />
-        <Link to="/new">new</Link>
-        <PlayerContainer />
-      </>
+      <div className="columns">
+        <div className="column is-10 is-offset-1">
+          <List articles={articles} onItemClick={selectArticle} />
+          <Link className="button is-primary" to="/new">
+            new
+          </Link>
+          <PlayerContainer />
+        </div>
+      </div>
     );
   }
 }

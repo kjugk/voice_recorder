@@ -1,6 +1,7 @@
 import * as Types from '../types';
 import * as Constants from '../constants';
 
+// TODO: レコーディング済みのファイルサイズと時間が取れたらいいなー
 const initialState: Types.RecorderState = {
   isRecording: false,
   recordingCompleted: false

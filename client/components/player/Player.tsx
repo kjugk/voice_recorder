@@ -20,7 +20,7 @@ export class Player extends React.Component<PlayerProps> {
 
     return (
       <div>
-        <h5>{title}</h5>
+        <h5 className="title is-6">{title}</h5>
         <div>
           {curPos}/{duration}
         </div>

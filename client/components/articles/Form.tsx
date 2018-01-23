@@ -12,8 +12,24 @@ export class Form extends React.Component<FormProps> {
 
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
-        <input type="text" value={title} onChange={this.handleTitleChange.bind(this)} />
-        <input type="submit" />
+        <div className="field">
+          <label className="label">Title</label>
+          <div className="control">
+            <input
+              className="input"
+              type="text"
+              value={title}
+              onChange={this.handleTitleChange.bind(this)}
+            />
+          </div>
+        </div>
+        <div className="field">
+          <div className="control">
+            <button className="button is-primary" type="submit">
+              Save
+            </button>
+          </div>
+        </div>
       </form>
     );
   }

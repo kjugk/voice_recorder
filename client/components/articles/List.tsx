@@ -9,7 +9,7 @@ interface ListProps {
 
 export const List: React.SFC<ListProps> = (props) => {
   return (
-    <ul>
+    <ul className="c-list">
       {props.articles.items.map((article) => {
         return (
           <ListItem

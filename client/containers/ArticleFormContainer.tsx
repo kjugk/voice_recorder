@@ -33,7 +33,7 @@ class ArticleFormContainer extends React.Component<ArticleFormContainerProps> {
     const { form, recorder, media } = this.props;
 
     if (!media.micPremitted) {
-      return <div>マイクが許可されていません。</div>;
+      return <div>マイクの使用が許可されていません。</div>;
     }
 
     if (form.submitted) {
