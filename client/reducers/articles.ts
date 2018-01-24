@@ -18,6 +18,9 @@ export const articles = (state: ArticlesState = initialState, action: any): Arti
     case Constants.SELECT_ARTICLE:
       return { ...state, selectedId: action.payload.id };
 
+    case Constants.DELETE_ARTICLE_COMPLETE:
+      return { ...state, items: action.payload.articles};
+
     default:
       return state;
   }

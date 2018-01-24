@@ -5,6 +5,7 @@ import { ListItem } from './ListItem';
 interface ListProps {
   articles: Types.ArticlesState;
   onItemClick: (id: string) => any;
+  onItemDelete: (id: string) => any;
 }
 
 export const List: React.SFC<ListProps> = (props) => {
@@ -17,6 +18,7 @@ export const List: React.SFC<ListProps> = (props) => {
             id={article.id}
             title={article.title}
             onClick={props.onItemClick}
+            onDelete={props.onItemDelete}
           />
         );
       })}

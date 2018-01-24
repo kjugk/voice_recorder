@@ -1,6 +1,8 @@
 export const SELECT_ARTICLE = 'SELECT_ARTICLE';
 export const FETCH_ARTICLES = 'FETCH_ARTICLES';
 export const RECEIVE_ARTICLES = 'RECEIVE_ARTICLES';
+export const DELETE_ARTICLE = 'DELETE_ARTICLE';
+export const DELETE_ARTICLE_COMPLETE = 'DELETE_ARTICLE_COMPLETE';
 
 export const PLAY = 'PLAY';
 export const PAUSE = 'PAUSE';

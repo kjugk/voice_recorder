@@ -4,7 +4,8 @@ import { MouseEvent } from 'react';
 interface ListItemProps {
   id: string;
   title: string;
-  onClick: (id: string) => void;
+  onClick: (id: string) => any;
+  onDelete: (id: string) => any;
 }
 
 export const ListItem: React.SFC<ListItemProps> = (props) => {
@@ -17,6 +18,15 @@ export const ListItem: React.SFC<ListItemProps> = (props) => {
       }}
     >
       {props.title}
+      <button
+        className="button is-danger is-small"
+        onClick={(evt: MouseEvent<HTMLElement>) => {
+          evt.stopPropagation();
+          props.onDelete(props.id);
+        }}
+      >
+        delete
+      </button>
     </li>
   );
 };

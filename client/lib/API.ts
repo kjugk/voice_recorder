@@ -25,6 +25,17 @@ export const saveArticle = (id: string, title: string, audio: any) => {
   });
 };
 
+export const deleteArticle = (id: string) => {
+  return new Promise((resolve) => {
+    localforage.getItem('articles').then((items: any) => {
+      const newItems = items.filter((item: any) => item.id !== id);
+      localforage.setItem('articles', newItems).then(() => {
+        resolve(newItems);
+      });
+    });
+  });
+};
+
 export const getTrack = (url: string) => {
   return new Promise((resolve) => {
     const xhr = new XMLHttpRequest();

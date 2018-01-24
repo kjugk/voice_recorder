@@ -21,9 +21,15 @@ function* submitArticle() {
   yield put(formActions.completeSubmit());
 }
 
+function* deleteArticle(action: any) {
+  const newArticles = yield call(Api.deleteArticle, action.payload.id);
+  yield put(articleActions.deleteArticleComplete(newArticles));
+}
+
 export default function* articleSagas() {
   yield all([
     takeEvery(Constants.FETCH_ARTICLES, fetchArticles),
-    takeEvery(Constants.SUBMIT_REQUEST, submitArticle)
+    takeEvery(Constants.SUBMIT_REQUEST, submitArticle),
+    takeEvery(Constants.DELETE_ARTICLE, deleteArticle)
   ]);
 }

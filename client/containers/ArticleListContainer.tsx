@@ -10,6 +10,7 @@ import PlayerContainer from './PlayerContainer';
 interface ArticleListContainerProps {
   articles: Types.ArticlesState;
   selectArticle: (id: string) => any;
+  deleteArticle: (id: string) => any;
   fetchArticles: () => any;
 }
 
@@ -24,11 +25,11 @@ class ArticleListContainer extends React.Component<ArticleListContainerProps> {
   }
 
   public render() {
-    const { articles, selectArticle } = this.props;
+    const { articles, selectArticle, deleteArticle } = this.props;
 
     return (
       <>
-        <List articles={articles} onItemClick={selectArticle} />
+        <List articles={articles} onItemClick={selectArticle} onItemDelete={deleteArticle} />
         <Link className="button is-primary" to="/new">
           new
         </Link>
@@ -47,6 +48,7 @@ const mapStateToProps = (state: Types.AppState) => {
 const mapDispatchToProps = (dispatch: Dispatch<any>) => {
   return {
     selectArticle: (id: string) => dispatch(articleActions.selectArticle(id)),
+    deleteArticle: (id: string) => dispatch(articleActions.deleteArticle(id)),
     fetchArticles: () => dispatch(articleActions.fetchArticles())
   };
 };
