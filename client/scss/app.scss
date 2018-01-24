@@ -1,6 +1,6 @@
-$desktop: 840px;
-$widescreen: 840px;
-$fullhd: 840px;
+$desktop: 960px;
+$widescreen: 960px;
+$fullhd: 960px;
 @import "~bulma/bulma.sass";
 
 $color-background: $white;
@@ -18,7 +18,7 @@ html,body{
 }
 
 footer{
-  padding-bottom: 160px!important;
+  // padding-bottom: 160px!important;
 }
 
 .section-main{
@@ -28,8 +28,7 @@ footer{
 .c-list{
   margin-bottom: $size-6;
   .c-list-item{
-    border-bottom: 1px solid $color-border;
-    padding: $size-4;
+    padding: $size-4 0;
   }
 }
 

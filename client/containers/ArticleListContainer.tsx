@@ -29,10 +29,14 @@ class ArticleListContainer extends React.Component<ArticleListContainerProps> {
 
     return (
       <>
-        <List articles={articles} onItemClick={selectArticle} onItemDelete={deleteArticle} />
-        <Link className="button is-primary" to="/new">
-          new
-        </Link>
+        <div className="columns">
+          <div className="column is-10 is-offset-1">
+            <List articles={articles} onItemPlay={selectArticle} onItemDelete={deleteArticle} />
+            <Link className="button is-primary" to="/new">
+              new
+            </Link>
+          </div>
+        </div>
         <PlayerContainer />
       </>
     );
