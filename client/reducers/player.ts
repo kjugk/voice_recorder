@@ -6,8 +6,8 @@ import { PlayerAction, ReceiveTrackAction } from '../actions/PlayerActions';
 const initialState: Types.PlayerState = {
   isPlaying: false,
   isLoading: false,
-  duration: 0,
-  curPos: 0
+  curPos: 0,
+  duration: 1
 };
 
 export const player = (state: Types.PlayerState = initialState, action: any): Types.PlayerState => {
@@ -33,6 +33,9 @@ export const player = (state: Types.PlayerState = initialState, action: any): Ty
 
     case Constants.RECEIVE_PROGRESS:
       return { ...state, curPos: action.payload.curPos };
+
+    case Constants.RESET_PLAYER:
+      return initialState;
 
     default:
       return state;

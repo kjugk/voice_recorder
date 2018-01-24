@@ -8,6 +8,7 @@ export const STOP = 'STOP';
 export const LOAD_TRACK = 'LOAD_TRACK';
 export const RECEIVE_TRACK = 'RECEIVE_TRACK';
 export const RECEIVE_PROGRESS = 'RECEIVE_PORGRESS';
+export const RESET_PLAYER = 'RESET_PLAYER';
 
 export const CHANGE_TITLE = 'CHANGE_TITLE';
 export const SUBMIT_REQUEST = 'SUBMIT_REQUEST';

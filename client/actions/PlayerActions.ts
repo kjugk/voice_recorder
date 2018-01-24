@@ -62,3 +62,10 @@ export const progress = (curPos: number) => {
     }
   };
 };
+
+export const resetPlayer = () => {
+  return {
+    type: Constants.RESET_PLAYER,
+    payload: {}
+  };
+};

@@ -18,19 +18,22 @@ class ArticleListContainer extends React.Component<ArticleListContainerProps> {
     this.props.fetchArticles();
   }
 
+  public componentWillUnmount() {
+    // player と 選択状態をリセットする
+    this.props.selectArticle('');
+  }
+
   public render() {
     const { articles, selectArticle } = this.props;
 
     return (
-      <div className="columns">
-        <div className="column is-10 is-offset-1">
-          <List articles={articles} onItemClick={selectArticle} />
-          <Link className="button is-primary" to="/new">
-            new
-          </Link>
-          <PlayerContainer />
-        </div>
-      </div>
+      <>
+        <List articles={articles} onItemClick={selectArticle} />
+        <Link className="button is-primary" to="/new">
+          new
+        </Link>
+        <PlayerContainer />
+      </>
     );
   }
 }

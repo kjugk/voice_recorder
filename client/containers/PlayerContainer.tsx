@@ -11,6 +11,7 @@ interface PlayerContainerProps {
   pause: () => any;
   play: () => any;
   loadTrack: (url: string) => any;
+  resetPlayer: () => any;
 }
 
 class PlayerContainer extends React.Component<PlayerContainerProps> {
@@ -22,6 +23,10 @@ class PlayerContainer extends React.Component<PlayerContainerProps> {
     } else if (prevProps.selectedArticle.id !== this.props.selectedArticle.id) {
       loadTrack(selectedArticle.id);
     }
+  }
+
+  public componentWillUnmount() {
+    this.props.resetPlayer();
   }
 
   public render() {
@@ -56,7 +61,8 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) => {
   return {
     pause: () => dispatch(playerActions.pause()),
     play: () => dispatch(playerActions.play()),
-    loadTrack: (url: string) => dispatch(playerActions.loadTrack(url))
+    loadTrack: (url: string) => dispatch(playerActions.loadTrack(url)),
+    resetPlayer: () => dispatch(playerActions.resetPlayer())
   };
 };
 

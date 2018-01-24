@@ -1,5 +1,9 @@
+$desktop: 840px;
+$widescreen: 840px;
+$fullhd: 840px;
 @import "~bulma/bulma.sass";
 
+$color-background: $white;
 $color-border: $grey-lighter;
 
 html,body{
@@ -13,6 +17,10 @@ html,body{
   height: 100%;
 }
 
+footer{
+  padding-bottom: 160px!important;
+}
+
 .section-main{
   flex: 1
 }
@@ -22,5 +30,29 @@ html,body{
   .c-list-item{
     border-bottom: 1px solid $color-border;
     padding: $size-4;
+  }
+}
+
+.c-player{
+  background: $color-background;
+  border-top: 1px solid $color-border;
+  padding: $size-6;
+  padding-bottom: $size-1;
+
+  .c-player-progress{
+    align-items: center;
+    display: flex;
+  }
+
+  .button{
+    min-width: 3.5rem;
+  }
+
+  &.is-fixed-bottom{
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    z-index: 2;
   }
 }

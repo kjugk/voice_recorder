@@ -35,9 +35,14 @@ function* loadTrack(action: any) {
   yield put(playerActions.play());
 }
 
+function resetPlayer() {
+  player.stop();
+}
+
 export default function* playerSagas() {
   yield all([
     takeLatest(Constants.LOAD_TRACK, loadTrack),
-    takeLatest(Constants.PLAY, getProgress)
+    takeLatest(Constants.PLAY, getProgress),
+    takeLatest(Constants.RESET_PLAYER, resetPlayer)
   ]);
 }
