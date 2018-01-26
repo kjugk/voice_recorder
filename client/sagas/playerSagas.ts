@@ -6,7 +6,7 @@ import * as playerActions from '../actions/playerActions';
 import Player from '../lib/Player';
 const player = new Player();
 
-const PROGRESS_INTERVAL = 250;
+const PROGRESS_INTERVAL = 200;
 
 function* getProgress() {
   player.play();

@@ -15,8 +15,7 @@ export const List: React.SFC<ListProps> = (props) => {
         return (
           <ListItem
             key={article.id}
-            id={article.id}
-            title={article.title}
+            article={article}
             onPlay={props.onItemPlay}
             onDelete={props.onItemDelete}
           />

@@ -22,19 +22,20 @@ footer{
 }
 
 .section-main{
-  flex: 1
-}
+  flex: 1;
+} 
 
 .c-list{
-  margin-bottom: $size-6;
   .c-list-item{
-    padding: $size-4 0;
+    padding: $size-4;
+    margin-bottom: $size-6;
   }
 }
 
 .c-player{
   background: $color-background;
   border-top: 1px solid $color-border;
+  box-shadow: 2px -3px rgba(10, 10, 10, 0.1);
   padding: $size-6;
   padding-bottom: $size-1;
 

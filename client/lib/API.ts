@@ -11,13 +11,13 @@ export const fetchArticles = () => {
   });
 };
 
-export const saveArticle = (id: string, title: string, audio: any) => {
+export const saveArticle = (id: string, title: string, audio: any, duration: number) => {
   return new Promise((resolve) => {
     localforage.getItem('articles').then((items: any) => {
       if (!items) {
         items = [];
       }
-      items = [{ id, title, audio }, ...items];
+      items = [{ id, title, audio, duration }, ...items];
       localforage.setItem('articles', items).then(() => {
         resolve();
       });

@@ -21,11 +21,13 @@ export interface ArticleFormState {
   title: string;
   submitted: boolean;
   audio: any;
+  duration: number;
 }
 
 export interface ArticleItemState {
   id: string;
   title: string;
+  duration: number;
 }
 
 export interface PlayerState {

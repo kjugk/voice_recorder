@@ -6,6 +6,7 @@ import * as Types from '../types';
 import * as articleActions from '../actions/articleActions';
 import { List } from '../components/articles/List';
 import PlayerContainer from './PlayerContainer';
+import { NoArticleMessage } from '../components/messages/NoArticleMessage';
 
 interface ArticleListContainerProps {
   articles: Types.ArticlesState;
@@ -31,6 +32,7 @@ class ArticleListContainer extends React.Component<ArticleListContainerProps> {
       <>
         <div className="columns">
           <div className="column is-10 is-offset-1">
+            {articles.items.length < 1 && <NoArticleMessage />}
             <List articles={articles} onItemPlay={selectArticle} onItemDelete={deleteArticle} />
             <Link className="button is-primary" to="/new">
               new

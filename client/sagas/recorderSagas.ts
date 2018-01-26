@@ -5,6 +5,8 @@ import * as formActions from '../actions/articleFormActions';
 import * as mediaActions from '../actions/mediaActions';
 import * as Media from '../lib/Media';
 
+import {getDurationFromFile} from '../lib/Player';
+
 function* requestMicPermission() {
   const stream = yield call(Media.requestMicPermission);
   yield put(mediaActions.successMicPermission());
@@ -17,7 +19,8 @@ function startRecording() {
 
 function* stopRecording() {
   const blob = yield call(RecordRTC.stopRecording);
-  yield put(formActions.receiveAudio(blob));
+  const duration = yield call(getDurationFromFile, blob);
+  yield put(formActions.receiveAudio(blob, duration));
 }
 
 export default function* recorderSagas() {

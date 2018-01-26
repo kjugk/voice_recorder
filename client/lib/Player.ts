@@ -59,3 +59,31 @@ export default class Player {
     return this.getDuration() >= this.buffer.duration;
   }
 }
+
+export const getDurationFromFile = (audio: Blob) => {
+  return new Promise((resolve) => {
+    const fr = new FileReader();
+
+    fr.onload = () => {
+      const context = new AudioContext();
+      context.decodeAudioData(fr.result, (decodeAudioData: AudioBuffer) => {
+        resolve(decodeAudioData.duration);
+      });
+    };
+    fr.readAsArrayBuffer(audio);
+  });
+};
+
+export const formatDurationToTime = (duration: number): string => {
+  return formatToMinutes(duration) + ':' + formatToSeconds(duration);
+};
+
+const formatToSeconds = (seconds: number): string => {
+  const t = Math.floor(seconds);
+  return (t < 10) ? '0' + t : '' + t;
+};
+
+const formatToMinutes = (seconds: number): string => {
+  const t = Math.floor(seconds / 60);
+  return (t < 10) ? '0' + t : '' + t;
+};

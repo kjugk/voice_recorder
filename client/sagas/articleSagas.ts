@@ -15,9 +15,9 @@ function* fetchArticles() {
 function* submitArticle() {
   const id = shortid.generate();
   const state = yield select();
-  const { title, audio } = state.articleForm;
+  const { title, audio, duration } = state.articleForm;
 
-  yield call(Api.saveArticle, id, title, audio);
+  yield call(Api.saveArticle, id, title, audio, duration);
   yield put(formActions.completeSubmit());
 }
 
