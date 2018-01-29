@@ -30,15 +30,14 @@ class ArticleListContainer extends React.Component<ArticleListContainerProps> {
 
     return (
       <>
-        <div className="columns">
-          <div className="column is-10 is-offset-1">
-            {articles.items.length < 1 && <NoArticleMessage />}
-            <List articles={articles} onItemPlay={selectArticle} onItemDelete={deleteArticle} />
-            <Link className="button is-primary" to="/new">
-              new
-            </Link>
-          </div>
-        </div>
+        <List articles={articles} onItemPlay={selectArticle} onItemDelete={deleteArticle} />
+
+        {articles.items.length < 1 && <NoArticleMessage />}
+        {articles.items.length >= 1 && (
+          <Link className="button is-primary" to="/new">
+            new
+          </Link>
+        )}
         <PlayerContainer />
       </>
     );

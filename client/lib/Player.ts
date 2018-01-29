@@ -25,7 +25,7 @@ export default class Player {
         });
       });
     });
-  }
+  };
 
   public play() {
     this.startTime = this.context.currentTime;
@@ -80,10 +80,10 @@ export const formatDurationToTime = (duration: number): string => {
 
 const formatToSeconds = (seconds: number): string => {
   const t = Math.floor(seconds);
-  return (t < 10) ? '0' + t : '' + t;
+  return t < 10 ? '0' + t : '' + t;
 };
 
 const formatToMinutes = (seconds: number): string => {
   const t = Math.floor(seconds / 60);
-  return (t < 10) ? '0' + t : '' + t;
+  return t < 10 ? '0' + t : '' + t;
 };

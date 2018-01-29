@@ -9,6 +9,7 @@ import * as recorderActions from '../actions/recorderActions';
 
 import RecorderContainer from '../containers/RecorderContainer';
 import FormContainer from '../containers/FormContainer';
+import { MicPermissionDeniedMessage } from '../components/messages/MicPermissionDeniedMessage';
 
 interface ArticleFormContainerProps {
   form: Types.ArticleFormState;
@@ -33,7 +34,7 @@ class ArticleFormContainer extends React.Component<ArticleFormContainerProps> {
     const { form, recorder, media } = this.props;
 
     if (!media.micPremitted) {
-      return <div>マイクの使用が許可されていません。</div>;
+      return <MicPermissionDeniedMessage />;
     }
 
     if (form.submitted) {
