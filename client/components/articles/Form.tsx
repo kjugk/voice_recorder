@@ -25,8 +25,11 @@ export class Form extends React.Component<FormProps> {
         </div>
         <div className="field">
           <div className="control">
-            <button className="button is-primary" type="submit">
-              Save
+            <button title="save" className="button is-primary" type="submit">
+              <div className="icon">
+                <i className="fas fa-download" />
+              </div>
+              <span>Save</span>
             </button>
           </div>
         </div>

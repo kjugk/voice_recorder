@@ -17,7 +17,7 @@ function* submitArticle() {
   const state = yield select();
   const { title, audio, duration } = state.articleForm;
 
-  yield call(Api.saveArticle, id, title, audio, duration);
+  yield call(Api.saveArticle, id, title, audio, duration, new Date());
   yield put(formActions.completeSubmit());
 }
 

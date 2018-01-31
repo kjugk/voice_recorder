@@ -18,13 +18,19 @@ export class Recorder extends React.Component<RecorderProps> {
     if (isRecording) {
       return (
         <button className="button is-primary is-large" onClick={stopRecording}>
-          Stop Recording
+          <span className="icon">
+            <i className="fas fa-stop-circle" />
+          </span>
+          <span>Stop Recording</span>
         </button>
       );
     } else {
       return (
         <button className="button is-danger is-large" onClick={startRecording}>
-          Start Recording
+          <span className="icon">
+            <i className="fas fa-play-circle" />
+          </span>
+          <span>Start Recording</span>
         </button>
       );
     }

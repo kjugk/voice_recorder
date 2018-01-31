@@ -25,10 +25,10 @@ export class Player extends React.Component<PlayerProps> {
       <section className="c-player is-fixed-bottom">
         <div className="container">
           <div className="columns is-mobile">
-            <div className="column is-narrow">
+            <div className="column">
               <h5 className="title is-6">{title}</h5>
             </div>
-            <div className="column">
+            <div className="column is-narrow">
               <div className="is-pulled-right">
                 <Timer curPos={curPos} duration={duration} />
               </div>
@@ -51,14 +51,18 @@ export class Player extends React.Component<PlayerProps> {
 
     if (isPlaying) {
       return (
-        <button className="button" onClick={onPause}>
-          pause
+        <button className="button is-white" onClick={onPause}>
+          <span className="icon">
+            <i className="fas fa-pause" />
+          </span>
         </button>
       );
     } else {
       return (
-        <button className="button" onClick={onPlay}>
-          play
+        <button className="button is-white" onClick={onPlay}>
+          <span className="icon">
+            <i className="fas fa-play" />
+          </span>
         </button>
       );
     }

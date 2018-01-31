@@ -34,8 +34,11 @@ class ArticleListContainer extends React.Component<ArticleListContainerProps> {
 
         {articles.items.length < 1 && <NoArticleMessage />}
         {articles.items.length >= 1 && (
-          <Link className="button is-primary" to="/new">
-            new
+          <Link className="button is-primary is-large" to="/new">
+            <span className="icon">
+              <i className="fas fa-microphone"></i>
+            </span>
+            <span>record new article</span>
           </Link>
         )}
         <PlayerContainer />

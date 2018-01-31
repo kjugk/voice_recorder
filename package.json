@@ -26,6 +26,7 @@
     "debug": "~2.6.9",
     "express": "~4.15.5",
     "localforage": "^1.5.5",
+    "moment": "^2.20.1",
     "morgan": "~1.9.0",
     "node-sass": "^4.7.2",
     "pug": "2.0.0-beta11",
