@@ -1,10 +1,14 @@
-import { ArticleFormState } from './states';
 export interface AppState {
   articles: ArticlesState;
   player: PlayerState;
   articleForm: ArticleFormState;
   recorder: RecorderState;
   media: MediaState;
+  message: MessageState;
+}
+
+export interface MessageState {
+  body: string;
 }
 
 export interface MediaState {

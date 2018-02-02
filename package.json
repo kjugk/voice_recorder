@@ -9,6 +9,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "@types/classnames": "^2.2.3",
     "@types/localforage": "0.0.34",
     "@types/react": "^16.0.31",
     "@types/react-dom": "^16.0.3",

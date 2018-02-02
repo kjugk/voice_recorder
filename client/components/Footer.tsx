@@ -8,7 +8,6 @@ export class Footer extends React.Component {
           <a href="https://bulma.io">
             <img src="/images/made-with-bulma.png" alt="Made with Bulma" width="128" height="24" />
           </a>
-          <div className="content">test</div>
         </div>
       </footer>
     );

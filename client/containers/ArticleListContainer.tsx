@@ -8,7 +8,10 @@ import { List } from '../components/articles/List';
 import PlayerContainer from './PlayerContainer';
 import { NoArticleMessage } from '../components/messages/NoArticleMessage';
 
+import { SnackBar } from '../components/SnackBar';
+
 interface ArticleListContainerProps {
+  message: Types.MessageState;
   articles: Types.ArticlesState;
   selectArticle: (id: string) => any;
   deleteArticle: (id: string) => any;
@@ -26,7 +29,7 @@ class ArticleListContainer extends React.Component<ArticleListContainerProps> {
   }
 
   public render() {
-    const { articles, selectArticle, deleteArticle } = this.props;
+    const { articles, selectArticle, deleteArticle, message } = this.props;
 
     return (
       <>
@@ -36,11 +39,13 @@ class ArticleListContainer extends React.Component<ArticleListContainerProps> {
         {articles.items.length >= 1 && (
           <Link className="button is-primary is-large" to="/new">
             <span className="icon">
-              <i className="fas fa-microphone"></i>
+              <i className="fas fa-microphone" />
             </span>
             <span>record new article</span>
           </Link>
         )}
+
+        <SnackBar message={message.body} />
         <PlayerContainer />
       </>
     );
@@ -49,7 +54,8 @@ class ArticleListContainer extends React.Component<ArticleListContainerProps> {
 
 const mapStateToProps = (state: Types.AppState) => {
   return {
-    articles: state.articles
+    articles: state.articles,
+    message: state.message
   };
 };
 

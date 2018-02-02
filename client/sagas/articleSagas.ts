@@ -6,6 +6,7 @@ import * as articleActions from '../actions/articleActions';
 import * as formActions from '../actions/articleFormActions';
 import * as Api from '../lib/Api';
 import * as shortid from 'shortid';
+import * as appActions from '../actions/appActions';
 
 function* fetchArticles() {
   const articles = yield call(Api.fetchArticles);
@@ -19,11 +20,14 @@ function* submitArticle() {
 
   yield call(Api.saveArticle, id, title, audio, duration, new Date());
   yield put(formActions.completeSubmit());
+  yield delay(50);
+  yield put(appActions.setMessage('録音が完了しました!'));
 }
 
 function* deleteArticle(action: any) {
   const newArticles = yield call(Api.deleteArticle, action.payload.id);
   yield put(articleActions.deleteArticleComplete(newArticles));
+  yield put(appActions.setMessage('削除しました！'));
 }
 
 export default function* articleSagas() {
