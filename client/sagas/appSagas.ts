@@ -4,7 +4,7 @@ import * as Constants from '../constants';
 import * as appActions from '../actions/appActions';
 
 function* clearMessage() {
-  yield delay(3000);
+  yield delay(2500);
   yield put(appActions.clearMessage());
 }
 

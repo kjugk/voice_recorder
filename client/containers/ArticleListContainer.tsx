@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom';
 
 import * as Types from '../types';
 import * as articleActions from '../actions/articleActions';
-import { List } from '../components/articles/List';
-import PlayerContainer from './PlayerContainer';
-import { NoArticleMessage } from '../components/messages/NoArticleMessage';
 
+import PlayerContainer from './PlayerContainer';
+
+import { List } from '../components/articles/List';
+import { NoArticleMessage } from '../components/messages/NoArticleMessage';
 import { SnackBar } from '../components/SnackBar';
+import { Loader } from '../components/Loader';
 
 interface ArticleListContainerProps {
   message: Types.MessageState;
@@ -20,7 +22,11 @@ interface ArticleListContainerProps {
 
 class ArticleListContainer extends React.Component<ArticleListContainerProps> {
   public componentDidMount() {
-    this.props.fetchArticles();
+    const { articles, fetchArticles } = this.props;
+
+    if (!articles.isInitialized) {
+      fetchArticles();
+    }
   }
 
   public componentWillUnmount() {
@@ -33,17 +39,29 @@ class ArticleListContainer extends React.Component<ArticleListContainerProps> {
 
     return (
       <>
-        <List articles={articles} onItemPlay={selectArticle} onItemDelete={deleteArticle} />
-
-        {articles.items.length < 1 && <NoArticleMessage />}
-        {articles.items.length >= 1 && (
-          <Link className="button is-primary is-large" to="/new">
-            <span className="icon">
-              <i className="fas fa-microphone" />
-            </span>
-            <span>record new article</span>
-          </Link>
-        )}
+        <>
+          {articles.isFetching && <Loader show={true} />}
+          {!articles.isFetching && (
+            <>
+              {articles.items.length < 1 && <NoArticleMessage />}
+              {articles.items.length >= 1 && (
+                <>
+                  <List
+                    articles={articles}
+                    onItemPlay={selectArticle}
+                    onItemDelete={deleteArticle}
+                  />
+                  <Link className="button is-primary is-large c-fab" to="/new">
+                    <span className="icon">
+                      <i className="fas fa-microphone" />
+                    </span>
+                    <span>record new article</span>
+                  </Link>
+                </>
+              )}
+            </>
+          )}
+        </>
 
         <SnackBar message={message.body} />
         <PlayerContainer />

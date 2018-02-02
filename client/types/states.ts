@@ -19,6 +19,7 @@ export interface ArticlesState {
   selectedId?: string;
   items: ArticleItemState[];
   isFetching: boolean;
+  isInitialized: boolean;
 }
 
 export interface ArticleFormState {

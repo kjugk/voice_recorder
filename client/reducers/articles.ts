@@ -4,7 +4,8 @@ import * as Constants from '../constants';
 export const initialState: ArticlesState = {
   items: [],
   isFetching: false,
-  selectedId: undefined
+  selectedId: undefined,
+  isInitialized: false
 };
 
 export const articles = (state: ArticlesState = initialState, action: any): ArticlesState => {
@@ -13,7 +14,7 @@ export const articles = (state: ArticlesState = initialState, action: any): Arti
       return { ...state, isFetching: true };
 
     case Constants.RECEIVE_ARTICLES:
-      return { ...state, isFetching: false, items: action.payload.articles };
+      return { ...state, isInitialized: true, isFetching: false, items: action.payload.articles };
 
     case Constants.SELECT_ARTICLE:
       return { ...state, selectedId: action.payload.id };

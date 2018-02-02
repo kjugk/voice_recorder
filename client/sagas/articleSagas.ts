@@ -10,6 +10,7 @@ import * as appActions from '../actions/appActions';
 
 function* fetchArticles() {
   const articles = yield call(Api.fetchArticles);
+  yield delay(1000);
   yield put(articleActions.receiveArticles(articles));
 }
 
@@ -18,7 +19,8 @@ function* submitArticle() {
   const state = yield select();
   const { title, audio, duration } = state.articleForm;
 
-  yield call(Api.saveArticle, id, title, audio, duration, new Date());
+  const articles = yield call(Api.saveArticle, id, title, audio, duration, new Date());
+  yield put(articleActions.receiveArticles(articles));
   yield put(formActions.completeSubmit());
   yield delay(50);
   yield put(appActions.setMessage('録音が完了しました!'));

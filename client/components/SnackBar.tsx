@@ -10,6 +10,6 @@ export class SnackBar extends React.Component<SnackBarProps> {
     const { message } = this.props;
     const c = classnames('c-snackbar', { hidden: message === '' });
 
-    return <div className={`notification is-info ${c}`}>{message}</div>;
+    return <div className={`notification is-primary ${c}`}>{message}</div>;
   }
 }

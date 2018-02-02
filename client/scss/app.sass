@@ -1,65 +1,56 @@
 $desktop: 960px;
 $widescreen: 960px;
 $fullhd: 960px;
+$radius: 0;
+$radius-large: 0;
+$radius-small: 0;
 @import "~bulma/bulma.sass";
+@import '~bulma/sass/utilities/mixins';
 
 $color-background: $white;
 $color-border: $grey-lighter;
 
-html,body{
+html,body
   font-size: 16px;
   height: 100%;
   box-sizing: border-box;
-}
 
-#app{
+#app
   display: flex;
   flex-direction: column;
   height: 100%;
-}
 
-footer{
-  // padding-bottom: 160px!important;
-}
-
-.section-main{
+.section-main
   flex: 1;
   position: relative;
-} 
 
-.c-list{
-  .c-list-item{
+.c-list
+  .c-list-item
     padding: $size-4;
     margin-bottom: $size-6;
-  }
-}
 
-.c-player{
+.c-player
   background: $color-background;
   border-top: 1px solid $color-border;
   box-shadow: 2px -3px rgba(10, 10, 10, 0.1);
   padding: $size-6;
   padding-bottom: $size-1;
 
-  .c-player-progress{
+  .c-player-progress
     align-items: center;
     display: flex;
-  }
 
-  .button{
+  .button
     min-width: 3.5rem;
-  }
 
-  &.is-fixed-bottom{
+  &.is-fixed-bottom
     bottom: 0;
     left: 0;
     position: fixed;
     right: 0;
     z-index: 2;
-  }
-}
 
-.c-snackbar{
+.c-snackbar
   bottom: 0;
   left: 50%;
   opacity: 1;
@@ -68,8 +59,18 @@ footer{
   transform: translate3D(0,0,0);
   transition: all .5s;
   min-width: 300px;
-  &.hidden {
+  &.hidden
     opacity: 0;
     transform: translateY(100%);
-  }
-}
+
+.c-loader
+  padding-top: $size-1;
+  text-align: center;
+
+
+.c-fab
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  +mobile
+    background: black;
