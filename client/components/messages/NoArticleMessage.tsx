@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export class NoArticleMessage extends React.Component {
   public render() {
     return (
-      <article className="message is-primary">
+      <article className="message">
         <div className="message-header">
           <p>There is no article yet.</p>
         </div>

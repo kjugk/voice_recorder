@@ -29,6 +29,12 @@ html,body
     padding: $size-4;
     margin-bottom: $size-6;
 
+.list-leave
+  opacity: 1;
+.list-leave.list-leave-active
+  opacity: 0.01;
+  transition: opacity 200ms ease-in;
+
 .c-player
   background: $color-background;
   border-top: 1px solid $color-border;
@@ -57,7 +63,7 @@ html,body
   margin-left: -150px;
   position: fixed;
   transform: translate3D(0,0,0);
-  transition: all .5s;
+  transition: all 200ms;
   min-width: 300px;
   &.hidden
     opacity: 0;
