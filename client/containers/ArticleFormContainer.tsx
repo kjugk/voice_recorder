@@ -13,8 +13,8 @@ import { MicPermissionDeniedMessage } from '../components/messages/MicPermission
 
 interface ArticleFormContainerProps {
   form: Types.ArticleFormState;
-  recorder: Types.RecorderState;
   media: Types.MediaState;
+  recorder: Types.RecorderState;
   requestMicPermission: () => void;
   resetForm: () => any;
   resetRecorder: () => any;
@@ -31,7 +31,7 @@ class ArticleFormContainer extends React.Component<ArticleFormContainerProps> {
   }
 
   public render() {
-    const { form, recorder, media } = this.props;
+    const { form, media, recorder } = this.props;
 
     if (!media.micPremitted) {
       return <MicPermissionDeniedMessage />;
@@ -53,8 +53,8 @@ class ArticleFormContainer extends React.Component<ArticleFormContainerProps> {
 const mapStateToProps = (state: Types.AppState) => {
   return {
     form: state.articleForm,
-    recorder: state.recorder,
-    media: state.media
+    media: state.media,
+    recorder: state.recorder
   };
 };
 

@@ -79,7 +79,7 @@ export const formatDurationToTime = (duration: number): string => {
 };
 
 const formatToSeconds = (seconds: number): string => {
-  const t = Math.floor(seconds);
+  const t = Math.floor(seconds % 60);
   return t < 10 ? '0' + t : '' + t;
 };
 

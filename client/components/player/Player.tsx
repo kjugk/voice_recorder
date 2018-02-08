@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Timer } from './Timer';
+import { Loader, LoaderSize } from '../Loader';
 
 export interface PlayerProps {
   isLoading: boolean;
@@ -19,27 +20,32 @@ export class Player extends React.Component<PlayerProps> {
     return (
       <section className="c-player is-fixed-bottom">
         <div className="container">
-          <div className="columns is-mobile is-1">
-            <div className="column">
-              <h6 className="title is-6">{title}</h6>
-            </div>
-            <div className="column is-narrow">
-              <div className="is-pulled-right">
-                <Timer curPos={curPos} duration={duration} />
+          {isLoading && <Loader size={LoaderSize.SMALL} />}
+          {!isLoading &&
+            <>
+              <div className="columns is-mobile is-1">
+                <div className="column">
+                  <h6 className="title is-6">{title}</h6>
+                </div>
+                <div className="column is-narrow">
+                  <div className="is-pulled-right">
+                    <Timer curPos={curPos} duration={duration} />
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
 
-          <div className="columns is-mobile is-1">
-            <div className="column is-narrow">{this.renderButton()}</div>
-            <div className="column c-player-progress">
-              <progress
-                className="progress is-primary is-small is-radiusless"
-                value={progress}
-                max={100}
-              />
-            </div>
-          </div>
+              <div className="columns is-mobile is-1">
+                <div className="column is-narrow">{this.renderButton()}</div>
+                <div className="column c-player-progress">
+                  <progress
+                    className="progress is-primary is-small is-radiusless"
+                    max={100}
+                    value={progress}
+                  />
+                </div>
+              </div>
+            </>
+          }
         </div>
       </section>
     );

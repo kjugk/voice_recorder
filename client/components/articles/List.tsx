@@ -14,6 +14,7 @@ export const List: React.SFC<ListProps> = (props) => {
     <ul className="c-list">
       <ReactCSSTransitionGroup
         transitionName="list"
+        transitionEnterTimeout={0}
         transitionLeaveTimeout={200}
       >
         {props.articles.items.map((article) => {

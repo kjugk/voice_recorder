@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
+import { TitleInput } from '../form/TitleInput';
 
 interface FormProps {
   title: string;
@@ -8,7 +9,6 @@ interface FormProps {
 }
 
 interface FormState {
-  titleHasChanged: boolean;
   titleIsValid: boolean;
 }
 
@@ -17,30 +17,19 @@ export class Form extends React.Component<FormProps, FormState> {
 
   constructor(props: FormProps) {
     super(props);
-    this.state = { titleHasChanged: false, titleIsValid: true };
+    this.state = {titleIsValid: true };
   }
 
   public render() {
     const { title } = this.props;
-    const c = classnames('input', {
-      'is-danger': this.state.titleHasChanged && !this.state.titleIsValid
-    });
 
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
-        <div className="field">
-          <label className="label">Title</label>
-          <div className="control">
-            <input
-              className={c}
-              type="text"
-              value={title}
-              onChange={this.handleTitleChange.bind(this)}
-            />
-          </div>
-          {this.state.titleHasChanged &&
-            !this.state.titleIsValid && <p className="help is-danger">{Form.TITLE_MAX_LENGTH}文字以内</p>}
-        </div>
+        <TitleInput
+          value={title}
+          isValid={this.state.titleIsValid}
+          onChange={this.handleTitleChange.bind(this)}
+        />
         <div className="field">
           <div className="control">
             <button
@@ -67,9 +56,7 @@ export class Form extends React.Component<FormProps, FormState> {
 
   private handleTitleChange(evt: React.FormEvent<HTMLInputElement>) {
     evt.stopPropagation();
-
     const newTitle: string = evt.currentTarget.value;
-    this.setState({ titleHasChanged: true });
 
     if (newTitle.length > Form.TITLE_MAX_LENGTH) {
       this.setState({ titleIsValid: false });

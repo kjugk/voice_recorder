@@ -16,12 +16,26 @@ interface PlayerContainerProps {
 
 class PlayerContainer extends React.Component<PlayerContainerProps> {
   public componentDidUpdate(prevProps: PlayerContainerProps) {
-    const { selectedArticle, loadTrack } = this.props;
+    const { selectedArticle, loadTrack, resetPlayer } = this.props;
 
+    // トラック削除
+    if (!selectedArticle) {
+      if (prevProps.selectedArticle) {
+        resetPlayer();
+      }
+      return;
+    }
+
+    // 最初の再生
     if (!prevProps.selectedArticle && selectedArticle) {
       loadTrack(selectedArticle.id);
-    } else if (prevProps.selectedArticle.id !== this.props.selectedArticle.id) {
+      return;
+    }
+
+    // トラック切り替え
+    if (prevProps.selectedArticle.id !== this.props.selectedArticle.id) {
       loadTrack(selectedArticle.id);
+      return;
     }
   }
 

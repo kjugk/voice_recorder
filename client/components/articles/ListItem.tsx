@@ -4,6 +4,7 @@ import { MouseEvent } from 'react';
 import * as moment from 'moment';
 
 import { formatDurationToTime } from '../../lib/Player';
+import { ListItemControl } from './ListItemControl';
 
 interface ListItemProps {
   article: Types.ArticleItemState;
@@ -33,32 +34,16 @@ export const ListItem: React.SFC<ListItemProps> = (props) => {
         </div>
       </div>
 
-      <div>
-        <button
-          className="button is-white"
-          title="play"
-          onClick={(evt: MouseEvent<HTMLElement>) => {
-            evt.stopPropagation();
-            props.onPlay(article.id);
-          }}
-        >
-          <span className="icon">
-            <i className="fas fa-play" />
-          </span>
-        </button>
-        <button
-          className="button is-white is-pulled-right"
-          title="delete"
-          onClick={(evt: MouseEvent<HTMLElement>) => {
-            evt.stopPropagation();
-            props.onDelete(article.id);
-          }}
-        >
-          <span className="icon has-text-danger">
-            <i className="fas fa-trash" />
-          </span>
-        </button>
-      </div>
+      <ListItemControl
+        onPlayClick={(evt: MouseEvent<HTMLElement>) => {
+          evt.stopPropagation();
+          props.onPlay(article.id);
+        }}
+        onDeleteClick={(evt: MouseEvent<HTMLElement>) => {
+          evt.stopPropagation();
+          props.onDelete(article.id);
+        }}
+      />
     </li>
   );
 };

@@ -6,22 +6,20 @@ interface TimerProps {
   duration: number;
 }
 
-export class Timer extends React.Component<TimerProps> {
-  public render() {
-    const { duration, curPos } = this.props;
+export const Timer: React.SFC<TimerProps> = (props) => {
+  const { duration, curPos } = props;
 
-    if (this.props.curPos > this.props.duration) {
-      return (
-        <span>
-          {formatDurationToTime(duration)} / {formatDurationToTime(duration)}
-        </span>
-      );
-    } else {
-      return (
-        <span>
-          {formatDurationToTime(curPos)} / {formatDurationToTime(duration)}
-        </span>
-      );
-    }
+  if (curPos > duration) {
+    return (
+      <span>
+        {formatDurationToTime(duration)} / {formatDurationToTime(duration)}
+      </span>
+    );
+  } else {
+    return (
+      <span>
+        {formatDurationToTime(curPos)} / {formatDurationToTime(duration)}
+      </span>
+    );
   }
-}
+};

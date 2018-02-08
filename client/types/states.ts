@@ -13,6 +13,7 @@ export interface MessageState {
 
 export interface MediaState {
   micPremitted: boolean;
+  isPermissionChecked: boolean;
 }
 
 export interface ArticlesState {

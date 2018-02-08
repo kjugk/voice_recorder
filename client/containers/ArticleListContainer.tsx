@@ -39,21 +39,25 @@ class ArticleListContainer extends React.Component<ArticleListContainerProps> {
 
     return (
       <>
-        {articles.isFetching && <Loader show={true} />}
+        {articles.isFetching && <Loader />}
         {!articles.isFetching && (
           <>
             {articles.items.length < 1 && <NoArticleMessage />}
-            <List
-              articles={articles}
-              onItemPlay={selectArticle}
-              onItemDelete={deleteArticle}
-            />
-            <Link className="button is-primary is-large c-fab" to="/new">
-              <span className="icon">
-                <i className="fas fa-microphone" />
-              </span>
-              <span>record new article</span>
-            </Link>
+            {articles.items.length >= 1 &&
+              <>
+                <List
+                  articles={articles}
+                  onItemPlay={selectArticle}
+                  onItemDelete={deleteArticle}
+                />
+                <Link className="button is-primary is-large c-fab" to="/new">
+                  <span className="icon">
+                    <i className="fas fa-microphone" />
+                  </span>
+                  <span>record new article</span>
+                </Link>
+              </>
+            }
           </>
         )}
 
