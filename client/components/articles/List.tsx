@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as Types from '../../types';
-import * as ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { ListItem } from './ListItem';
 
 interface ListProps {
@@ -12,22 +11,16 @@ interface ListProps {
 export const List: React.SFC<ListProps> = (props) => {
   return (
     <ul className="c-list">
-      <ReactCSSTransitionGroup
-        transitionName="list"
-        transitionEnterTimeout={0}
-        transitionLeaveTimeout={200}
-      >
-        {props.articles.items.map((article) => {
-          return (
-            <ListItem
-              key={article.id}
-              article={article}
-              onPlay={props.onItemPlay}
-              onDelete={props.onItemDelete}
-            />
-          );
-        })}
-      </ReactCSSTransitionGroup>
+      {props.articles.items.map((article) => {
+        return (
+          <ListItem
+            key={article.id}
+            article={article}
+            onPlay={props.onItemPlay}
+            onDelete={props.onItemDelete}
+          />
+        );
+      })}
     </ul>
   );
 };
