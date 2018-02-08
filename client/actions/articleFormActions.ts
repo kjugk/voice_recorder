@@ -9,12 +9,13 @@ export const changeTitle = (newTitle: string) => {
   };
 };
 
-export const receiveAudio = (audio: any, duration: number) => {
+export const receiveAudio = (audio: any, duration: number, size: number) => {
   return {
     type: Constants.RECEIVE_AUDIO,
     payload: {
       audio,
-      duration
+      duration,
+      size
     }
   };
 };

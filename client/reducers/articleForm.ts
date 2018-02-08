@@ -5,7 +5,8 @@ export const initialState: ArticleFormState = {
   title: '',
   submitted: false,
   audio: undefined,
-  duration: 0
+  duration: 0,
+  size: 0
 };
 
 export const articleForm = (
@@ -17,7 +18,12 @@ export const articleForm = (
       return { ...state, title: action.payload.newTitle };
 
     case Constants.RECEIVE_AUDIO:
-      return { ...state, audio: action.payload.audio, duration: action.payload.duration };
+      return {
+        ...state,
+        audio: action.payload.audio,
+        duration: action.payload.duration,
+        size: action.payload.size
+      };
 
     case Constants.SUBMIT_COMPLETE:
       return { ...state, submitted: true };

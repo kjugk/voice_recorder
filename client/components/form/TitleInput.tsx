@@ -8,7 +8,7 @@ interface TitleInputProps {
 }
 
 export const TitleInput: React.SFC<TitleInputProps> = (props) => {
-  const className = classnames('input', {
+  const className = classnames('input is-large', {
     'is-danger': !props.isValid
   });
 

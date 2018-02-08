@@ -28,6 +28,7 @@ export interface ArticleFormState {
   submitted: boolean;
   audio: any;
   duration: number;
+  size: number;
 }
 
 export interface ArticleItemState {

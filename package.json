@@ -11,6 +11,7 @@
   "dependencies": {
     "@types/classnames": "^2.2.3",
     "@types/localforage": "0.0.34",
+    "@types/pretty-bytes": "^4.0.0",
     "@types/react": "^16.0.31",
     "@types/react-addons-css-transition-group": "^15.0.3",
     "@types/react-dom": "^16.0.3",
@@ -31,6 +32,7 @@
     "moment": "^2.20.1",
     "morgan": "~1.9.0",
     "node-sass": "^4.7.2",
+    "pretty-bytes": "^4.0.2",
     "pug": "2.0.0-beta11",
     "react": "^16.2.0",
     "react-addons-css-transition-group": "^15.6.2",

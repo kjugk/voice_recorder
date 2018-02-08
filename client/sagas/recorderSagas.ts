@@ -21,7 +21,8 @@ function startRecording() {
 function* stopRecording() {
   const blob = yield call(RecordRTC.stopRecording);
   const duration = yield call(getDurationFromFile, blob);
-  yield put(formActions.receiveAudio(blob, duration));
+  const size = blob.size;
+  yield put(formActions.receiveAudio(blob, duration, size));
 }
 
 export default function* recorderSagas() {
