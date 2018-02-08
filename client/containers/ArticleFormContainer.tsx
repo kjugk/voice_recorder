@@ -9,11 +9,12 @@ import * as recorderActions from '../actions/recorderActions';
 
 import RecorderContainer from '../containers/RecorderContainer';
 import FormContainer from '../containers/FormContainer';
+import { MicPermissionDeniedMessage } from '../components/messages/MicPermissionDeniedMessage';
 
 interface ArticleFormContainerProps {
   form: Types.ArticleFormState;
-  recorder: Types.RecorderState;
   media: Types.MediaState;
+  recorder: Types.RecorderState;
   requestMicPermission: () => void;
   resetForm: () => any;
   resetRecorder: () => any;
@@ -30,10 +31,10 @@ class ArticleFormContainer extends React.Component<ArticleFormContainerProps> {
   }
 
   public render() {
-    const { form, recorder, media } = this.props;
+    const { form, media, recorder } = this.props;
 
     if (!media.micPremitted) {
-      return <div>マイクが許可されていません。</div>;
+      return <MicPermissionDeniedMessage />;
     }
 
     if (form.submitted) {
@@ -43,22 +44,21 @@ class ArticleFormContainer extends React.Component<ArticleFormContainerProps> {
     return (
       <>
         {!recorder.recordingCompleted && <RecorderContainer />}
-
         {recorder.recordingCompleted && <FormContainer />}
       </>
     );
   }
 }
 
-export const mapStateToProps = (state: Types.AppState) => {
+const mapStateToProps = (state: Types.AppState) => {
   return {
     form: state.articleForm,
-    recorder: state.recorder,
-    media: state.media
+    media: state.media,
+    recorder: state.recorder
   };
 };
 
-export const mapDispatchToProps = (dispatch: Dispatch<any>) => {
+const mapDispatchToProps = (dispatch: Dispatch<any>) => {
   return {
     requestMicPermission: () => {
       dispatch(mediaActions.requestMicPermission());

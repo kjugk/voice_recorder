@@ -14,7 +14,15 @@ class FormContainer extends React.Component<FormContainerProps> {
   public render() {
     const { submitForm, changeTitle, form } = this.props;
 
-    return <Form onSubmit={submitForm} onTitleChange={changeTitle} title={form.title} />;
+    return (
+      <Form
+        duration={form.duration}
+        onSubmit={submitForm}
+        onTitleChange={changeTitle}
+        size={form.size}
+        title={form.title}
+      />
+    );
   }
 }
 

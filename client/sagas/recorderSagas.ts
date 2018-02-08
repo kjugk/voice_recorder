@@ -5,8 +5,11 @@ import * as formActions from '../actions/articleFormActions';
 import * as mediaActions from '../actions/mediaActions';
 import * as Media from '../lib/Media';
 
+import {getDurationFromFile} from '../lib/Player';
+
 function* requestMicPermission() {
   const stream = yield call(Media.requestMicPermission);
+  // TODO: errow handlings.
   yield put(mediaActions.successMicPermission());
   RecordRTC.build(stream);
 }
@@ -17,7 +20,9 @@ function startRecording() {
 
 function* stopRecording() {
   const blob = yield call(RecordRTC.stopRecording);
-  yield put(formActions.receiveAudio(blob));
+  const duration = yield call(getDurationFromFile, blob);
+  const size = blob.size;
+  yield put(formActions.receiveAudio(blob, duration, size));
 }
 
 export default function* recorderSagas() {

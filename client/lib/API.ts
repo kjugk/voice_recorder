@@ -11,15 +11,35 @@ export const fetchArticles = () => {
   });
 };
 
-export const saveArticle = (id: string, title: string, audio: any) => {
+export const saveArticle = (
+  id: string,
+  title: string,
+  audio: any,
+  duration: number,
+  createdAt: Date
+) => {
+  if (title.trim() === '') {
+    title = 'no title';
+  }
   return new Promise((resolve) => {
     localforage.getItem('articles').then((items: any) => {
       if (!items) {
         items = [];
       }
-      items = [{ id, title, audio }, ...items];
+      items = [{ id, title, audio, duration, createdAt }, ...items];
       localforage.setItem('articles', items).then(() => {
-        resolve();
+        resolve(items);
+      });
+    });
+  });
+};
+
+export const deleteArticle = (id: string) => {
+  return new Promise((resolve) => {
+    localforage.getItem('articles').then((items: any) => {
+      const newItems = items.filter((item: any) => item.id !== id);
+      localforage.setItem('articles', newItems).then(() => {
+        resolve(newItems);
       });
     });
   });

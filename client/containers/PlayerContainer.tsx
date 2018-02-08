@@ -11,17 +11,36 @@ interface PlayerContainerProps {
   pause: () => any;
   play: () => any;
   loadTrack: (url: string) => any;
+  resetPlayer: () => any;
 }
 
 class PlayerContainer extends React.Component<PlayerContainerProps> {
   public componentDidUpdate(prevProps: PlayerContainerProps) {
-    const { selectedArticle, loadTrack } = this.props;
+    const { selectedArticle, loadTrack, resetPlayer } = this.props;
 
+    // トラック削除
+    if (!selectedArticle) {
+      if (prevProps.selectedArticle) {
+        resetPlayer();
+      }
+      return;
+    }
+
+    // 最初の再生
     if (!prevProps.selectedArticle && selectedArticle) {
       loadTrack(selectedArticle.id);
-    } else if (prevProps.selectedArticle.id !== this.props.selectedArticle.id) {
-      loadTrack(selectedArticle.id);
+      return;
     }
+
+    // トラック切り替え
+    if (prevProps.selectedArticle.id !== this.props.selectedArticle.id) {
+      loadTrack(selectedArticle.id);
+      return;
+    }
+  }
+
+  public componentWillUnmount() {
+    this.props.resetPlayer();
   }
 
   public render() {
@@ -56,7 +75,8 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) => {
   return {
     pause: () => dispatch(playerActions.pause()),
     play: () => dispatch(playerActions.play()),
-    loadTrack: (url: string) => dispatch(playerActions.loadTrack(url))
+    loadTrack: (url: string) => dispatch(playerActions.loadTrack(url)),
+    resetPlayer: () => dispatch(playerActions.resetPlayer())
   };
 };
 

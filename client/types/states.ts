@@ -1,10 +1,14 @@
-import { ArticleFormState } from './states';
 export interface AppState {
   articles: ArticlesState;
   player: PlayerState;
   articleForm: ArticleFormState;
   recorder: RecorderState;
   media: MediaState;
+  message: MessageState;
+}
+
+export interface MessageState {
+  body: string;
 }
 
 export interface MediaState {
@@ -15,17 +19,22 @@ export interface ArticlesState {
   selectedId?: string;
   items: ArticleItemState[];
   isFetching: boolean;
+  isInitialized: boolean;
 }
 
 export interface ArticleFormState {
   title: string;
   submitted: boolean;
   audio: any;
+  duration: number;
+  size: number;
 }
 
 export interface ArticleItemState {
   id: string;
   title: string;
+  duration: number;
+  createdAt: Date;
 }
 
 export interface PlayerState {

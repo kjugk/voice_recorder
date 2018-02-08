@@ -1,0 +1,101 @@
+@charset "utf-8"
+
+$desktop: 960px;
+$widescreen: 960px;
+$fullhd: 960px;
+$radius: 0;
+$radius-large: 0;
+$radius-small: 0;
+
+$family-primary: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
+
+@import "~bulma/bulma.sass";
+
+$color-background: $white;
+$color-border: $grey-lighter;
+
+html,body
+  font-size: 16px;
+  height: 100%;
+  box-sizing: border-box;
+
+#app
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+.section-main
+  flex: 1;
+  position: relative;
+
+.c-list
+  .c-list-item
+    padding: $size-4;
+    margin-bottom: $size-6;
+
+.list-leave
+  opacity: 1;
+
+.list-leave.list-leave-active
+  opacity: 0.01;
+  transition: opacity 200ms ease-in;
+
+.c-player
+  background: $color-background;
+  border-top: 1px solid $color-border;
+  box-shadow: 2px -3px rgba(10, 10, 10, 0.1);
+  padding: $size-6;
+  padding-bottom: $size-1;
+
+  .c-player-progress
+    align-items: center;
+    display: flex;
+
+  &.is-fixed-bottom
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    z-index: 2;
+
+.c-snackbar
+  top: 4rem;
+  right: 1rem;
+  opacity: 1;
+  position: fixed;
+  transform: translate3D(0,0,0);
+  transition: all 200ms ease-in;
+  min-width: 300px;
+  max-width: 300px;
+  z-index: 100;
+  &.hidden
+    opacity: 0;
+    transform: translate3D(0,-100%,0);
+
+  +mobile
+    max-width: 100vh;
+    right: 0;
+    left: 0;
+    text-align: center;
+
+.c-loader
+  color: $primary;
+  padding-top: $size-1;
+  text-align: center;
+
+
+.c-fab
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+  font-size: 1.8rem;
+  border-radius: 50%;
+  position: fixed;
+  right: 4rem;
+  bottom: 9.8rem;
+  z-index: 1000;
+  +mobile
+    right: .5rem;
+
+.c-brand
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: $primary;

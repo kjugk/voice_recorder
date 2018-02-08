@@ -25,3 +25,21 @@ export const selectArticle = (id: string) => {
     }
   };
 };
+
+export const deleteArticle = (id: string) => {
+  return {
+    type: Constants.DELETE_ARTICLE,
+    payload: {
+      id
+    }
+  };
+};
+
+export const deleteArticleComplete = (articles: Types.ArticleItemState[]) => {
+  return {
+    type: Constants.DELETE_ARTICLE_COMPLETE,
+    payload: {
+      articles
+    }
+  };
+};

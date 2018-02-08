@@ -1,3 +1,4 @@
+// TODO: mic入力のvisualizeを作る
 import * as React from 'react';
 
 interface RecorderProps {
@@ -8,20 +9,30 @@ interface RecorderProps {
 
 export class Recorder extends React.Component<RecorderProps> {
   public render() {
-    return(
-      <div>
-        {this.renderButton()}
-      </div>
-    );
+    return <div>{this.renderButton()}</div>;
   }
 
   private renderButton() {
     const { isRecording, startRecording, stopRecording } = this.props;
 
     if (isRecording) {
-      return <button onClick={stopRecording}>stop</button>;
+      return (
+        <button className="button is-danger is-large" onClick={stopRecording}>
+          <span className="icon">
+            <i className="fas fa-stop-circle" />
+          </span>
+          <span>Stop Recording</span>
+        </button>
+      );
     } else {
-      return <button onClick={startRecording}>start</button>;
+      return (
+        <button className="button is-primary is-large" onClick={startRecording}>
+          <span className="icon">
+            <i className="fas fa-play-circle" />
+          </span>
+          <span>Start Recording</span>
+        </button>
+      );
     }
   }
 }

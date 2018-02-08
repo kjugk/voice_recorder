@@ -10,6 +10,9 @@ export const media = (state: MediaState = initialState, action: any): MediaState
     case Constants.MIC_PREMISSION_SUCCESS:
       return { ...state, micPremitted: true };
 
+    case Constants.RESET_FORM:
+      return { ...state, micPremitted: false };
+
     default:
       return state;
   }
