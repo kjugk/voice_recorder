@@ -17,7 +17,7 @@ export class Recorder extends React.Component<RecorderProps> {
 
     if (isRecording) {
       return (
-        <button className="button is-primary is-large" onClick={stopRecording}>
+        <button className="button is-danger is-large" onClick={stopRecording}>
           <span className="icon">
             <i className="fas fa-stop-circle" />
           </span>
@@ -26,7 +26,7 @@ export class Recorder extends React.Component<RecorderProps> {
       );
     } else {
       return (
-        <button className="button is-danger is-large" onClick={startRecording}>
+        <button className="button is-primary is-large" onClick={startRecording}>
           <span className="icon">
             <i className="fas fa-play-circle" />
           </span>

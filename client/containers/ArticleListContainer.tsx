@@ -30,7 +30,6 @@ class ArticleListContainer extends React.Component<ArticleListContainerProps> {
   }
 
   public componentWillUnmount() {
-    // player と 選択状態をリセットする
     this.props.selectArticle('');
   }
 
@@ -43,24 +42,17 @@ class ArticleListContainer extends React.Component<ArticleListContainerProps> {
         {!articles.isFetching && (
           <>
             {articles.items.length < 1 && <NoArticleMessage />}
-            {articles.items.length >= 1 &&
-              <>
-                <List
-                  articles={articles}
-                  onItemPlay={selectArticle}
-                  onItemDelete={deleteArticle}
-                />
-                <Link className="button is-primary is-large c-fab" to="/new">
-                  <span className="icon">
-                    <i className="fas fa-microphone" />
-                  </span>
-                  <span>record new article</span>
-                </Link>
-              </>
-            }
+            {articles.items.length >= 1 && (
+              <List articles={articles} onItemPlay={selectArticle} onItemDelete={deleteArticle} />
+            )}
           </>
         )}
 
+        <Link className="button is-primary c-fab" title="start recording" to="/new">
+          <span className="icon">
+            <i className="fas fa-microphone" />
+          </span>
+        </Link>
         <SnackBar message={message.body} />
         <PlayerContainer />
       </>

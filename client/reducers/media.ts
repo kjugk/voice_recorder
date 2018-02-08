@@ -2,14 +2,16 @@ import { MediaState } from '../types';
 import * as Constants from '../constants';
 
 export const initialState: MediaState = {
-  micPremitted: false,
-  isPermissionChecked: false
+  micPremitted: false
 };
 
 export const media = (state: MediaState = initialState, action: any): MediaState => {
   switch (action.type) {
     case Constants.MIC_PREMISSION_SUCCESS:
-      return { ...state, isPermissionChecked: true, micPremitted: true };
+      return { ...state, micPremitted: true };
+
+    case Constants.RESET_FORM:
+      return { ...state, micPremitted: false };
 
     default:
       return state;
