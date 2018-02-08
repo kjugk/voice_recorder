@@ -23,13 +23,13 @@ function* submitArticle() {
   yield put(articleActions.receiveArticles(articles));
   yield put(formActions.completeSubmit());
   yield delay(50);
-  yield put(appActions.setMessage('録音が完了しました!'));
+  yield put(appActions.setMessage('REC completed!'));
 }
 
 function* deleteArticle(action: any) {
   const newArticles = yield call(Api.deleteArticle, action.payload.id);
   yield put(articleActions.deleteArticleComplete(newArticles));
-  yield put(appActions.setMessage('削除しました！'));
+  yield put(appActions.setMessage('Delete completed.'));
 }
 
 export default function* articleSagas() {
