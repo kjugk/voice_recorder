@@ -2,6 +2,14 @@ import * as Api from '../lib/Api';
 
 const AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext;
 
+let ctx: AudioContext;
+export const getContext = (): AudioContext => {
+  if (!ctx) {
+    ctx = new AudioContext();
+  }
+  return ctx;
+};
+
 export default class Player {
   private context: AudioContext;
   private buffer: AudioBuffer;
@@ -10,13 +18,12 @@ export default class Player {
   private startTime: number;
 
   constructor() {
+    this.context = getContext();
     this.startOffset = 0;
     this.startTime = 0;
   }
 
   public loadTrack = (id: string) => {
-    this.context = new AudioContext();
-
     return new Promise((resolve) => {
       Api.getTrackFromStorage(id).then((response: any) => {
         this.context.decodeAudioData(response, (decodedData: AudioBuffer) => {
@@ -25,7 +32,7 @@ export default class Player {
         });
       });
     });
-  }
+  };
 
   public play() {
     this.startTime = this.context.currentTime;
@@ -65,7 +72,7 @@ export const getDurationFromFile = (audio: Blob) => {
     const fr = new FileReader();
 
     fr.onload = () => {
-      const context = new AudioContext();
+      const context = getContext();
       context.decodeAudioData(fr.result, (decodeAudioData: AudioBuffer) => {
         resolve(decodeAudioData.duration);
       });

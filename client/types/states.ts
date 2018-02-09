@@ -13,6 +13,7 @@ export interface MessageState {
 
 export interface MediaState {
   micPremitted: boolean;
+  stream?: MediaStream;
 }
 
 export interface ArticlesState {

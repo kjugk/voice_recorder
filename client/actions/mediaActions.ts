@@ -7,9 +7,11 @@ export const requestMicPermission = () => {
   };
 };
 
-export const successMicPermission = () => {
+export const successMicPermission = (stream: MediaStream) => {
   return {
     type: Constants.MIC_PREMISSION_SUCCESS,
-    payload: {}
+    payload: {
+      stream
+    }
   };
 };
