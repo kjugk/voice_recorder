@@ -3,12 +3,12 @@ import * as Api from '../lib/Api';
 const AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext;
 
 let ctx: AudioContext;
-function getContext(): AudioContext {
+export const getContext = (): AudioContext => {
   if (!ctx) {
     ctx = new AudioContext();
   }
   return ctx;
-}
+};
 
 export default class Player {
   private context: AudioContext;
@@ -32,7 +32,7 @@ export default class Player {
         });
       });
     });
-  }
+  };
 
   public play() {
     this.startTime = this.context.currentTime;

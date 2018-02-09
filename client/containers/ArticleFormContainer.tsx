@@ -2,6 +2,8 @@ import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
+import MicVisualizer from '../containers/MicVisualizer';
+
 import * as Types from '../types';
 import * as formActions from '../actions/articleFormActions';
 import * as mediaActions from '../actions/mediaActions';
@@ -43,6 +45,7 @@ class ArticleFormContainer extends React.Component<ArticleFormContainerProps> {
 
     return (
       <>
+        <MicVisualizer />
         {!recorder.recordingCompleted && <RecorderContainer />}
         {recorder.recordingCompleted && <FormContainer />}
       </>
