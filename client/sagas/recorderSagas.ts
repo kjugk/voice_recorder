@@ -10,7 +10,7 @@ import {getDurationFromFile} from '../lib/Player';
 function* requestMicPermission() {
   const stream = yield call(Media.requestMicPermission);
   // TODO: errow handlings.
-  yield put(mediaActions.successMicPermission());
+  yield put(mediaActions.successMicPermission(stream));
   RecordRTC.build(stream);
 }
 
