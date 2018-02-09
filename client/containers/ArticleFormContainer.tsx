@@ -45,12 +45,12 @@ class ArticleFormContainer extends React.Component<ArticleFormContainerProps> {
 
     return (
       <>
-        {!recorder.recordingCompleted &&
+        {!recorder.recordingCompleted && (
           <>
-            <MicVisualizer stream={media.stream}/>
+            <MicVisualizer stream={media.stream} isRecording={recorder.isRecording} />
             <RecorderContainer />
           </>
-        }
+        )}
         {recorder.recordingCompleted && <FormContainer />}
       </>
     );

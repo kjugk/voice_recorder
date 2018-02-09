@@ -99,3 +99,16 @@ html,body
   font-size: 1.8rem;
   font-weight: 800;
   color: $primary;
+
+.c-recorder-ticker
+  animation: tick 2s ease-in-out 0s infinite;
+  color: $danger;
+  font-size: 1.6rem;
+  font-weight: bold;
+  height: 2.5rem;
+
+@keyframes tick
+  50%
+    opacity: 0.01
+  100%
+    opacity: 1;
