@@ -1,13 +1,13 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
-import { getContext } from '../lib/Player';
-import { requestMicPermission } from '../lib/Media';
+import { getContext } from '../../lib/Player';
+import { requestMicPermission } from '../../lib/Media';
 
 interface MicVisualizerProps {
   stream?: MediaStream;
   isRecording: boolean;
 }
-export default class MicVisualizer extends React.Component<MicVisualizerProps> {
+export class MicVisualizer extends React.Component<MicVisualizerProps> {
   private static WIDTH = 300;
   private static HEIGHT = 120;
   private static BAR_SPACE = 1;
@@ -53,17 +53,12 @@ export default class MicVisualizer extends React.Component<MicVisualizerProps> {
 
   public render() {
     return (
-      <div>
-        <div className="c-recorder-ticker">
-          {this.props.isRecording && <span>Now Recording</span>}
-        </div>
-        <canvas
-          style={{ width: 300, height: 120 }}
-          ref={(canvas) => {
-            this.canvas = canvas;
-          }}
-        />
-      </div>
+      <canvas
+        style={{ width: 300, height: 120 }}
+        ref={(canvas) => {
+          this.canvas = canvas;
+        }}
+      />
     );
   }
 }
