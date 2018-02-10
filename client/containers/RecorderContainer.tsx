@@ -21,6 +21,7 @@ class RecorderContainer extends React.Component<RecorderContainerProps> {
       <>
         <MicVisualizer stream={media.stream} isRecording={recorder.isRecording} />
         <Recorder
+          duration={recorder.duration}
           isRecording={recorder.isRecording}
           startRecording={startRecording}
           stopRecording={stopRecording}

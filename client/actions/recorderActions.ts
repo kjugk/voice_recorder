@@ -20,3 +20,12 @@ export const resetRecorder = () => {
     payload: {}
   };
 };
+
+export const receiveDuration = (duration: number) => {
+  return {
+    type: Constants.RECEIVE_RECORD_DURATION,
+    payload: {
+      duration
+    }
+  };
+};

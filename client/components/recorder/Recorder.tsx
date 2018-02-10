@@ -1,6 +1,8 @@
 import * as React from 'react';
+import { formatDurationToTime } from '../../lib/Player';
 
 interface RecorderProps {
+  duration: number;
   isRecording: boolean;
   startRecording: () => any;
   stopRecording: () => any;
@@ -8,7 +10,18 @@ interface RecorderProps {
 
 export class Recorder extends React.Component<RecorderProps> {
   public render() {
-    return <div>{this.renderButton()}</div>;
+    return (
+      <div className="columns is-mobile  has-align-center">
+        <div className="column is-narrow">
+          {this.renderButton()}
+        </div>
+        <div className="column is-narrow is-paddingless">
+          <span className="c-recorder-timer">
+            {formatDurationToTime(this.props.duration / 1000)}
+          </span>
+        </div>
+      </div>
+    );
   }
 
   private renderButton() {
@@ -16,20 +29,18 @@ export class Recorder extends React.Component<RecorderProps> {
 
     if (isRecording) {
       return (
-        <button className="button is-danger is-large" onClick={stopRecording}>
+        <button className="button is-danger c-rec-btn" onClick={stopRecording}>
           <span className="icon">
-            <i className="fas fa-stop-circle" />
+            <i className="fas fa-stop" />
           </span>
-          <span>Stop Recording</span>
         </button>
       );
     } else {
       return (
-        <button className="button is-primary is-large" onClick={startRecording}>
+        <button className="button is-primary c-rec-btn" onClick={startRecording}>
           <span className="icon">
-            <i className="fas fa-play-circle" />
+            <i className="fas fa-play" />
           </span>
-          <span>Start Recording</span>
         </button>
       );
     }

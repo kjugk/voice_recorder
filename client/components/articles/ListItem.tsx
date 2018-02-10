@@ -13,6 +13,7 @@ interface ListItemProps {
 
 export const ListItem: React.SFC<ListItemProps> = (props) => {
   const { article } = props;
+
   return (
     <li className="c-list-item box">
       <ListItemHeadline article={article} />
