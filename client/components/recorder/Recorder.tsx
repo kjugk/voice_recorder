@@ -1,26 +1,39 @@
 import * as React from 'react';
 import { formatDurationToTime } from '../../lib/Player';
+import * as Types from '../../types';
+import * as classnames from 'classnames';
+
+import { MicVisualizer } from '../../components/recorder/MicVisualizer';
 
 interface RecorderProps {
   duration: number;
   isRecording: boolean;
+  media: Types.MediaState;
   startRecording: () => any;
   stopRecording: () => any;
 }
 
 export class Recorder extends React.Component<RecorderProps> {
   public render() {
+    const { isRecording, media, duration } = this.props;
+    const tickerClass = classnames('c-recorder-ticker', {
+      inactive: !isRecording,
+      active: isRecording
+    });
+
     return (
-      <div className="columns is-mobile  has-align-center">
-        <div className="column is-narrow">
-          {this.renderButton()}
+      <>
+        <div className="c-recorder-timer">{formatDurationToTime(duration / 1000)}</div>
+
+        <MicVisualizer stream={media.stream} isRecording={isRecording} />
+
+        <div className="columns is-mobile  has-align-center">
+          <div className="column is-narrow">{this.renderButton()}</div>
+          <div className="column is-narrow is-paddingless">
+            <span className={tickerClass}>Now Recording</span>
+          </div>
         </div>
-        <div className="column is-narrow is-paddingless">
-          <span className="c-recorder-timer">
-            {formatDurationToTime(this.props.duration / 1000)}
-          </span>
-        </div>
-      </div>
+      </>
     );
   }
 
@@ -29,7 +42,11 @@ export class Recorder extends React.Component<RecorderProps> {
 
     if (isRecording) {
       return (
-        <button className="button is-danger c-rec-btn" onClick={stopRecording}>
+        <button
+          className="button is-danger is-large"
+          onClick={stopRecording}
+          title="stop recording"
+        >
           <span className="icon">
             <i className="fas fa-stop" />
           </span>
@@ -37,7 +54,11 @@ export class Recorder extends React.Component<RecorderProps> {
       );
     } else {
       return (
-        <button className="button is-primary c-rec-btn" onClick={startRecording}>
+        <button
+          className="button is-primary is-large"
+          onClick={startRecording}
+          title="start recording"
+        >
           <span className="icon">
             <i className="fas fa-play" />
           </span>
