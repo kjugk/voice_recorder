@@ -1,4 +1,3 @@
-// TODO: mic入力のvisualizeを作る
 import * as React from 'react';
 
 interface RecorderProps {

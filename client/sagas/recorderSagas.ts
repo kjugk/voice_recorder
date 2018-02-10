@@ -5,10 +5,12 @@ import * as formActions from '../actions/articleFormActions';
 import * as mediaActions from '../actions/mediaActions';
 import * as Media from '../lib/Media';
 
-import {getDurationFromFile} from '../lib/Player';
+import { getDurationFromFile } from '../lib/Player';
+
+let stream: MediaStream;
 
 function* requestMicPermission() {
-  const stream = yield call(Media.requestMicPermission);
+  stream = yield call(Media.requestMicPermission);
   // TODO: errow handlings.
   yield put(mediaActions.successMicPermission(stream));
   RecordRTC.build(stream);

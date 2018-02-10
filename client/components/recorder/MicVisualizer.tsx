@@ -1,13 +1,13 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
-import { getContext } from '../lib/Player';
-import { requestMicPermission } from '../lib/Media';
+import { getContext } from '../../lib/Player';
+import { requestMicPermission } from '../../lib/Media';
 
 interface MicVisualizerProps {
-  stream: MediaStream;
+  stream?: MediaStream;
   isRecording: boolean;
 }
-export default class MicVisualizer extends React.Component<MicVisualizerProps> {
+export class MicVisualizer extends React.Component<MicVisualizerProps> {
   private static WIDTH = 300;
   private static HEIGHT = 120;
   private static BAR_SPACE = 1;
@@ -17,12 +17,12 @@ export default class MicVisualizer extends React.Component<MicVisualizerProps> {
 
   public componentDidMount() {
     const canvasCtx = this.canvas.getContext('2d');
+    const stream = this.props.stream as MediaStream;
 
     this.audioCtx = getContext();
     this.analyser = this.audioCtx.createAnalyser();
     this.analyser.fftSize = 256;
-    this.audioCtx.createMediaStreamSource(this.props.stream).connect(this.analyser);
-    this.analyser.connect(this.audioCtx.destination);
+    this.audioCtx.createMediaStreamSource(stream).connect(this.analyser);
 
     const bufferLength = this.analyser.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
@@ -53,17 +53,12 @@ export default class MicVisualizer extends React.Component<MicVisualizerProps> {
 
   public render() {
     return (
-      <div>
-        <div className="c-recorder-ticker">
-          {this.props.isRecording && <span>Now Recording</span>}
-        </div>
-        <canvas
-          style={{ width: 300, height: 120 }}
-          ref={(canvas) => {
-            this.canvas = canvas;
-          }}
-        />
-      </div>
+      <canvas
+        style={{ width: 300, height: 120 }}
+        ref={(canvas) => {
+          this.canvas = canvas;
+        }}
+      />
     );
   }
 }

@@ -4,8 +4,10 @@ import * as Types from '../types';
 import * as recorderActions from '../actions/recorderActions';
 
 import { Recorder } from '../components/recorder/Recorder';
+import { MicVisualizer } from '../components/recorder/MicVisualizer';
 
 interface RecorderContainerProps {
+  media: Types.MediaState;
   recorder: Types.RecorderState;
   startRecording: () => any;
   stopRecording: () => any;
@@ -13,20 +15,24 @@ interface RecorderContainerProps {
 
 class RecorderContainer extends React.Component<RecorderContainerProps> {
   public render() {
-    const { recorder, startRecording, stopRecording } = this.props;
+    const { media, recorder, startRecording, stopRecording } = this.props;
 
     return (
-      <Recorder
-        isRecording={recorder.isRecording}
-        startRecording={startRecording}
-        stopRecording={stopRecording}
-      />
+      <>
+        <MicVisualizer stream={media.stream} isRecording={recorder.isRecording} />
+        <Recorder
+          isRecording={recorder.isRecording}
+          startRecording={startRecording}
+          stopRecording={stopRecording}
+        />
+      </>
     );
   }
 }
 
 const mapStateToProps = (state: Types.AppState) => {
   return {
+    media: state.media,
     recorder: state.recorder
   };
 };
