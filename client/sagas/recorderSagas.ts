@@ -1,13 +1,30 @@
 import { all, call, fork, put, select, takeEvery, takeLatest } from 'redux-saga/effects';
+import { delay } from 'redux-saga';
 import * as Constants from '../constants';
 import * as RecordRTC from '../lib/Recorder';
 import * as formActions from '../actions/articleFormActions';
 import * as mediaActions from '../actions/mediaActions';
 import * as Media from '../lib/Media';
 
+import * as recorderActions from '../actions/recorderActions';
+
 import { getDurationFromFile } from '../lib/Player';
 
 let stream: MediaStream;
+
+function* getProgress() {
+  let duration = 0;
+  while (true) {
+    yield put(recorderActions.receiveDuration(duration));
+    yield delay(1000);
+    duration += 1000;
+
+    const state = yield select();
+    if (state.recorder.recordingCompleted) {
+      break;
+    }
+  }
+}
 
 function* requestMicPermission() {
   stream = yield call(Media.requestMicPermission);
@@ -16,8 +33,9 @@ function* requestMicPermission() {
   RecordRTC.build(stream);
 }
 
-function startRecording() {
+function* startRecording() {
   RecordRTC.startRecording();
+  yield call(getProgress);
 }
 
 function* stopRecording() {

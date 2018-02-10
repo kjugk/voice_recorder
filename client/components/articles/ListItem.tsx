@@ -1,9 +1,8 @@
 import * as React from 'react';
-import * as Types from '../../types';
 import { MouseEvent } from 'react';
-import * as moment from 'moment';
+import * as Types from '../../types';
 
-import { formatDurationToTime } from '../../lib/Player';
+import { ListItemHeadline } from './ListItemHeadline';
 import { ListItemControl } from './ListItemControl';
 
 interface ListItemProps {
@@ -14,25 +13,10 @@ interface ListItemProps {
 
 export const ListItem: React.SFC<ListItemProps> = (props) => {
   const { article } = props;
+
   return (
     <li className="c-list-item box">
-      <div className="columns is-mobile ">
-        <div className="column">
-          <span className="title is-5">{article.title}</span>
-        </div>
-        <div className="column is-narrow">
-          <div>
-            <span className="is-pulled-right is-size-7">
-              {moment(article.createdAt).format('YYYY/MM/DD')}
-            </span>
-          </div>
-          <div>
-            <span className="is-pulled-right is-size-7">
-              {formatDurationToTime(article.duration)}
-            </span>
-          </div>
-        </div>
-      </div>
+      <ListItemHeadline article={article} />
 
       <ListItemControl
         onPlayClick={(evt: MouseEvent<HTMLElement>) => {

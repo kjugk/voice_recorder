@@ -4,7 +4,6 @@ import * as Types from '../types';
 import * as recorderActions from '../actions/recorderActions';
 
 import { Recorder } from '../components/recorder/Recorder';
-import { MicVisualizer } from '../components/recorder/MicVisualizer';
 
 interface RecorderContainerProps {
   media: Types.MediaState;
@@ -18,14 +17,13 @@ class RecorderContainer extends React.Component<RecorderContainerProps> {
     const { media, recorder, startRecording, stopRecording } = this.props;
 
     return (
-      <>
-        <MicVisualizer stream={media.stream} isRecording={recorder.isRecording} />
-        <Recorder
-          isRecording={recorder.isRecording}
-          startRecording={startRecording}
-          stopRecording={stopRecording}
-        />
-      </>
+      <Recorder
+        media={media}
+        duration={recorder.duration}
+        isRecording={recorder.isRecording}
+        startRecording={startRecording}
+        stopRecording={stopRecording}
+      />
     );
   }
 }
