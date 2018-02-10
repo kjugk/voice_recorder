@@ -4,7 +4,7 @@ import { getContext } from '../lib/Player';
 import { requestMicPermission } from '../lib/Media';
 
 interface MicVisualizerProps {
-  stream: MediaStream;
+  stream?: MediaStream;
   isRecording: boolean;
 }
 export default class MicVisualizer extends React.Component<MicVisualizerProps> {
@@ -17,12 +17,12 @@ export default class MicVisualizer extends React.Component<MicVisualizerProps> {
 
   public componentDidMount() {
     const canvasCtx = this.canvas.getContext('2d');
+    const stream = this.props.stream as MediaStream;
 
     this.audioCtx = getContext();
     this.analyser = this.audioCtx.createAnalyser();
     this.analyser.fftSize = 256;
-    this.audioCtx.createMediaStreamSource(this.props.stream).connect(this.analyser);
-    this.analyser.connect(this.audioCtx.destination);
+    this.audioCtx.createMediaStreamSource(stream).connect(this.analyser);
 
     const bufferLength = this.analyser.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
