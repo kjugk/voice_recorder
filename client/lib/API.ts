@@ -1,47 +1,39 @@
-import * as localforage from 'localforage';
+import { VoiceRecorderDatabase } from '../db/VoiceRecorderDatabase';
+const db = new VoiceRecorderDatabase();
 
 export const fetchArticles = () => {
   return new Promise((resolve) => {
-    localforage.getItem('articles').then((articles) => {
-      if (!articles) {
-        articles = [];
-      }
-      resolve(articles);
-    });
+    resolve(db.articles.toArray());
   });
 };
 
 export const saveArticle = (
   id: string,
   title: string,
-  audio: any,
+  audio: Blob,
   duration: number,
   createdAt: Date
 ) => {
   if (title.trim() === '') {
     title = 'no title';
   }
+
   return new Promise((resolve) => {
-    localforage.getItem('articles').then((items: any) => {
-      if (!items) {
-        items = [];
-      }
-      items = [{ id, title, audio, duration, createdAt }, ...items];
-      localforage.setItem('articles', items).then(() => {
-        resolve(items);
-      });
+    db.articles.put({ id, title, audio, duration, createdAt }).then(() => {
+      resolve(db.articles.toArray());
     });
   });
 };
 
 export const deleteArticle = (id: string) => {
   return new Promise((resolve) => {
-    localforage.getItem('articles').then((items: any) => {
-      const newItems = items.filter((item: any) => item.id !== id);
-      localforage.setItem('articles', newItems).then(() => {
-        resolve(newItems);
+    db.articles
+      .where('id')
+      .equals(id)
+      .delete()
+      .then(() => {
+        resolve(db.articles.toArray());
       });
-    });
   });
 };
 
@@ -60,14 +52,16 @@ export const getTrack = (url: string) => {
 
 export const getTrackFromStorage = (id: string) => {
   return new Promise((resolve) => {
-    localforage.getItem('articles').then((items: any) => {
-      const article = items.find((item: any) => item.id === id);
-      const fr = new FileReader();
-      fr.readAsArrayBuffer(article.audio);
-
-      fr.onload = () => {
-        resolve(fr.result);
-      };
-    });
+    db.articles
+      .where('id')
+      .equals(id)
+      .first()
+      .then((article: any) => {
+        const fr = new FileReader();
+        fr.onload = () => {
+          resolve(fr.result);
+        };
+        fr.readAsArrayBuffer(article.audio);
+      });
   });
 };
