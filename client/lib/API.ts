@@ -3,7 +3,12 @@ const db = new VoiceRecorderDatabase();
 
 export const fetchArticles = () => {
   return new Promise((resolve) => {
-    resolve(db.articles.toArray());
+    resolve(
+      db.articles
+        .toCollection()
+        .reverse()
+        .sortBy('createdAt')
+    );
   });
 };
 
@@ -20,7 +25,12 @@ export const saveArticle = (
 
   return new Promise((resolve) => {
     db.articles.put({ id, title, audio, duration, createdAt }).then(() => {
-      resolve(db.articles.toArray());
+      resolve(
+        db.articles
+          .toCollection()
+          .reverse()
+          .sortBy('createdAt')
+      );
     });
   });
 };
@@ -32,7 +42,12 @@ export const deleteArticle = (id: string) => {
       .equals(id)
       .delete()
       .then(() => {
-        resolve(db.articles.toArray());
+        resolve(
+          db.articles
+            .toCollection()
+            .reverse()
+            .sortBy('createdAt')
+        );
       });
   });
 };

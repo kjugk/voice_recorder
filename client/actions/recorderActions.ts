@@ -14,6 +14,13 @@ export const stopRecording = () => {
   };
 };
 
+export const completeRecording = () => {
+  return {
+    type: Constants.RECORDING_COMPLETED,
+    payload: {}
+  };
+};
+
 export const resetRecorder = () => {
   return {
     type: Constants.RESET_RECORDER,

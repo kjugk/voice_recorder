@@ -16,21 +16,25 @@ interface RecorderProps {
 export class Recorder extends React.Component<RecorderProps> {
   public render() {
     const { isRecording, media, duration } = this.props;
-    const tickerClass = classnames('c-recorder-ticker', {
+    const timerClassName = classnames('c-recorder-timer', {
+      'has-text-danger': isRecording
+    });
+
+    const tickerClassName = classnames('c-recorder-ticker', {
       inactive: !isRecording,
       active: isRecording
     });
 
     return (
       <>
-        <div className="c-recorder-timer">{formatDurationToTime(duration / 1000)}</div>
+        <div className={timerClassName}>{formatDurationToTime(duration / 1000)}</div>
 
         <MicVisualizer stream={media.stream} isRecording={isRecording} />
 
         <div className="columns is-mobile  has-align-center">
           <div className="column is-narrow">{this.renderButton()}</div>
           <div className="column is-narrow is-paddingless">
-            <span className={tickerClass}>Now Recording</span>
+            <span className={tickerClassName}>Now Recording</span>
           </div>
         </div>
       </>

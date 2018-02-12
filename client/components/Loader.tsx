@@ -9,6 +9,7 @@ export enum LoaderSize {
 interface LoaderProps {
   show?: boolean;
   size?: LoaderSize;
+  text?: string;
 }
 
 export const Loader: React.SFC<LoaderProps> = (props) => {
@@ -26,11 +27,13 @@ export const Loader: React.SFC<LoaderProps> = (props) => {
       <span className="icon">
         <i className={c} />
       </span>
+      {!!props.text && <h5 className="loader-text is-5 has-text-weight-bold">{props.text}</h5>}
     </div>
   );
 };
 
 Loader.defaultProps = {
   show: true,
-  size: LoaderSize.LARGE
+  size: LoaderSize.LARGE,
+  text: ''
 };
