@@ -28,7 +28,12 @@ function* submitArticle() {
 
 function* deleteArticle(action: any) {
   const newArticles = yield call(Api.deleteArticle, action.payload.id);
+  const state = yield select();
+
   yield put(articleActions.deleteArticleComplete(newArticles));
+  if (action.payload.id === state.articles.selectedId) {
+    yield put(articleActions.selectArticle(''));
+  }
   yield put(appActions.setMessage('Delete completed.'));
 }
 

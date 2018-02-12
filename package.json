@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@types/classnames": "^2.2.3",
-    "@types/localforage": "0.0.34",
     "@types/pretty-bytes": "^4.0.0",
     "@types/react": "^16.0.31",
     "@types/react-dom": "^16.0.3",
@@ -26,8 +25,8 @@
     "cookie-parser": "~1.4.3",
     "css-loader": "^0.28.9",
     "debug": "~2.6.9",
+    "dexie": "^2.0.1",
     "express": "~4.15.5",
-    "localforage": "^1.5.6",
     "moment": "^2.20.1",
     "morgan": "~1.9.0",
     "node-sass": "^4.7.2",
@@ -46,7 +45,7 @@
     "source-map-loader": "^0.2.3",
     "style-loader": "^0.19.1",
     "tslint": "^5.8.0",
-    "typescript": "^2.6.2",
+    "typescript": "^2.7.1",
     "webpack": "^3.10.0"
   }
 }

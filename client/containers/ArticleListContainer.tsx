@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import * as classnames from 'classnames';
 
 import * as Types from '../types';
 import * as articleActions from '../actions/articleActions';
@@ -35,6 +36,7 @@ class ArticleListContainer extends React.Component<ArticleListContainerProps> {
 
   public render() {
     const { articles, selectArticle, deleteArticle, message } = this.props;
+    const fabClassName = classnames('button is-primary c-fab', { shifted: !!articles.selectedId });
 
     return (
       <>
@@ -48,7 +50,7 @@ class ArticleListContainer extends React.Component<ArticleListContainerProps> {
           </>
         )}
 
-        <Link className="button is-primary c-fab" title="start recording" to="/new">
+        <Link className={fabClassName} title="start recording" to="/new">
           <span className="icon">
             <i className="fas fa-microphone" />
           </span>

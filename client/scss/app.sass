@@ -92,10 +92,13 @@ html,body
   border-radius: 50%;
   position: fixed;
   right: 4rem;
-  bottom: 9.8rem;
+  bottom: 3rem;
   z-index: 1000;
+  transform: bottom .5s;
+  &.shifted
+    bottom: 9.8rem;
   +mobile
-    right: .5rem;
+    right: 1.5rem;
 
 .c-brand
   font-size: 1.8rem;
