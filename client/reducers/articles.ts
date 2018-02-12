@@ -20,7 +20,7 @@ export const articles = (state: ArticlesState = initialState, action: any): Arti
       return { ...state, selectedId: action.payload.id };
 
     case Constants.DELETE_ARTICLE_COMPLETE:
-      return { ...state, items: action.payload.articles};
+      return { ...state, items: action.payload.articles };
 
     default:
       return state;
