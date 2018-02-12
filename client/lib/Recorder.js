@@ -2,8 +2,8 @@ const RecordRTC = require('recordrtc');
 let recordRTC;
 
 module.exports.build = function(stream) {
-  if(!recordRTC) {
-    recordRTC = RecordRTC(stream, { type: 'audio', recorderType: RecordRTC.MediaStreamRecorder});
+  if (!recordRTC) {
+    recordRTC = RecordRTC(stream, { type: 'audio' });
   }
   return recordRTC;
 };
