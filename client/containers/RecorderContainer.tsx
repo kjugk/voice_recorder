@@ -4,6 +4,7 @@ import * as Types from '../types';
 import * as recorderActions from '../actions/recorderActions';
 
 import { Recorder } from '../components/recorder/Recorder';
+import { Loader } from '../components/Loader';
 
 interface RecorderContainerProps {
   media: Types.MediaState;
@@ -15,6 +16,10 @@ interface RecorderContainerProps {
 class RecorderContainer extends React.Component<RecorderContainerProps> {
   public render() {
     const { media, recorder, startRecording, stopRecording } = this.props;
+
+    if (recorder.isWaiting) {
+      return <Loader text="Audio file processing..." />;
+    }
 
     return (
       <Recorder

@@ -49,4 +49,5 @@ export interface RecorderState {
   isRecording: boolean;
   recordingCompleted?: boolean;
   duration: number;
+  isWaiting: boolean;
 }

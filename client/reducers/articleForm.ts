@@ -17,7 +17,7 @@ export const articleForm = (
     case Constants.CHANGE_TITLE:
       return { ...state, title: action.payload.newTitle };
 
-    case Constants.RECEIVE_AUDIO:
+    case Constants.RECEIVE_AUDIO_DATA:
       return {
         ...state,
         audio: action.payload.audio,

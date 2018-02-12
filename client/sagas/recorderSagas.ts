@@ -5,15 +5,12 @@ import * as RecordRTC from '../lib/Recorder';
 import * as formActions from '../actions/articleFormActions';
 import * as mediaActions from '../actions/mediaActions';
 import * as Media from '../lib/Media';
-
 import * as recorderActions from '../actions/recorderActions';
-
 import { getDurationFromFile } from '../lib/Player';
-
-let stream: MediaStream;
 
 function* getProgress() {
   let duration = 0;
+
   while (true) {
     yield put(recorderActions.receiveDuration(duration));
     yield delay(1000);
@@ -27,10 +24,10 @@ function* getProgress() {
 }
 
 function* requestMicPermission() {
-  stream = yield call(Media.requestMicPermission);
+  const stream = yield call(Media.requestMicPermission);
   // TODO: errow handlings.
-  yield put(mediaActions.successMicPermission(stream));
   RecordRTC.build(stream);
+  yield put(mediaActions.successMicPermission(stream));
 }
 
 function* startRecording() {
@@ -41,8 +38,10 @@ function* startRecording() {
 function* stopRecording() {
   const blob = yield call(RecordRTC.stopRecording);
   const duration = yield call(getDurationFromFile, blob);
-  const size = blob.size;
-  yield put(formActions.receiveAudio(blob, duration, size));
+
+  yield delay(1000);
+  yield put(recorderActions.completeRecording());
+  yield put(formActions.receiveAudioData(blob, duration, blob.size));
 }
 
 export default function* recorderSagas() {
