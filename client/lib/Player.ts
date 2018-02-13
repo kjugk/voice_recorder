@@ -23,7 +23,7 @@ export default class Player {
     this.startTime = 0;
   }
 
-  public loadTrack = (id: string) => {
+  public loadTrack(id: string) {
     return new Promise((resolve) => {
       Api.getTrackFromStorage(id).then((response: any) => {
         this.context.decodeAudioData(response, (decodedData: AudioBuffer) => {
@@ -32,7 +32,7 @@ export default class Player {
         });
       });
     });
-  };
+  }
 
   public play() {
     this.startTime = this.context.currentTime;
