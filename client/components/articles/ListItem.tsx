@@ -12,7 +12,7 @@ interface ListItemProps {
 }
 
 export const ListItem: React.SFC<ListItemProps> = (props) => {
-  const { article } = props;
+  const { article, onPlay, onDelete } = props;
 
   return (
     <li className="c-list-item box">
@@ -21,11 +21,11 @@ export const ListItem: React.SFC<ListItemProps> = (props) => {
       <ListItemControl
         onPlayClick={(evt: MouseEvent<HTMLElement>) => {
           evt.stopPropagation();
-          props.onPlay(article.id);
+          onPlay(article.id);
         }}
         onDeleteClick={(evt: MouseEvent<HTMLElement>) => {
           evt.stopPropagation();
-          props.onDelete(article.id);
+          onDelete(article.id);
         }}
       />
     </li>

@@ -10,7 +10,7 @@ interface ListIteamHeadlineProps {
 export const ListItemHeadline: React.SFC<ListIteamHeadlineProps> = (props) => {
   const { article } = props;
 
-  return(
+  return (
     <div className="columns is-mobile ">
       <div className="column">
         <span className="title is-5">{article.title}</span>
