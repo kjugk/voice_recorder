@@ -1,24 +1,23 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import * as classnames from 'classnames';
 
 import * as Types from '../types';
 import * as articleActions from '../actions/articleActions';
 
 import PlayerContainer from './PlayerContainer';
-
 import { List } from '../components/articles/List';
 import { NoArticleMessage } from '../components/messages/NoArticleMessage';
 import { SnackBar } from '../components/SnackBar';
 import { Loader } from '../components/Loader';
+import { Fab } from '../components/Fab';
 
 interface ArticleListContainerProps {
-  message: Types.MessageState;
   articles: Types.ArticlesState;
-  selectArticle: (id: string) => any;
+  message: Types.MessageState;
   deleteArticle: (id: string) => any;
   fetchArticles: () => any;
+  selectArticle: (id: string) => any;
 }
 
 class ArticleListContainer extends React.Component<ArticleListContainerProps> {
@@ -36,7 +35,7 @@ class ArticleListContainer extends React.Component<ArticleListContainerProps> {
 
   public render() {
     const { articles, selectArticle, deleteArticle, message } = this.props;
-    const fabClassName = classnames('button is-primary c-fab', { shifted: !!articles.selectedId });
+    const fabClassName = classnames({ shifted: !!articles.selectedId });
 
     return (
       <>
@@ -50,11 +49,7 @@ class ArticleListContainer extends React.Component<ArticleListContainerProps> {
           </>
         )}
 
-        <Link className={fabClassName} title="start recording" to="/new">
-          <span className="icon">
-            <i className="fas fa-microphone" />
-          </span>
-        </Link>
+        <Fab className={fabClassName} linkTo="/new" title="start recording" />
         <SnackBar message={message.body} />
         <PlayerContainer />
       </>
@@ -71,9 +66,9 @@ const mapStateToProps = (state: Types.AppState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => {
   return {
-    selectArticle: (id: string) => dispatch(articleActions.selectArticle(id)),
     deleteArticle: (id: string) => dispatch(articleActions.deleteArticle(id)),
-    fetchArticles: () => dispatch(articleActions.fetchArticles())
+    fetchArticles: () => dispatch(articleActions.fetchArticles()),
+    selectArticle: (id: string) => dispatch(articleActions.selectArticle(id))
   };
 };
 
