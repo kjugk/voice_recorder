@@ -7,13 +7,9 @@ interface ListItemControlProps {
 }
 
 export const ListItemControl: React.SFC<ListItemControlProps> = (props) => {
-  return(
+  return (
     <div>
-      <button
-        className="button is-white"
-        title="play"
-        onClick={props.onPlayClick}
-      >
+      <button className="button is-white" title="play" onClick={props.onPlayClick}>
         <span className="icon">
           <i className="fas fa-play" />
         </span>

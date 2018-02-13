@@ -69,6 +69,7 @@ export class Form extends React.Component<FormProps, FormState> {
     this.props.onSubmit();
   }
 
+  // このチェックって、componentDidUpdate でやるべきでは? 結果をcomponent に渡せば同じことだし。
   private handleTitleChange(evt: React.FormEvent<HTMLInputElement>) {
     evt.stopPropagation();
     const newTitle: string = evt.currentTarget.value;
