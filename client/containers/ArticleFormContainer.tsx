@@ -5,15 +5,20 @@ import { Redirect } from 'react-router-dom';
 import * as Types from '../types';
 import * as formActions from '../actions/articleFormActions';
 import * as mediaActions from '../actions/mediaActions';
+import * as appActions from '../actions/appActions';
 import * as recorderActions from '../actions/recorderActions';
 
 import RecorderContainer from '../containers/RecorderContainer';
 import FormContainer from '../containers/FormContainer';
 import { MicPermissionDeniedMessage } from '../components/messages/MicPermissionDeniedMessage';
+import { MediaPermissionState } from '../reducers/media';
+import { Loader } from '../components/Loader';
+import { ErrorModal } from '../components/ErrorModal';
 
 interface ArticleFormContainerProps {
   form: Types.ArticleFormState;
   media: Types.MediaState;
+  message: Types.MessageState;
   recorder: Types.RecorderState;
   requestMicPermission: () => void;
   resetForm: () => any;
@@ -33,7 +38,11 @@ class ArticleFormContainer extends React.Component<ArticleFormContainerProps> {
   public render() {
     const { form, media, recorder } = this.props;
 
-    if (!media.micPremitted) {
+    if (media.permission === MediaPermissionState.NOT_CHECKED) {
+      return <Loader />;
+    }
+
+    if (media.permission === MediaPermissionState.DENIED) {
       return <MicPermissionDeniedMessage />;
     }
 
@@ -45,6 +54,12 @@ class ArticleFormContainer extends React.Component<ArticleFormContainerProps> {
       <>
         {!recorder.recordingCompleted && <RecorderContainer />}
         {recorder.recordingCompleted && <FormContainer />}
+        <ErrorModal
+          message={this.props.message.errorMessage}
+          onCloseClick={() => {
+            appActions.setErrorMessage('');
+          }}
+        />
       </>
     );
   }
@@ -54,7 +69,8 @@ const mapStateToProps = (state: Types.AppState) => {
   return {
     form: state.articleForm,
     media: state.media,
-    recorder: state.recorder
+    recorder: state.recorder,
+    message: state.message
   };
 };
 

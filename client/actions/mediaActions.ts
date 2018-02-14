@@ -15,3 +15,10 @@ export const successMicPermission = (stream: MediaStream) => {
     }
   };
 };
+
+export const denyMicPermission = () => {
+  return {
+    type: Constants.MIC_PREMISSION_DENIED,
+    payload: {}
+  };
+};
