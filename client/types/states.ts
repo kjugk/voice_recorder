@@ -11,6 +11,7 @@ export interface AppState {
 
 export interface MessageState {
   body: string;
+  errorMessage: string;
 }
 
 export interface MediaState {

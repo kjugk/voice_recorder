@@ -16,3 +16,12 @@ export const clearMessage = () => {
     }
   };
 };
+
+export const setErrorMessage = (message: string) => {
+  return {
+    type: Constants.SET_ERROR_MESSAGE,
+    payload: {
+      body: message
+    }
+  };
+};
