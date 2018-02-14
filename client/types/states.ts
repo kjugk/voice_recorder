@@ -1,3 +1,5 @@
+import { MediaPermissionState } from '../reducers/media';
+
 export interface AppState {
   articles: ArticlesState;
   player: PlayerState;
@@ -12,7 +14,7 @@ export interface MessageState {
 }
 
 export interface MediaState {
-  micPremitted: boolean;
+  permission: MediaPermissionState;
   stream?: MediaStream;
 }
 

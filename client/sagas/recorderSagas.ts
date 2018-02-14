@@ -24,10 +24,13 @@ function* getProgress() {
 }
 
 function* requestMicPermission() {
-  const stream = yield call(Media.requestMicPermission);
-  // TODO: errow handlings.
-  RecordRTC.build(stream);
-  yield put(mediaActions.successMicPermission(stream));
+  try {
+    const stream = yield call(Media.requestMicPermission);
+    RecordRTC.build(stream);
+    yield put(mediaActions.successMicPermission(stream));
+  } catch (e) {
+    yield put(mediaActions.denyMicPermission());
+  }
 }
 
 function* startRecording() {

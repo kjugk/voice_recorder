@@ -1,18 +1,34 @@
 import { MediaState } from '../types';
 import * as Constants from '../constants';
 
+export enum MediaPermissionState {
+  NOT_CHECKED,
+  PERMITTED,
+  DENIED
+}
+
 export const initialState: MediaState = {
-  micPremitted: false,
+  permission: MediaPermissionState.NOT_CHECKED,
   stream: undefined
 };
 
 export const media = (state: MediaState = initialState, action: any): MediaState => {
   switch (action.type) {
     case Constants.MIC_PREMISSION_SUCCESS:
-      return { ...state, micPremitted: true, stream: action.payload.stream};
+      return {
+        ...state,
+        permission: MediaPermissionState.PERMITTED,
+        stream: action.payload.stream
+      };
+
+    case Constants.MIC_PREMISSION_DENIED:
+      return {
+        ...state,
+        permission: MediaPermissionState.DENIED
+      };
 
     case Constants.RESET_FORM:
-      return { ...state, micPremitted: false, stream: undefined};
+      return initialState;
 
     default:
       return state;
