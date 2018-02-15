@@ -15,6 +15,8 @@ import { MediaPermissionState } from '../reducers/media';
 import { Loader } from '../components/Loader';
 import { ErrorModal } from '../components/ErrorModal';
 
+import { Helmet } from 'react-helmet';
+
 interface ArticleFormContainerProps {
   form: Types.ArticleFormState;
   media: Types.MediaState;
@@ -36,6 +38,22 @@ class ArticleFormContainer extends React.Component<ArticleFormContainerProps> {
   }
 
   public render() {
+    if (this.props.form.submitted) {
+      return <Redirect to="/" />;
+    }
+
+    return (
+      <>
+        <Helmet>
+          <title>New Article | Voice Recorder</title>
+          <meta name="robots" content="noindex" />
+        </Helmet>
+        {this.renderContents()}
+      </>
+    );
+  }
+
+  private renderContents() {
     const { form, media, recorder } = this.props;
 
     if (media.permission === MediaPermissionState.NOT_CHECKED) {
@@ -44,10 +62,6 @@ class ArticleFormContainer extends React.Component<ArticleFormContainerProps> {
 
     if (media.permission === MediaPermissionState.DENIED) {
       return <MicPermissionDeniedMessage />;
-    }
-
-    if (form.submitted) {
-      return <Redirect to="/" />;
     }
 
     return (
