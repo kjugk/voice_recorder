@@ -11,6 +11,7 @@ import { NoArticleMessage } from '../components/messages/NoArticleMessage';
 import { SnackBar } from '../components/SnackBar';
 import { Loader } from '../components/Loader';
 import { Fab } from '../components/Fab';
+import { Helmet } from 'react-helmet';
 
 interface ArticleListContainerProps {
   articles: Types.ArticlesState;
@@ -39,6 +40,9 @@ class ArticleListContainer extends React.Component<ArticleListContainerProps> {
 
     return (
       <>
+        <Helmet>
+          <title>Voice Recorder</title>
+        </Helmet>
         {articles.isFetching && <Loader />}
         {!articles.isFetching && (
           <>

@@ -2,43 +2,41 @@ import * as Api from '../lib/Api';
 
 const AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext;
 
-let ctx: AudioContext;
-export const getContext = (): AudioContext => {
-  if (!ctx) {
-    ctx = new AudioContext();
-  }
-  return ctx;
-};
-
 export default class Player {
-  private context: AudioContext;
+  private static ctx: AudioContext;
+  public static getContext(): AudioContext {
+    if (!Player.ctx) {
+      Player.ctx = new AudioContext();
+    }
+    return Player.ctx;
+  }
+
   private buffer: AudioBuffer;
   private source: AudioBufferSourceNode;
   private startOffset: number;
   private startTime: number;
 
   constructor() {
-    this.context = getContext();
     this.startOffset = 0;
     this.startTime = 0;
   }
 
-  public loadTrack(id: string) {
+  public loadTrack = (id: string) => {
     return new Promise((resolve) => {
       Api.getTrackFromStorage(id).then((response: any) => {
-        this.context.decodeAudioData(response, (decodedData: AudioBuffer) => {
+        Player.getContext().decodeAudioData(response, (decodedData: AudioBuffer) => {
           this.buffer = decodedData;
           resolve(this.buffer.duration);
         });
       });
     });
-  }
+  };
 
   public play() {
-    this.startTime = this.context.currentTime;
-    this.source = this.context.createBufferSource();
+    this.startTime = Player.getContext().currentTime;
+    this.source = Player.getContext().createBufferSource();
     this.source.buffer = this.buffer;
-    this.source.connect(this.context.destination);
+    this.source.connect(Player.getContext().destination);
     this.source.start(0, this.startOffset % this.buffer.duration);
   }
 
@@ -46,7 +44,7 @@ export default class Player {
     if (!this.source) {
       return;
     }
-    this.startOffset = this.context.currentTime - this.startTime;
+    this.startOffset = Player.getContext().currentTime - this.startTime;
     this.source.stop(0);
   }
 
@@ -59,7 +57,7 @@ export default class Player {
   }
 
   public getDuration() {
-    return this.startOffset + (this.context.currentTime - this.startTime);
+    return this.startOffset + (Player.getContext().currentTime - this.startTime);
   }
 
   public isEnded() {
@@ -72,7 +70,7 @@ export const getDurationFromFile = (audio: Blob) => {
     const fr = new FileReader();
 
     fr.onload = () => {
-      const context = getContext();
+      const context = Player.getContext();
       context.decodeAudioData(fr.result, (decodeAudioData: AudioBuffer) => {
         resolve(decodeAudioData.duration);
       });

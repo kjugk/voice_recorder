@@ -1,3 +1,4 @@
+import * as shortid from 'shortid';
 import { VoiceRecorderDatabase } from '../db/VoiceRecorderDatabase';
 const db = new VoiceRecorderDatabase();
 
@@ -13,12 +14,12 @@ export const fetchArticles = () => {
 };
 
 export const saveArticle = (
-  id: string,
   title: string,
   audio: Blob,
   duration: number,
   createdAt: Date
 ) => {
+  const id = shortid.generate();
   if (title.trim() === '') {
     title = 'no title';
   }

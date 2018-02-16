@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
-import { getContext } from '../../lib/Player';
+import Player from '../../lib/Player';
 import { requestMicPermission } from '../../lib/Media';
 
 interface MicVisualizerProps {
@@ -19,7 +19,7 @@ export class MicVisualizer extends React.Component<MicVisualizerProps> {
     const canvasCtx = this.canvas.getContext('2d');
     const stream = this.props.stream as MediaStream;
 
-    this.audioCtx = getContext();
+    this.audioCtx = Player.getContext();
     this.analyser = this.audioCtx.createAnalyser();
     this.analyser.fftSize = 256;
     this.audioCtx.createMediaStreamSource(stream).connect(this.analyser);
