@@ -6,7 +6,8 @@
     "build": "webpack",
     "build-prod": "webpack -p",
     "watch": "webpack -w",
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "test": "jest"
   },
   "dependencies": {
     "@types/classnames": "^2.2.3",
@@ -16,22 +17,15 @@
     "@types/react-helmet": "^5.0.4",
     "@types/react-redux": "^5.0.14",
     "@types/react-router-dom": "^4.2.3",
-    "@types/redux": "^3.6.0",
-    "@types/redux-saga": "^0.10.5",
     "@types/shortid": "0.0.29",
-    "awesome-typescript-loader": "^3.4.1",
     "body-parser": "~1.18.2",
-    "bulma": "^0.6.2",
     "classnames": "^2.2.5",
     "cookie-parser": "~1.4.3",
-    "css-loader": "^0.28.9",
     "debug": "~2.6.9",
     "dexie": "^2.0.1",
     "express": "~4.15.5",
     "moment": "^2.20.1",
     "morgan": "~1.9.0",
-    "node-sass": "^4.7.2",
-    "postcss-loader": "^2.1.0",
     "pretty-bytes": "^4.0.2",
     "pug": "2.0.0-beta11",
     "react": "^16.2.0",
@@ -42,13 +36,38 @@
     "recordrtc": "^5.4.6",
     "redux": "^3.7.2",
     "redux-saga": "^0.16.0",
-    "sass-loader": "^6.0.6",
     "serve-favicon": "~2.4.5",
     "shortid": "^2.2.8",
+    "uglifyjs-webpack-plugin": "^1.1.8"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "^3.4.1",
+    "bulma": "^0.6.2",
+    "css-loader": "^0.28.9",
+    "node-sass": "^4.7.2",
+    "postcss-loader": "^2.1.0",
+    "sass-loader": "^6.0.6",
     "source-map-loader": "^0.2.3",
     "style-loader": "^0.19.1",
     "tslint": "^5.8.0",
     "typescript": "^2.7.1",
-    "webpack": "^3.10.0"
+    "webpack": "^3.10.0",
+    "@types/jest": "^22.1.2",
+    "jest": "^22.3.0",
+    "ts-jest": "^22.0.4"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }
