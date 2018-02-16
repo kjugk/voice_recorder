@@ -9,7 +9,8 @@
         "interface-name": [true, "never-prefix"],
         "ordered-imports": false,
         "trailing-comma": [true, {"multiline": "never", "singleline": "never"}],
-        "object-literal-sort-keys": false
+        "object-literal-sort-keys": false,
+        "member-ordering": false
     },
     "rulesDirectory": []
 }
