@@ -18,6 +18,7 @@
     "@types/react-redux": "^5.0.14",
     "@types/react-router-dom": "^4.2.3",
     "@types/shortid": "0.0.29",
+    "bulma": "^0.6.2",
     "body-parser": "~1.18.2",
     "classnames": "^2.2.5",
     "cookie-parser": "~1.4.3",
@@ -37,12 +38,11 @@
     "redux": "^3.7.2",
     "redux-saga": "^0.16.0",
     "serve-favicon": "~2.4.5",
-    "shortid": "^2.2.8",
-    "uglifyjs-webpack-plugin": "^1.1.8"
+    "shortid": "^2.2.8"
   },
   "devDependencies": {
+    "@types/jest": "^22.1.2",
     "awesome-typescript-loader": "^3.4.1",
-    "bulma": "^0.6.2",
     "css-loader": "^0.28.9",
     "node-sass": "^4.7.2",
     "postcss-loader": "^2.1.0",
@@ -52,9 +52,9 @@
     "tslint": "^5.8.0",
     "typescript": "^2.7.1",
     "webpack": "^3.10.0",
-    "@types/jest": "^22.1.2",
     "jest": "^22.3.0",
-    "ts-jest": "^22.0.4"
+    "ts-jest": "^22.0.4",
+    "uglifyjs-webpack-plugin": "^1.1.8"
   },
   "jest": {
     "transform": {
