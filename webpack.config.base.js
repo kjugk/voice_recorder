@@ -1,14 +1,9 @@
-// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-
-module.exports = {
+let config = {
   entry: "./client/index.tsx",
   output: {
     filename: "bundle.js",
     path: __dirname + "/public/javascripts/"
   },
-
-  // Enable sourcemaps for debugging webpack's output.
-  devtool: "source-map",
 
   resolve: {
     // Add '.ts' and '.tsx' as resolvable extensions.
@@ -21,7 +16,7 @@ module.exports = {
       { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
 
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-      { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
+      // { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
 
       {
         test: /\.(scss|sass)$/,
@@ -41,8 +36,9 @@ module.exports = {
         ]
       }
     ]
-  },
-  // plugins: [
-  //   new UglifyJsPlugin()
-  // ]
+  }
+}
+
+module.exports = {
+  config
 };

@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "webpack",
-    "build-prod": "webpack -p",
-    "watch": "webpack -w",
+    "clean": "rm ./public/javascripts/bundle.js ./public/javascripts/bundle.js.map",
+    "build:dev": "npm run clean; NODE_ENV=dev webpack --config webpack.config.dev.js",
+    "build:prod": "npm run clean; NODE_ENV=production webpack --config webpack.config.prod.js",
     "start": "node ./bin/www",
     "test": "jest"
   },
@@ -48,17 +48,18 @@
     "@types/jest": "^22.1.2",
     "awesome-typescript-loader": "^3.4.1",
     "css-loader": "^0.28.9",
+    "jest": "^22.3.0",
     "node-sass": "^4.7.2",
     "postcss-loader": "^2.1.0",
     "sass-loader": "^6.0.6",
     "source-map-loader": "^0.2.3",
     "style-loader": "^0.19.1",
+    "ts-jest": "^22.0.4",
     "tslint": "^5.8.0",
     "typescript": "^2.7.1",
+    "uglifyjs-webpack-plugin": "^1.1.8",
     "webpack": "^3.10.0",
-    "jest": "^22.3.0",
-    "ts-jest": "^22.0.4",
-    "uglifyjs-webpack-plugin": "^1.1.8"
+    "webpack-merge": "^4.1.1"
   },
   "jest": {
     "transform": {
