@@ -6,4 +6,8 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Voice Recorder' });
 });
 
+router.get('/new', function(req, res, next) {
+  res.render('index', { title: 'Voice Recorder' });
+});
+
 module.exports = router;
