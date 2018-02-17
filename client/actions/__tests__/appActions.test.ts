@@ -1,10 +1,10 @@
 import * as Constants from '../../constants';
-import * as appActions from '../appActions';
+import * as messageActions from '../messageActions';
 
-describe('appActions', () => {
+describe('messageActions', () => {
   describe('setMessage', () => {
     it('should create an action to set message.', () => {
-      expect(appActions.setMessage('hoge')).toEqual({
+      expect(messageActions.setMessage('hoge')).toEqual({
         type: Constants.SET_MESSAGE,
         payload: {
           body: 'hoge'
@@ -15,7 +15,7 @@ describe('appActions', () => {
 
   describe('clearMessage', () => {
     it('should create an action to clear message.', () => {
-      expect(appActions.clearMessage()).toEqual({
+      expect(messageActions.clearMessage()).toEqual({
         type: Constants.CLEAR_MESSAGE,
         payload: {
           body: ''
@@ -26,7 +26,7 @@ describe('appActions', () => {
 
   describe('setErrorMessage', () => {
     it('should create an action to set error message.', () => {
-      expect(appActions.setErrorMessage('error')).toEqual({
+      expect(messageActions.setErrorMessage('error')).toEqual({
         type: Constants.SET_ERROR_MESSAGE,
         payload: {
           body: 'error'

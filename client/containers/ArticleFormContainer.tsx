@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import * as Types from '../types';
 import * as formActions from '../actions/articleFormActions';
 import * as mediaActions from '../actions/mediaActions';
-import * as appActions from '../actions/appActions';
+import * as messageActions from '../actions/messageActions';
 import * as recorderActions from '../actions/recorderActions';
 
 import RecorderContainer from '../containers/RecorderContainer';
@@ -13,7 +13,6 @@ import FormContainer from '../containers/FormContainer';
 import { MicPermissionDeniedMessage } from '../components/messages/MicPermissionDeniedMessage';
 import { MediaPermissionState } from '../reducers/media';
 import { Loader } from '../components/Loader';
-import { ErrorModal } from '../components/ErrorModal';
 
 import { Helmet } from 'react-helmet';
 
@@ -68,12 +67,6 @@ class ArticleFormContainer extends React.Component<ArticleFormContainerProps> {
       <>
         {!recorder.recordingCompleted && <RecorderContainer />}
         {recorder.recordingCompleted && <FormContainer />}
-        <ErrorModal
-          message={this.props.message.errorMessage}
-          onCloseClick={() => {
-            appActions.setErrorMessage('');
-          }}
-        />
       </>
     );
   }

@@ -1,11 +1,11 @@
 import { all, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import * as Constants from '../constants';
-import * as appActions from '../actions/appActions';
+import * as messageActions from '../actions/messageActions';
 
 function* clearMessage() {
   yield delay(2500);
-  yield put(appActions.clearMessage());
+  yield put(messageActions.clearMessage());
 }
 
 export default function* appSagas() {
