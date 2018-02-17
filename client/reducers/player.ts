@@ -1,8 +1,6 @@
 import * as Types from '../types';
 import * as Constants from '../constants';
 
-import { PlayerAction, ReceiveTrackAction } from '../actions/PlayerActions';
-
 const initialState: Types.PlayerState = {
   isPlaying: false,
   isLoading: false,

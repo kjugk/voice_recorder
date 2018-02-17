@@ -1,13 +1,12 @@
 @charset "utf-8"
-
 $desktop: 960px;
 $widescreen: 960px;
 $fullhd: 960px;
 $radius: 0;
 $radius-large: 0;
 $radius-small: 0;
-
 $family-primary: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
+$modal-background-background-color: rgba(0, 0, 0, 0.6);
 
 @import "~bulma/bulma.sass";
 
@@ -82,7 +81,6 @@ html,body
     text-align: center;
 
 .c-loader
-  color: $primary;
   padding-top: $size-1;
   text-align: center;
   .loader-text
@@ -102,10 +100,13 @@ html,body
   +mobile
     right: 1.5rem;
 
+.c-error-container
+  text-align: center;
+  padding: 2rem;
+
 .c-brand
   font-size: 1.8rem;
   font-weight: 800;
-  color: $primary;
 
 .c-recorder-timer
   font-size: 3.2rem;

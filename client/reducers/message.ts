@@ -14,6 +14,9 @@ export const message = (state = initialState, action: any): Types.MessageState =
     case Constants.CLEAR_MESSAGE:
       return {...state, body: ''};
 
+    case Constants.SET_ERROR_MESSAGE:
+      return {...state, errorMessage: action.payload.message};
+
     default:
       return state;
   }

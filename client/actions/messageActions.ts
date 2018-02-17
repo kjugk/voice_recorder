@@ -21,7 +21,7 @@ export const setErrorMessage = (message: string) => {
   return {
     type: Constants.SET_ERROR_MESSAGE,
     payload: {
-      body: message
+      message
     }
   };
 };

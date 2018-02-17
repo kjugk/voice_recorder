@@ -14,7 +14,7 @@ export class VoiceRecorderDatabase extends Dexie {
   constructor() {
     super('VoiceRecorderDatabase');
     this.version(1).stores({
-      articles: 'id,title,audio,duration,createdAt'
+      articles: 'id'
     });
   }
 }
