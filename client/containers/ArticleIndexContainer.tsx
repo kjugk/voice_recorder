@@ -13,7 +13,7 @@ import { Loader } from '../components/Loader';
 import { Fab } from '../components/Fab';
 import { Helmet } from 'react-helmet';
 
-interface ArticleListContainerProps {
+interface ArticleIndexContainerProps {
   articles: Types.ArticlesState;
   message: Types.MessageState;
   deleteArticle: (id: string) => any;
@@ -21,7 +21,7 @@ interface ArticleListContainerProps {
   selectArticle: (id: string) => any;
 }
 
-class ArticleListContainer extends React.Component<ArticleListContainerProps> {
+class ArticleIndexContainer extends React.Component<ArticleIndexContainerProps> {
   public componentDidMount() {
     const { articles, fetchArticles } = this.props;
 
@@ -76,4 +76,4 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleListContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleIndexContainer);

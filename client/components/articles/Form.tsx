@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
 import * as prettyBytes from 'pretty-bytes';
-import { TitleInput } from '../form/TitleInput';
+import { TitleInput } from './form/TitleInput';
 import { formatDurationToTime } from '../../lib/Player';
 
 interface FormProps {

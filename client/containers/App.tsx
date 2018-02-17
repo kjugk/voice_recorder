@@ -3,8 +3,8 @@ import * as Types from '../types';
 import { connect, Dispatch } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import ArticleListContainer from '../containers/ArticleListContainer';
-import ArticleFormContainer from '../containers/ArticleFormContainer';
+import ArticleIndexContainer from '../containers/ArticleIndexContainer';
+import ArticleNewContainer from '../containers/ArticleNewContainer';
 
 import { Header } from '../components/layout/Header';
 import { MainSection } from '../components/layout/MainSection';
@@ -25,8 +25,8 @@ class App extends React.Component<AppProps> {
         <>
           <Header />
           <MainSection>
-            <Route exact path="/" component={ArticleListContainer} />
-            <Route exact path="/new" component={ArticleFormContainer} />
+            <Route exact path="/" component={ArticleIndexContainer} />
+            <Route exact path="/new" component={ArticleNewContainer} />
           </MainSection>
           <Footer />
           <ErrorMessageModal

@@ -16,7 +16,7 @@ import { Loader } from '../components/Loader';
 
 import { Helmet } from 'react-helmet';
 
-interface ArticleFormContainerProps {
+interface NewArticleContainerProps {
   form: Types.ArticleFormState;
   media: Types.MediaState;
   message: Types.MessageState;
@@ -26,7 +26,7 @@ interface ArticleFormContainerProps {
   resetRecorder: () => any;
 }
 
-class ArticleFormContainer extends React.Component<ArticleFormContainerProps> {
+class NewArticleContainer extends React.Component<NewArticleContainerProps> {
   public componentDidMount() {
     this.props.requestMicPermission();
   }
@@ -95,4 +95,4 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleFormContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(NewArticleContainer);
