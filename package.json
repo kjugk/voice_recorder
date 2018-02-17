@@ -1,12 +1,13 @@
 {
   "name": "voice-recorder",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "clean": "rm ./public/javascripts/bundle.js ./public/javascripts/bundle.js.map",
     "build:dev": "npm run clean; NODE_ENV=dev webpack --config webpack.config.dev.js",
     "build:prod": "npm run clean; NODE_ENV=production webpack --config webpack.config.prod.js",
-    "start": "node ./bin/www",
+    "launch:server:dev": "nodemon ./bin/www",
+    "start:dev": "npm-run-all --parallel build:dev launch:server:dev",
     "test": "jest"
   },
   "dependencies": {
@@ -18,10 +19,6 @@
     "@types/react-redux": "^5.0.14",
     "@types/react-router-dom": "^4.2.3",
     "@types/shortid": "0.0.29",
-    "babel-cli": "^6.26.0",
-    "babel-plugin-module-resolver": "^3.1.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
     "body-parser": "~1.18.2",
     "bulma": "^0.6.2",
     "classnames": "^2.2.5",
@@ -46,10 +43,16 @@
   },
   "devDependencies": {
     "@types/jest": "^22.1.2",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-module-resolver": "^3.1.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
     "awesome-typescript-loader": "^3.4.1",
     "css-loader": "^0.28.9",
     "jest": "^22.3.0",
     "node-sass": "^4.7.2",
+    "nodemon": "^1.15.0",
+    "npm-run-all": "^4.1.2",
     "postcss-loader": "^2.1.0",
     "sass-loader": "^6.0.6",
     "source-map-loader": "^0.2.3",
