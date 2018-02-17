@@ -13,31 +13,31 @@ export const fetchArticles = () => {
   });
 };
 
-export const saveArticle = (
-  title: string,
-  audio: Blob,
-  duration: number,
-  createdAt: Date
-) => {
+export const saveArticle = (title: string, audio: Blob, duration: number, createdAt: Date) => {
   const id = shortid.generate();
   if (title.trim() === '') {
     title = 'no title';
   }
 
-  return new Promise((resolve) => {
-    db.articles.put({ id, title, audio, duration, createdAt }).then(() => {
-      resolve(
-        db.articles
-          .toCollection()
-          .reverse()
-          .sortBy('createdAt')
-      );
-    });
+  return new Promise((resolve, reject) => {
+    db.articles
+      .put({ id, title, audio, duration, createdAt })
+      .then(() => {
+        resolve(
+          db.articles
+            .toCollection()
+            .reverse()
+            .sortBy('createdAt')
+        );
+      })
+      .catch((e) => {
+        reject(e);
+      });
   });
 };
 
 export const deleteArticle = (id: string) => {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     db.articles
       .where('id')
       .equals(id)
@@ -49,6 +49,9 @@ export const deleteArticle = (id: string) => {
             .reverse()
             .sortBy('createdAt')
         );
+      })
+      .catch((e) => {
+        reject(e);
       });
   });
 };

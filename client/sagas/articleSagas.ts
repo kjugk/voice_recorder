@@ -25,21 +25,24 @@ function* submitArticle() {
     yield put(formActions.completeSubmit());
     yield delay(50);
     yield put(messageActions.setMessage('REC completed!'));
-
   } catch (e) {
     yield put(messageActions.setErrorMessage('Sorry, something went wrong.'));
   }
 }
 
 function* deleteArticle(action: any) {
-  const newArticles = yield call(Api.deleteArticle, action.payload.id);
-  const state = yield select();
+  try {
+    const newArticles = yield call(Api.deleteArticle, action.payload.id);
+    const state = yield select();
 
-  yield put(articleActions.deleteArticleComplete(newArticles));
-  if (action.payload.id === state.articles.selectedId) {
-    yield put(articleActions.selectArticle(''));
+    yield put(articleActions.deleteArticleComplete(newArticles));
+    if (action.payload.id === state.articles.selectedId) {
+      yield put(articleActions.selectArticle(''));
+    }
+    yield put(messageActions.setMessage('Delete completed.'));
+  } catch (e) {
+    yield put(messageActions.setErrorMessage('Sorry, something went wrong.'));
   }
-  yield put(messageActions.setMessage('Delete completed.'));
 }
 
 export default function* articleSagas() {
