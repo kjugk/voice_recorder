@@ -6,6 +6,9 @@ It uses React, Redux, TypeScript, IndexedDB, and [RecordRTC](http://recordrtc.or
 
 [See the site here](https://voice-recorder-190010.appspot.com/)
 
+## Requirements
+Node v8+
+
 ## Local running for development
 1. Clone the project.
 2. Run `npm install`.
