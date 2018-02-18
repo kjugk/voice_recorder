@@ -1,14 +1,4 @@
-const mediaDevices =
-  navigator.mediaDevices ||
-  (navigator.mozGetUserMedia || navigator.webkitGetUserMedia
-    ? {
-        getUserMedia: function(c) {
-          return new Promise(function(y, n) {
-            (navigator.mozGetUserMedia || navigator.webkitGetUserMedia).call(navigator, c, y, n);
-          });
-        }
-      }
-    : null);
+const getUserMedia = require('get-user-media-promise');
 
 export const requestMicPermission = () => {
   return new Promise((resolve, reject) => {
@@ -21,8 +11,7 @@ export const requestMicPermission = () => {
       }
     };
 
-    mediaDevices
-      .getUserMedia(constraints)
+    getUserMedia(constraints)
       .then((stream) => {
         resolve(stream);
       })
