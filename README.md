@@ -1,6 +1,6 @@
 # Voice Recorder
 
-A Sample web app that record your voice.
+A simple web app that record your voice.
 
 It uses React, Redux, TypeScript, IndexedDB, and [RecordRTC](http://recordrtc.org/).
 
