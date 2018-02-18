@@ -13,6 +13,7 @@ export class MicVisualizer extends React.Component<MicVisualizerProps> {
   private canvas: any;
   private audioCtx: AudioContext;
   private analyser: AnalyserNode;
+  private requestId: number = 0;
 
   public componentDidMount() {
     const canvasCtx = this.canvas.getContext('2d');
@@ -28,7 +29,7 @@ export class MicVisualizer extends React.Component<MicVisualizerProps> {
     const dataArray = new Uint8Array(bufferLength);
 
     const draw = () => {
-      requestAnimationFrame(draw);
+      this.requestId = requestAnimationFrame(draw);
       this.analyser.getByteFrequencyData(dataArray);
 
       canvasCtx.fillStyle = 'rgb(245, 245, 245)';
@@ -49,6 +50,12 @@ export class MicVisualizer extends React.Component<MicVisualizerProps> {
     };
 
     draw();
+  }
+
+  public componentWillUnmount() {
+    if (this.requestId > 0) {
+      cancelAnimationFrame(this.requestId);
+    }
   }
 
   public render() {
