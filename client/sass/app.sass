@@ -61,7 +61,7 @@ html,body
     z-index: 2;
 
 .c-snackbar
-  top: 4rem;
+  top: 4.8rem;
   right: 1rem;
   opacity: 1;
   position: fixed;
@@ -105,8 +105,10 @@ html,body
   padding: 2rem;
 
 .c-brand
+  margin-top: .9rem;
   font-size: 1.8rem;
-  font-weight: 800;
+  +desktop
+    margin-left: -4px;
 
 .c-recorder-timer
   font-size: 3.2rem;
@@ -130,3 +132,6 @@ html,body
     opacity: 0.01
   100%
     opacity: 1;
+
+.u-margin-m-t
+  margin-top: 1rem;

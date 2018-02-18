@@ -8,8 +8,7 @@ interface MicVisualizerProps {
   isRecording: boolean;
 }
 export class MicVisualizer extends React.Component<MicVisualizerProps> {
-  private static WIDTH = 300;
-  private static HEIGHT = 120;
+  private static HEIGHT = 140;
   private static BAR_SPACE = 1;
   private canvas: any;
   private audioCtx: AudioContext;
@@ -18,6 +17,7 @@ export class MicVisualizer extends React.Component<MicVisualizerProps> {
   public componentDidMount() {
     const canvasCtx = this.canvas.getContext('2d');
     const stream = this.props.stream as MediaStream;
+    const width = this.canvas.clientWidth;
 
     this.audioCtx = Player.getContext();
     this.analyser = this.audioCtx.createAnalyser();
@@ -32,10 +32,10 @@ export class MicVisualizer extends React.Component<MicVisualizerProps> {
       this.analyser.getByteFrequencyData(dataArray);
 
       canvasCtx.fillStyle = 'rgb(245, 245, 245)';
-      canvasCtx.fillRect(0, 0, MicVisualizer.WIDTH, MicVisualizer.HEIGHT);
+      canvasCtx.fillRect(0, 0, width, MicVisualizer.HEIGHT);
 
-      const barWidth = MicVisualizer.WIDTH / bufferLength * 2; // 高い周波数がほぼ0 なので、右側に詰める
-      const barColor = this.props.isRecording ? 'hsl(348, 100%, 61%)' : 'hsl(171, 100%, 41%)'; // props の状態で色を替える
+      const barWidth = width / bufferLength;
+      const barColor = this.props.isRecording ? 'hsl(348, 100%, 61%)' : 'hsl(171, 100%, 41%)';
       let barHeight = 0;
       let x = 0;
 
@@ -54,7 +54,7 @@ export class MicVisualizer extends React.Component<MicVisualizerProps> {
   public render() {
     return (
       <canvas
-        style={{ width: 300, height: 120 }}
+        style={{ width: '100%', height: '140px' }}
         ref={(canvas) => {
           this.canvas = canvas;
         }}

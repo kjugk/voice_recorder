@@ -7,7 +7,7 @@ export class Header extends React.Component {
         <div className="container">
           <div className="navbar-brand">
             <div className="navbar-item c-brand">
-              <h1 className="has-text-weight-bold">Voice Recorder</h1>
+              <h2 className="title is-2">Voice Recorder</h2>
             </div>
           </div>
         </div>

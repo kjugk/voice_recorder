@@ -1,30 +1,50 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 
 export const NoArticleMessage: React.SFC = () => {
   return (
-    <article className="message">
-      <div className="message-body">
-        <p className="content">
-          ここで、アプリの説明と、サーバーに保存しないなどの注意書きをする。
-          <br/>
-          サポートブラウザを出してもいいかも。(articleがある場合は、modalに移すとかいいかも)
-          <br />
-          サーバーにでーた保存しないよ
-          <br />
-          There is no article yet.
-          <br />
-          Lets' record your voices!!
-        </p>
-        <div className="has-text-centered">
-          <Link to="/new" className="button is-primary is-large">
-            <span className="icon">
-              <i className="fas fa-microphone" />
-            </span>
-            <span>Record New Article</span>
-          </Link>
+    <div>
+      <p className="title is-3 has-text-primary">Record your voice anywhere.</p>
+      <p className="subtitle is-5">A simple voice recorder app for modern browsers. </p>
+
+      <div className="columns" style={{marginTop: '3.8rem'}}>
+        <div className="column">
+          <h5 className="title is-5">No data saved to server.</h5>
+          <p>
+            All your recorded data is saved into your browser storage instead of server.
+            <br/>
+            So you can use this app safely without any registration or login.
+          </p>
+        </div>
+        <div className="column">
+          <h5 className="title is-5">Supporting browsers</h5>
+          <ul>
+            <li>
+              <span className="icon">
+                <i className="fab fa-edge" />
+              </span>
+              Latest Edge
+            </li>
+            <li>
+              <span className="icon">
+                <i className="fab fa-firefox" />
+              </span>
+              Latest Firefox
+            </li>
+            <li>
+              <span className="icon">
+                <i className="fab fa-chrome" />
+              </span>
+              Latest Chrome
+            </li>
+            <li>
+              <span className="icon">
+                <i className="fab fa-android" />
+              </span>
+              Android 7.0+ Chrome
+            </li>
+          </ul>
         </div>
       </div>
-    </article>
+    </div>
   );
 };

@@ -9,8 +9,6 @@ import * as messageActions from '../actions/messageActions';
 
 function* fetchArticles() {
   const articles = yield call(Api.fetchArticles);
-
-  yield delay(1000);
   yield put(articleActions.receiveArticles(articles));
 }
 
