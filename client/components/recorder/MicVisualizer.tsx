@@ -1,7 +1,8 @@
 import * as React from 'react';
-import * as classnames from 'classnames';
 import Player from '../../lib/Player';
 import { requestMicPermission } from '../../lib/Media';
+
+import * as d3 from 'd3';
 
 interface MicVisualizerProps {
   stream?: MediaStream;
@@ -16,6 +17,63 @@ export class MicVisualizer extends React.Component<MicVisualizerProps> {
   private requestId: number = 0;
 
   public componentDidMount() {
+    const stream = this.props.stream as MediaStream;
+    const height = 140;
+    const width = 300;
+    const svg = d3.select('svg');
+    this.audioCtx = Player.getContext();
+    this.analyser = this.audioCtx.createAnalyser();
+    this.analyser.fftSize = 256;
+    this.audioCtx.createMediaStreamSource(stream).connect(this.analyser);
+
+    const bufferLength = this.analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+
+    const x = d3
+      .scaleBand()
+      .padding(0.1)
+      .rangeRound([0, width]);
+
+    const y = d3.scaleLinear().rangeRound([150, 0]);
+    const g = svg.append('g');
+
+    this.analyser.getByteFrequencyData(dataArray);
+
+    const xxxx: string[] = [];
+    for (let i = 0; i < 128; i++) {
+      xxxx.push((i + 1).toString());
+    }
+
+    const draw = () => {
+      // this.requestId = requestAnimationFrame(draw);
+      this.analyser.getByteFrequencyData(dataArray);
+      const d: number[] = Array.from(dataArray, (ddd) => ddd);
+      const max = d3.max(d, (zzz) => zzz) || 0;
+      x.domain(xxxx);
+      y.domain([0, max]);
+
+      g.selectAll('.bar').data(d)
+        .enter()
+        .append('rect')
+        .attr('class', 'bar')
+        .attr('x', (dd, i) => x(i.toString()) || '')
+        .attr('y', (dd) => y(dd))
+        .attr('width', x.bandwidth())
+        .attr('height', (dd) => 150 - y(dd));
+
+      // bar.exit().remove();
+      // bar
+      //   .transition()
+      //   .duration(200)
+      //   .attr('x', (dd, i) => x(i.toString()) || '')
+      //   .attr('y', (dd) => y(dd) || 0);
+
+      setTimeout(draw, 500);
+    };
+
+    draw();
+
+    /*
     const canvasCtx = this.canvas.getContext('2d');
     const stream = this.props.stream as MediaStream;
     const width = this.canvas.clientWidth;
@@ -50,6 +108,7 @@ export class MicVisualizer extends React.Component<MicVisualizerProps> {
     };
 
     draw();
+    */
   }
 
   public componentWillUnmount() {
@@ -60,12 +119,15 @@ export class MicVisualizer extends React.Component<MicVisualizerProps> {
 
   public render() {
     return (
-      <canvas
-        style={{ width: '100%', height: '140px' }}
-        ref={(canvas) => {
-          this.canvas = canvas;
-        }}
-      />
+      <>
+        <svg id="svg" width="300" height="150" />
+        <canvas
+          style={{ width: '100%', height: '140px' }}
+          ref={(canvas) => {
+            this.canvas = canvas;
+          }}
+        />
+      </>
     );
   }
 }
