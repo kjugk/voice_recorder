@@ -11,18 +11,21 @@ export class MicVisualizer extends React.Component<MicVisualizerProps> {
   private static BAR_SPACE = 3;
   private static SVG_HEIGHT = 150;
   private static FFT_SIZE = 128;
-  private svgElem: any;
+  private containerElem: any;
   private requestId: number = 0;
 
   public componentDidMount() {
     const stream = this.props.stream as MediaStream;
-    if (!stream) { return; }
+    if (!stream) {
+      return;
+    }
 
-    const width = this.svgElem.clientWidth;
+    const width = this.containerElem.clientWidth;
     const height = MicVisualizer.SVG_HEIGHT;
     const svg = d3.select('svg');
     const audioCtx = Player.getContext();
     const analyser = audioCtx.createAnalyser();
+
     analyser.fftSize = MicVisualizer.FFT_SIZE;
     audioCtx.createMediaStreamSource(stream).connect(analyser);
 
@@ -35,7 +38,7 @@ export class MicVisualizer extends React.Component<MicVisualizerProps> {
       .enter()
       .append('rect')
       .attr('class', 'bar')
-      .attr('x', (d, i) => i * width / dataArray.length)
+      .attr('x', (d, i) => i * (width / dataArray.length))
       .attr('width', width / dataArray.length - MicVisualizer.BAR_SPACE);
 
     const draw = () => {
@@ -60,14 +63,14 @@ export class MicVisualizer extends React.Component<MicVisualizerProps> {
     const c = classnames('c-visualizer', { on: this.props.isRecording });
 
     return (
-      <svg
-        className={c}
-        width="100%"
-        height="150"
-        ref={(svg) => {
-          this.svgElem = svg;
+      <div
+        style={{ width: '100%', height: '150px' }}
+        ref={(container) => {
+          this.containerElem = container;
         }}
-      />
+      >
+        <svg className={c} width="100%" height="100%" />
+      </div>
     );
   }
 }
