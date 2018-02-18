@@ -3,10 +3,10 @@ import * as React from 'react';
 export const NoArticleMessage: React.SFC = () => {
   return (
     <div>
-      <p className="title is-3 has-text-primary">Record your voice anyware.</p>
+      <p className="title is-3 has-text-primary">Record your voice anywhere.</p>
       <p className="subtitle is-5">A simple voice recorder app for modern browsers. </p>
 
-      <div className="columns" style={{marginTop: '3rem'}}>
+      <div className="columns" style={{marginTop: '3.8rem'}}>
         <div className="column">
           <h5 className="title is-5">No data saved to server.</h5>
           <p>

@@ -31,7 +31,7 @@ export class Recorder extends React.Component<RecorderProps> {
 
         <MicVisualizer stream={media.stream} isRecording={isRecording} />
 
-        <div className="columns is-mobile  has-align-center">
+        <div className="columns is-mobile  has-align-center" style={{marginTop: '.6rem'}}>
           <div className="column is-narrow">{this.renderButton()}</div>
           <div className="column is-narrow is-paddingless">
             <span className={tickerClassName}>Now Recording</span>
