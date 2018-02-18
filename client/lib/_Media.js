@@ -1,4 +1,5 @@
 const getUserMedia = require('get-user-media-promise');
+let stream;
 
 export const requestMicPermission = () => {
   return new Promise((resolve, reject) => {
@@ -12,7 +13,8 @@ export const requestMicPermission = () => {
     };
 
     getUserMedia(constraints)
-      .then((stream) => {
+      .then((_stream) => {
+        stream = _stream;
         resolve(stream);
       })
       .catch(() => {
@@ -20,4 +22,10 @@ export const requestMicPermission = () => {
         reject();
       });
   });
+};
+
+export const killStream = () => {
+  if(!stream) { return; }
+
+  stream.getTracks().forEach((track) => track.stop());
 };
