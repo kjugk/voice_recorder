@@ -13,10 +13,10 @@ Node v8+
 1. Clone the project.
 2. Run `npm install`.
 3. Run `npm run start:dev`.
-4. Access localhost:8080
+4. Access localhost:8080.
 
 ## Testing
-Run `npm run test`
+Run `npm run test`.
 
 ## License
 [MIT licence](https://www.webrtc-experiment.com/licence/)
