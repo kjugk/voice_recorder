@@ -4,7 +4,7 @@ import * as Constants from '../constants';
 import * as RecordRTC from '../lib/Recorder';
 import * as formActions from '../actions/articleFormActions';
 import * as mediaActions from '../actions/mediaActions';
-import * as Media from '../lib/Media';
+import * as Media from '../lib/Media.js';
 import * as recorderActions from '../actions/recorderActions';
 import { getDurationFromFile } from '../lib/Player';
 
