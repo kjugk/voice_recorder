@@ -1,69 +1,71 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
+import * as d3 from 'd3';
 import Player from '../../lib/Player';
-import { requestMicPermission } from '../../lib/Media';
 
 interface MicVisualizerProps {
   stream?: MediaStream;
   isRecording: boolean;
 }
 export class MicVisualizer extends React.Component<MicVisualizerProps> {
-  private static HEIGHT = 140;
-  private static BAR_SPACE = 1;
-  private canvas: any;
-  private audioCtx: AudioContext;
-  private analyser: AnalyserNode;
+  private static BAR_SPACE = 3;
+  private static SVG_HEIGHT = 150;
+  private static FFT_SIZE = 128;
+  private svgElem: any;
   private requestId: number = 0;
 
   public componentDidMount() {
-    const canvasCtx = this.canvas.getContext('2d');
     const stream = this.props.stream as MediaStream;
-    const width = this.canvas.clientWidth;
+    if (!stream) { return; }
 
-    this.audioCtx = Player.getContext();
-    this.analyser = this.audioCtx.createAnalyser();
-    this.analyser.fftSize = 256;
-    this.audioCtx.createMediaStreamSource(stream).connect(this.analyser);
+    const width = this.svgElem.clientWidth;
+    const height = MicVisualizer.SVG_HEIGHT;
+    const svg = d3.select('svg');
+    const audioCtx = Player.getContext();
+    const analyser = audioCtx.createAnalyser();
+    analyser.fftSize = MicVisualizer.FFT_SIZE;
+    audioCtx.createMediaStreamSource(stream).connect(analyser);
 
-    const bufferLength = this.analyser.frequencyBinCount;
+    const bufferLength = analyser.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
+
+    svg
+      .selectAll('rect')
+      .data(Array.from(dataArray))
+      .enter()
+      .append('rect')
+      .attr('class', 'bar')
+      .attr('x', (d, i) => i * width / dataArray.length)
+      .attr('width', width / dataArray.length - MicVisualizer.BAR_SPACE);
 
     const draw = () => {
       this.requestId = requestAnimationFrame(draw);
-      this.analyser.getByteFrequencyData(dataArray);
+      analyser.getByteFrequencyData(dataArray);
 
-      canvasCtx.fillStyle = 'rgb(245, 245, 245)';
-      canvasCtx.fillRect(0, 0, width, MicVisualizer.HEIGHT);
-
-      const barWidth = width / bufferLength;
-      const barColor = this.props.isRecording ? 'hsl(348, 100%, 61%)' : 'hsl(171, 100%, 41%)';
-      let barHeight = 0;
-      let x = 0;
-
-      for (let i = 0; i < bufferLength; i++) {
-        barHeight = dataArray[i];
-        canvasCtx.fillStyle = barColor;
-        canvasCtx.fillRect(x, MicVisualizer.HEIGHT - barHeight, barWidth, barHeight);
-
-        x += barWidth + MicVisualizer.BAR_SPACE;
-      }
+      svg
+        .selectAll('rect')
+        .data(Array.from(dataArray))
+        .attr('y', (d) => height - d)
+        .attr('height', (d) => d);
     };
 
     draw();
   }
 
   public componentWillUnmount() {
-    if (this.requestId > 0) {
-      cancelAnimationFrame(this.requestId);
-    }
+    cancelAnimationFrame(this.requestId);
   }
 
   public render() {
+    const c = classnames('c-visualizer', { on: this.props.isRecording });
+
     return (
-      <canvas
-        style={{ width: '100%', height: '140px' }}
-        ref={(canvas) => {
-          this.canvas = canvas;
+      <svg
+        className={c}
+        width="100%"
+        height="150"
+        ref={(svg) => {
+          this.svgElem = svg;
         }}
       />
     );
