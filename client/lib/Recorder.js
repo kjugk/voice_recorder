@@ -2,9 +2,7 @@ const RecordRTC = require('recordrtc');
 let recordRTC;
 
 module.exports.build = function(stream) {
-  if (!recordRTC) {
-    recordRTC = RecordRTC(stream, { type: 'audio' });
-  }
+  recordRTC = RecordRTC(stream, { type: 'audio' });
   return recordRTC;
 };
 
@@ -20,6 +18,7 @@ module.exports.stopRecording = function() {
     recordRTC.stopRecording(function(audioURL) {
       resolve(recordRTC.getBlob());
       recordRTC.clearRecordedData();
+      recordRTC.destroy();
     });
   });
 };

@@ -29,6 +29,7 @@
     "debug": "~2.6.9",
     "dexie": "^2.0.1",
     "express": "~4.15.5",
+    "get-user-media-promise": "^1.1.1",
     "moment": "^2.20.1",
     "morgan": "~1.9.0",
     "pretty-bytes": "^4.0.2",
