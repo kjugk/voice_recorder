@@ -11,22 +11,12 @@ export const ListItemHeadline: React.SFC<ListIteamHeadlineProps> = (props) => {
   const { article } = props;
 
   return (
-    <div className="columns is-mobile ">
-      <div className="column">
-        <span className="title is-5">{article.title}</span>
+    <>
+      <h5 className="title is-5 c-list-item-title">{article.title}</h5>
+      <div className="is-size-7">
+        <div>date: {moment(article.createdAt).format('YYYY/MM/DD')}</div>
+        <div>total: {formatDurationToTime(article.duration)}</div>
       </div>
-      <div className="column is-narrow">
-        <div>
-          <span className="is-pulled-right is-size-7">
-            {moment(article.createdAt).format('YYYY/MM/DD')}
-          </span>
-        </div>
-        <div>
-          <span className="is-pulled-right is-size-7">
-            {formatDurationToTime(article.duration)}
-          </span>
-        </div>
-      </div>
-    </div>
+    </>
   );
 };

@@ -10,7 +10,7 @@ interface ListProps {
 
 export const List: React.SFC<ListProps> = (props) => {
   return (
-    <ul className="c-list">
+    <ul className="columns is-multiline">
       {props.articles.items.map((article) => {
         return (
           <ListItem
