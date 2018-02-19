@@ -10,7 +10,7 @@ export const MicPermissionDeniedMessage: React.SFC = () => {
             <i className="fas fa-microphone-slash" />
           </span>
         </p>
-        <p className="content">Please change borwser settings to permit microphone.</p>
+        <p className="content has-text-centered">Please change borwser settings to permit microphone.</p>
       </div>
     </article>
   );
