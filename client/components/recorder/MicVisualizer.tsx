@@ -8,7 +8,7 @@ interface MicVisualizerProps {
   isRecording: boolean;
 }
 export class MicVisualizer extends React.Component<MicVisualizerProps> {
-  private static BAR_SPACE = 3;
+  private static BAR_SPACE = 0.1;
   private static SVG_HEIGHT = 150;
   private static FFT_SIZE = 128;
   private containerElem: any;
@@ -20,7 +20,7 @@ export class MicVisualizer extends React.Component<MicVisualizerProps> {
       return;
     }
 
-    const width = this.containerElem.clientWidth;
+    const width = this.containerElem.offsetWidth;
     const height = MicVisualizer.SVG_HEIGHT;
     const svg = d3.select('svg');
     const audioCtx = Player.getContext();
@@ -32,14 +32,29 @@ export class MicVisualizer extends React.Component<MicVisualizerProps> {
     const bufferLength = analyser.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
 
+    const x = d3
+      .scaleBand()
+      .range([0, width])
+      .padding(MicVisualizer.BAR_SPACE);
+
+    const y = d3.scaleLinear().rangeRound([height, 0]);
+
+    const ar = [];
+    for (let i = 0; i < MicVisualizer.FFT_SIZE / 2; i++) {
+      ar.push('' + i);
+    }
+
+    x.domain(ar);
+    y.domain([0, 255]);
+
     svg
       .selectAll('rect')
       .data(Array.from(dataArray))
       .enter()
       .append('rect')
       .attr('class', 'bar')
-      .attr('x', (d, i) => i * (width / dataArray.length))
-      .attr('width', width / dataArray.length - MicVisualizer.BAR_SPACE);
+      .attr('x', (d, i) => x('' + i) || '0')
+      .attr('width', x.bandwidth());
 
     const draw = () => {
       this.requestId = requestAnimationFrame(draw);
@@ -48,8 +63,8 @@ export class MicVisualizer extends React.Component<MicVisualizerProps> {
       svg
         .selectAll('rect')
         .data(Array.from(dataArray))
-        .attr('y', (d) => height - d)
-        .attr('height', (d) => d);
+        .attr('y', (d) => y(d))
+        .attr('height', (d) => height - y(d));
     };
 
     draw();

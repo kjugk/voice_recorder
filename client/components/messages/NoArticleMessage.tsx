@@ -4,14 +4,16 @@ export const NoArticleMessage: React.SFC = () => {
   return (
     <div>
       <p className="title is-3 has-text-primary">Record your voice anywhere.</p>
-      <p className="subtitle is-5">A simple voice recorder app for modern browsers. </p>
+      <p className="subtitle is-5" style={{ marginTop: '.1rem' }}>
+        A simple voice recorder app for modern browsers.{' '}
+      </p>
 
-      <div className="columns" style={{marginTop: '3.8rem'}}>
+      <div className="columns" style={{ marginTop: '3.8rem' }}>
         <div className="column">
-          <h5 className="title is-5">No data saved to server</h5>
+          <h5 className="title is-5">No data will be saved into server</h5>
           <p>
-            All your recorded data is saved into your browser storage instead of server.
-            <br/>
+            All your recorded data is saved into browser storage instead of server.
+            <br />
             So you can use this app safely without any registration or login.
           </p>
         </div>

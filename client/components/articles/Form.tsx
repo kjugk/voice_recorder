@@ -17,7 +17,7 @@ interface FormState {
 }
 
 export class Form extends React.Component<FormProps, FormState> {
-  private static TITLE_MAX_LENGTH = 10;
+  private static TITLE_MAX_LENGTH = 20;
 
   constructor(props: FormProps) {
     super(props);
@@ -43,6 +43,7 @@ export class Form extends React.Component<FormProps, FormState> {
             value={title}
             isValid={this.state.titleIsValid}
             onChange={this.handleTitleChange.bind(this)}
+            maxLength={Form.TITLE_MAX_LENGTH}
           />
           <div className="field">
             <div className="control">

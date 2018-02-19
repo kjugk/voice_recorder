@@ -30,17 +30,11 @@ html,body
 .has-align-center
   align-items: center
 
-.c-list
-  .c-list-item
-    padding: $size-4;
-    margin-bottom: $size-6;
-
-.list-leave
-  opacity: 1;
-
-.list-leave.list-leave-active
-  opacity: 0.01;
-  transition: opacity 200ms ease-in;
+.c-list-item-title
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 
 .c-player
   background: $color-background;
@@ -75,7 +69,7 @@ html,body
     transform: translate3D(0,-100%,0);
 
   +mobile
-    max-width: 100vh;
+    width: 100vh;
     right: 0;
     left: 0;
     text-align: center;

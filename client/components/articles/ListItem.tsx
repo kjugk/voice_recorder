@@ -15,19 +15,24 @@ export const ListItem: React.SFC<ListItemProps> = (props) => {
   const { article, onPlay, onDelete } = props;
 
   return (
-    <li className="c-list-item box">
-      <ListItemHeadline article={article} />
-
-      <ListItemControl
-        onPlayClick={(evt: MouseEvent<HTMLElement>) => {
-          evt.stopPropagation();
-          onPlay(article.id);
-        }}
-        onDeleteClick={(evt: MouseEvent<HTMLElement>) => {
-          evt.stopPropagation();
-          onDelete(article.id);
-        }}
-      />
+    <li className="column is-4">
+      <div className="card">
+        <div className="card-content">
+          <ListItemHeadline article={article} />
+        </div>
+        <div className="card-footer">
+          <ListItemControl
+            onPlayClick={(evt: MouseEvent<HTMLElement>) => {
+              evt.stopPropagation();
+              onPlay(article.id);
+            }}
+            onDeleteClick={(evt: MouseEvent<HTMLElement>) => {
+              evt.stopPropagation();
+              onDelete(article.id);
+            }}
+          />
+        </div>
+      </div>
     </li>
   );
 };

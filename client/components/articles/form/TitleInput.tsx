@@ -5,6 +5,7 @@ interface TitleInputProps {
   isValid: boolean;
   value: string;
   onChange: () => any;
+  maxLength: number;
 }
 
 export const TitleInput: React.SFC<TitleInputProps> = (props) => {
@@ -18,7 +19,7 @@ export const TitleInput: React.SFC<TitleInputProps> = (props) => {
       <div className="control">
         <input className={className} type="text" value={props.value} onChange={props.onChange} />
       </div>
-      {!props.isValid && <p className="help is-danger">10文字以内</p>}
+      {!props.isValid && <p className="help is-danger">Less than {props.maxLength} characters.</p>}
     </div>
   );
 };
