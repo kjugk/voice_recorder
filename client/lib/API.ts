@@ -21,7 +21,7 @@ export const saveArticle = (title: string, audio: Blob, duration: number, create
 
   return new Promise((resolve, reject) => {
     db.articles
-      .put({ id, title, audio, duration, createdAt })
+      .add({ id, title, audio, duration, createdAt })
       .then(() => {
         resolve(
           db.articles
