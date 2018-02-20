@@ -17,6 +17,3 @@ Node.js 8+
 
 ## Testing
 Run `npm run test`.
-
-## License
-[MIT licence](https://www.webrtc-experiment.com/licence/)
