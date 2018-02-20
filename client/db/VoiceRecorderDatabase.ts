@@ -6,6 +6,7 @@ interface Article {
   audio: Blob;
   duration: number;
   createdAt: Date;
+  size: number;
 }
 
 export class VoiceRecorderDatabase extends Dexie {

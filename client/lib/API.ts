@@ -13,7 +13,7 @@ export const fetchArticles = () => {
   });
 };
 
-export const saveArticle = (title: string, audio: Blob, duration: number, createdAt: Date) => {
+export const saveArticle = (title: string, audio: Blob, duration: number, createdAt: Date, size: number) => {
   const id = shortid.generate();
   if (title.trim() === '') {
     title = 'no title';
@@ -21,7 +21,7 @@ export const saveArticle = (title: string, audio: Blob, duration: number, create
 
   return new Promise((resolve, reject) => {
     db.articles
-      .add({ id, title, audio, duration, createdAt })
+      .add({ id, title, audio, duration, createdAt, size })
       .then(() => {
         resolve(
           db.articles
