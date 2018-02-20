@@ -1,11 +1,11 @@
 import { all, call, fork, put, select, takeEvery, takeLatest } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import * as Constants from '../constants';
-import * as RecordRTC from '../lib/Recorder';
 import * as formActions from '../actions/articleFormActions';
 import * as mediaActions from '../actions/mediaActions';
-import * as Media from '../lib/Media';
 import * as recorderActions from '../actions/recorderActions';
+import * as Media from '../lib/Media';
+import * as RecordRTC from '../lib/Recorder';
 import { getDurationFromFile } from '../lib/Player';
 
 function* getProgress() {
