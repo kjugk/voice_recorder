@@ -1,8 +1,7 @@
 import * as React from 'react';
-import * as classnames from 'classnames';
-import * as prettyBytes from 'pretty-bytes';
+import { TotalTimeField } from './form/TotalTimeField';
+import { FileSizeField } from './form/FileSizeField';
 import { TitleInput } from './form/TitleInput';
-import { formatDurationToTime } from '../../lib/Player';
 
 interface FormProps {
   duration: number;
@@ -29,14 +28,8 @@ export class Form extends React.Component<FormProps, FormState> {
 
     return (
       <>
-        <div className="field">
-          <label className="label">Total time</label>
-            <div>{formatDurationToTime(duration)}</div>
-        </div>
-        <div className="field">
-          <label className="label">File size</label>
-          <div>{prettyBytes(size)}</div>
-        </div>
+        <TotalTimeField duration={duration} />
+        <FileSizeField size={size} />
 
         <form onSubmit={this.handleSubmit.bind(this)}>
           <TitleInput
@@ -51,7 +44,7 @@ export class Form extends React.Component<FormProps, FormState> {
                 title="save"
                 className="button is-primary is-large"
                 type="submit"
-                disabled={!this.state.titleIsValid}
+                disabled={!this.isValid}
               >
                 <div className="icon">
                   <i className="fas fa-download" />
@@ -65,21 +58,25 @@ export class Form extends React.Component<FormProps, FormState> {
     );
   }
 
+  private isValid(): boolean {
+    return this.state.titleIsValid;
+  }
+
   private handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
+
+    if (!this.isValid) {
+      return;
+    }
+
     this.props.onSubmit();
   }
 
   private handleTitleChange(evt: React.FormEvent<HTMLInputElement>) {
     evt.stopPropagation();
+
     const newTitle: string = evt.currentTarget.value;
-
-    if (newTitle.length > Form.TITLE_MAX_LENGTH) {
-      this.setState({ titleIsValid: false });
-    } else {
-      this.setState({ titleIsValid: true });
-    }
-
+    this.setState({ titleIsValid: newTitle.length <= Form.TITLE_MAX_LENGTH });
     this.props.onTitleChange(evt.currentTarget.value);
   }
 }
