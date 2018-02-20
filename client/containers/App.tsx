@@ -9,7 +9,7 @@ import ArticleNewContainer from '../containers/ArticleNewContainer';
 import { Header } from '../components/layout/Header';
 import { MainSection } from '../components/layout/MainSection';
 import { Footer } from '../components/layout/Footer';
-import { ErrorMessageModal } from '../components/ErrorMessageModal';
+import { ErrorMessageModal } from '../components/modal/ErrorMessageModal';
 
 import * as messageActions from '../actions/messageActions';
 

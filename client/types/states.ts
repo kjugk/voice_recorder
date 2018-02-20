@@ -39,6 +39,7 @@ export interface ArticleItemState {
   title: string;
   duration: number;
   createdAt: Date;
+  size: number;
 }
 
 export interface PlayerState {

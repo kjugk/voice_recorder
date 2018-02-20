@@ -1,17 +1,18 @@
 const RecordRTC = require('recordrtc');
 let recordRTC;
 
-module.exports.build = function(stream) {
+module.exports.build = (stream) => {
   recordRTC = RecordRTC(stream, { type: 'audio' });
   return recordRTC;
 };
 
-module.exports.startRecording = function() {
+module.exports.startRecording = () => {
   if (!recordRTC) return;
+
   recordRTC.startRecording();
 };
 
-module.exports.stopRecording = function() {
+module.exports.stopRecording = () => {
   return new Promise((resolve, reject) => {
     if (!recordRTC) reject();
 

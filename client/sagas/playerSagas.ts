@@ -5,12 +5,9 @@ import * as playerActions from '../actions/playerActions';
 
 import Player from '../lib/Player';
 const player = new Player();
-
 const PROGRESS_INTERVAL = 250;
 
 function* getProgress() {
-  player.play();
-
   while (true) {
     yield delay(PROGRESS_INTERVAL);
     yield put(playerActions.progress(player.getDuration()));
@@ -25,6 +22,11 @@ function* getProgress() {
       break;
     }
   }
+}
+
+function* play() {
+  player.play();
+  yield call(getProgress);
 }
 
 function* loadTrack(action: any) {
@@ -42,7 +44,7 @@ function resetPlayer() {
 export default function* playerSagas() {
   yield all([
     takeLatest(Constants.LOAD_TRACK, loadTrack),
-    takeLatest(Constants.PLAY, getProgress),
+    takeLatest(Constants.PLAY, play),
     takeLatest(Constants.RESET_PLAYER, resetPlayer)
   ]);
 }

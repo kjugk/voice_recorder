@@ -14,10 +14,10 @@ function* fetchArticles() {
 
 function* submitArticle() {
   const state = yield select();
-  const { title, audio, duration } = state.articleForm;
+  const { title, audio, duration, size } = state.articleForm;
 
   try {
-    const articles = yield call(Api.saveArticle, title, audio, duration, new Date());
+    const articles = yield call(Api.saveArticle, title, audio, duration, new Date(), size);
 
     yield put(articleActions.receiveArticles(articles));
     yield put(formActions.completeSubmit());

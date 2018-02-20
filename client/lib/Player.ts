@@ -21,8 +21,8 @@ export default class Player {
     this.startTime = 0;
   }
 
-  public loadTrack = (id: string) => {
-    return new Promise((resolve) => {
+  public loadTrack = (id: string): Promise<number> => {
+    return new Promise<number>((resolve) => {
       Api.getTrackFromStorage(id).then((response: any) => {
         Player.getContext().decodeAudioData(response, (decodedData: AudioBuffer) => {
           this.buffer = decodedData;
@@ -30,9 +30,9 @@ export default class Player {
         });
       });
     });
-  };
+  }
 
-  public play() {
+  public play(): void {
     this.startTime = Player.getContext().currentTime;
     this.source = Player.getContext().createBufferSource();
     this.source.buffer = this.buffer;
@@ -40,7 +40,7 @@ export default class Player {
     this.source.start(0, this.startOffset % this.buffer.duration);
   }
 
-  public pause() {
+  public pause(): void {
     if (!this.source) {
       return;
     }
@@ -48,7 +48,7 @@ export default class Player {
     this.source.stop(0);
   }
 
-  public stop() {
+  public stop(): void {
     if (!this.source) {
       return;
     }
@@ -56,17 +56,17 @@ export default class Player {
     this.source.stop(0);
   }
 
-  public getDuration() {
+  public getDuration(): number {
     return this.startOffset + (Player.getContext().currentTime - this.startTime);
   }
 
-  public isEnded() {
+  public isEnded(): boolean {
     return this.getDuration() >= this.buffer.duration;
   }
 }
 
-export const getDurationFromFile = (audio: Blob) => {
-  return new Promise((resolve) => {
+export const getDurationFromFile = (audio: Blob): Promise<number> => {
+  return new Promise<number>((resolve) => {
     const fr = new FileReader();
 
     fr.onload = () => {
