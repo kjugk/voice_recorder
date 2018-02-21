@@ -2,8 +2,8 @@ import * as React from 'react';
 import { MouseEvent } from 'react';
 
 interface ListItemControlProps {
-  onPlayClick: (evt: MouseEvent<HTMLElement>) => any;
-  onDeleteClick: (evt: MouseEvent<HTMLElement>) => any;
+  onPlayClick: (evt: MouseEvent<HTMLElement>) => void;
+  onDeleteClick: (evt: MouseEvent<HTMLElement>) => void;
 }
 
 export const ListItemControl: React.SFC<ListItemControlProps> = (props) => {

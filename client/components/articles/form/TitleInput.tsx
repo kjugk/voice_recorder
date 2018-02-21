@@ -3,9 +3,9 @@ import * as classnames from 'classnames';
 
 interface TitleInputProps {
   isValid: boolean;
+  maxLength: number;
   value: string;
   onChange: () => any;
-  maxLength: number;
 }
 
 export const TitleInput: React.SFC<TitleInputProps> = (props) => {
