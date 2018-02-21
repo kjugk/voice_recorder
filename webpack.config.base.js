@@ -1,3 +1,11 @@
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+
+let clearOptions = {
+  root:     __dirname + '/public',
+  verbose:  true,
+  dry:      false
+}
+
 let config = {
   entry: "./client/index.tsx",
   output: {
@@ -32,8 +40,12 @@ let config = {
           }
         ]
       }
-    ]
-  }
+    ],
+  },
+
+  plugins: [
+    new CleanWebpackPlugin('javascripts', clearOptions)
+  ]
 }
 
 module.exports = {
