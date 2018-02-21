@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as prettyBytes from 'pretty-bytes';
-import { formatDurationToTime } from '../../../lib/Player';
 
 interface FileSizeFieldProps {
   size: number;

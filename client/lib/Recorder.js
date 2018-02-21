@@ -1,3 +1,5 @@
+module.exports.RECORDING_LIMIT = 600000;
+
 const RecordRTC = require('recordrtc');
 let recordRTC;
 

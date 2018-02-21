@@ -17,7 +17,8 @@ describe('articleActions', () => {
       id: '1',
       title: 'test',
       duration: 1,
-      createdAt: new Date()
+      createdAt: new Date(),
+      size: 1000
     }];
 
     it('should create an action to receive articles.', () => {

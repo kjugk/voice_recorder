@@ -14,7 +14,7 @@ export const initialState: MediaState = {
 
 export const media = (state: MediaState = initialState, action: any): MediaState => {
   switch (action.type) {
-    case Constants.MIC_PREMISSION_SUCCESS:
+    case Constants.MIC_PREMISSION_ACCEPTED:
       return {
         ...state,
         permission: MediaPermissionState.PERMITTED,

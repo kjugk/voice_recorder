@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "clean": "rm ./public/javascripts/bundle.js ./public/javascripts/bundle.js.map",
-    "build:dev": "npm run clean; NODE_ENV=dev webpack --config webpack.config.dev.js",
-    "build:prod": "npm run clean; NODE_ENV=production webpack --config webpack.config.prod.js",
+    "build:dev": "NODE_ENV=dev webpack --config webpack.config.dev.js",
+    "build:prod": "NODE_ENV=production webpack --config webpack.config.prod.js",
     "launch:server:dev": "nodemon ./bin/www",
     "start:dev": "npm-run-all --parallel build:dev launch:server:dev",
     "start": "node ./bin/www",
@@ -47,6 +46,7 @@
   "devDependencies": {
     "@types/jest": "^22.1.2",
     "awesome-typescript-loader": "^3.4.1",
+    "clean-webpack-plugin": "^0.1.18",
     "css-loader": "^0.28.9",
     "jest": "^22.3.0",
     "node-sass": "^4.7.2",
