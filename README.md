@@ -16,4 +16,6 @@ Node.js 8+
 4. Access localhost:8080.
 
 ## Testing
-Run `npm run test`.
+
+## License
+This software is released under the MIT License, see LICENSE.txt.
