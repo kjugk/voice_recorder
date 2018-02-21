@@ -16,6 +16,11 @@ function* getProgress() {
     yield delay(1000);
     duration += 1000;
 
+    if (duration >= RecordRTC.RECORDING_LIMIT) {
+      yield put(recorderActions.stopRecording());
+      break;
+    }
+
     const state = yield select();
     if (state.recorder.recordingCompleted) {
       break;

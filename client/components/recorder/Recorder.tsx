@@ -4,6 +4,7 @@ import * as Types from '../../types';
 import * as classnames from 'classnames';
 
 import { MicVisualizer } from '../../components/recorder/MicVisualizer';
+import { RECORDING_LIMIT } from '../../lib/Recorder';
 
 interface RecorderProps {
   duration: number;
@@ -27,7 +28,11 @@ export class Recorder extends React.Component<RecorderProps> {
 
     return (
       <>
-        <div className={timerClassName}>{formatDurationToTime(duration / 1000)}</div>
+        <div className={timerClassName}>
+          <div>{formatDurationToTime(duration / 1000)}</div>
+          <span style={{marginRight: '1rem', fontWeight: 'normal'}}>/</span>
+          <div>{formatDurationToTime(RECORDING_LIMIT / 1000)}</div>
+        </div>
 
         <MicVisualizer stream={media.stream} isRecording={isRecording} />
 
