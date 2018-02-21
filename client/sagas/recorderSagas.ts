@@ -27,7 +27,7 @@ function* requestMicPermission() {
   try {
     const stream = yield call(Media.requestMicPermission);
     RecordRTC.build(stream);
-    yield put(mediaActions.successMicPermission(stream));
+    yield put(mediaActions.acceptMicPermission(stream));
   } catch (e) {
     yield put(mediaActions.denyMicPermission());
   }
@@ -55,7 +55,7 @@ function* resetRecorder() {
 
 export default function* recorderSagas() {
   yield all([
-    takeEvery(Constants.REQUEST_MIC_PERMISSION, requestMicPermission),
+    takeEvery(Constants.MIC_PERMISSION_REQUESTED, requestMicPermission),
     takeEvery(Constants.START_RECORDING, startRecording),
     takeEvery(Constants.STOP_RECORDING, stopRecording),
     takeEvery(Constants.RESET_RECORDER, resetRecorder)

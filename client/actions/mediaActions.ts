@@ -2,14 +2,14 @@ import * as Constants from '../constants';
 
 export const requestMicPermission = () => {
   return {
-    type: Constants.REQUEST_MIC_PERMISSION,
+    type: Constants.MIC_PERMISSION_REQUESTED,
     payload: {}
   };
 };
 
-export const successMicPermission = (stream: MediaStream) => {
+export const acceptMicPermission = (stream: MediaStream) => {
   return {
-    type: Constants.MIC_PREMISSION_SUCCESS,
+    type: Constants.MIC_PREMISSION_ACCEPTED,
     payload: {
       stream
     }
