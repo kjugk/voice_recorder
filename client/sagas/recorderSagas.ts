@@ -3,6 +3,7 @@ import { delay } from 'redux-saga';
 import * as Constants from '../constants';
 import * as formActions from '../actions/articleFormActions';
 import * as mediaActions from '../actions/mediaActions';
+import * as messageActions from '../actions/messageActions';
 import * as recorderActions from '../actions/recorderActions';
 import * as Media from '../lib/Media';
 import * as RecordRTC from '../lib/Recorder';
@@ -34,7 +35,11 @@ function* requestMicPermission() {
     RecordRTC.build(stream);
     yield put(mediaActions.acceptMicPermission(stream));
   } catch (e) {
-    yield put(mediaActions.denyMicPermission());
+    if (e instanceof Media.NotSupportedError) {
+      yield put(messageActions.setErrorMessage(e.message));
+    } else {
+      yield put(mediaActions.denyMicPermission());
+    }
   }
 }
 
