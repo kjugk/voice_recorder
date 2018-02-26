@@ -2,7 +2,7 @@ import * as React from 'react';
 
 export const NotSupportedMessage: React.SFC = () => {
   return (
-    <article className="message">
+    <article className="message is-primary">
       <div className="message-header">Recording functions is not supported</div>
       <div className="message-body">
         <p className="content has-text-centered is-size-1">
