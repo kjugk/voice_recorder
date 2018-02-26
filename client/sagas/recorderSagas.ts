@@ -8,16 +8,18 @@ import * as recorderActions from '../actions/recorderActions';
 import * as Media from '../lib/Media';
 import * as RecordRTC from '../lib/Recorder';
 import { getDurationFromFile } from '../lib/Player';
+import * as moment from 'moment';
 
 function* getProgress() {
-  let duration = 0;
+  let diff = 0;
+  const startTime = moment(new Date());
 
   while (true) {
-    yield put(recorderActions.receiveDuration(duration));
+    yield put(recorderActions.receiveDuration(diff));
     yield delay(1000);
-    duration += 1000;
+    diff = moment(new Date()).diff(startTime);
 
-    if (duration >= RecordRTC.RECORDING_LIMIT) {
+    if (diff >= RecordRTC.RECORDING_LIMIT) {
       yield put(recorderActions.stopRecording());
       break;
     }
