@@ -1,4 +1,3 @@
-import { MediaPermissionState } from '../reducers/media';
 
 export interface AppState {
   articles: ArticlesState;
@@ -12,6 +11,13 @@ export interface AppState {
 export interface MessageState {
   body: string;
   errorMessage: string;
+}
+
+export enum MediaPermissionState {
+  NOT_CHECKED,
+  PERMITTED,
+  DENIED,
+  NOT_SUPPORTED
 }
 
 export interface MediaState {
