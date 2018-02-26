@@ -22,3 +22,10 @@ export const denyMicPermission = () => {
     payload: {}
   };
 };
+
+export const receiveNotSupported = () => {
+  return {
+    type: Constants.MIC_NOT_SUPPORTED,
+    payload: {}
+  };
+};

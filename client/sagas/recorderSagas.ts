@@ -36,7 +36,7 @@ function* requestMicPermission() {
     yield put(mediaActions.acceptMicPermission(stream));
   } catch (e) {
     if (e instanceof Media.NotSupportedError) {
-      yield put(messageActions.setErrorMessage(e.message));
+      yield put(mediaActions.receiveNotSupported());
     } else {
       yield put(mediaActions.denyMicPermission());
     }

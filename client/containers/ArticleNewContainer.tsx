@@ -11,7 +11,7 @@ import * as recorderActions from '../actions/recorderActions';
 import RecorderContainer from '../containers/RecorderContainer';
 import FormContainer from '../containers/FormContainer';
 import { MicPermissionDeniedMessage } from '../components/messages/MicPermissionDeniedMessage';
-import { MediaPermissionState } from '../reducers/media';
+import { NotSupportedMessage } from '../components/messages/NotSupportedMessage';
 import { Loader } from '../components/Loader';
 
 import { Helmet } from 'react-helmet';
@@ -55,12 +55,16 @@ class NewArticleContainer extends React.Component<NewArticleContainerProps> {
   private renderContents() {
     const { form, media, recorder } = this.props;
 
-    if (media.permission === MediaPermissionState.NOT_CHECKED) {
+    if (media.permission === Types.MediaPermissionState.NOT_CHECKED) {
       return <Loader />;
     }
 
-    if (media.permission === MediaPermissionState.DENIED) {
+    if (media.permission === Types.MediaPermissionState.DENIED) {
       return <MicPermissionDeniedMessage />;
+    }
+
+    if (media.permission === Types.MediaPermissionState.NOT_SUPPORTED) {
+      return <NotSupportedMessage />;
     }
 
     return (
