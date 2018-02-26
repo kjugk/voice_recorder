@@ -1,27 +1,27 @@
 module.exports.RECORDING_LIMIT = 600000;
 
 const RecordRTC = require('recordrtc');
-let recordRTC;
+let recorder;
 
 module.exports.build = (stream) => {
-  recordRTC = RecordRTC(stream, { type: 'audio' });
-  return recordRTC;
+  recorder = RecordRTC(stream, { type: 'audio' });
+  return recorder;
 };
 
 module.exports.startRecording = () => {
-  if (!recordRTC) return;
+  if (!recorder) return;
 
-  recordRTC.startRecording();
+  recorder.startRecording();
 };
 
 module.exports.stopRecording = () => {
   return new Promise((resolve, reject) => {
-    if (!recordRTC) reject();
+    if (!recorder) reject();
 
-    recordRTC.stopRecording(function(audioURL) {
-      resolve(recordRTC.getBlob());
-      recordRTC.clearRecordedData();
-      recordRTC.destroy();
+    recorder.stopRecording(function(audioURL) {
+      resolve(recorder.getBlob());
+      recorder.clearRecordedData();
+      recorder.destroy();
     });
   });
 };
