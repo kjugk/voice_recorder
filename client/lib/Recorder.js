@@ -1,7 +1,12 @@
-module.exports.RECORDING_LIMIT = 600000;
+const RECORDING_LIMIT = 600000;
+module.exports.RECORDING_LIMIT = RECORDING_LIMIT
 
 const RecordRTC = require('recordrtc');
 let recorder;
+
+module.exports.isOverLimit = (duration) => {
+  return duration > RECORDING_LIMIT;
+}
 
 module.exports.build = (stream) => {
   recorder = RecordRTC(stream, { type: 'audio' });

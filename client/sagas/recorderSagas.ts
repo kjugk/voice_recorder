@@ -19,7 +19,7 @@ function* getProgress() {
     yield delay(1000);
     diff = moment(new Date()).diff(startTime);
 
-    if (diff >= Recorder.RECORDING_LIMIT) {
+    if (Recorder.isOverLimit(diff)) {
       yield put(recorderActions.stopRecording());
       break;
     }
