@@ -16,7 +16,7 @@ module.exports.startRecording = () => {
 
 module.exports.stopRecording = () => {
   return new Promise((resolve, reject) => {
-    if (!recorder) reject();
+    if (!recorder) return;
 
     recorder.stopRecording(function(audioURL) {
       resolve(recorder.getBlob());
