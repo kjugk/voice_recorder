@@ -1,7 +1,7 @@
-import { ArticleFormState } from './../types/states';
+import * as types from '../types';
 import * as Constants from '../constants';
 
-export const initialState: ArticleFormState = {
+export const initialState: types.ArticleFormState = {
   title: '',
   submitted: false,
   audio: undefined,
@@ -10,9 +10,9 @@ export const initialState: ArticleFormState = {
 };
 
 export const articleForm = (
-  state: ArticleFormState = initialState,
+  state: types.ArticleFormState = initialState,
   action: any
-): ArticleFormState => {
+): types.ArticleFormState => {
   switch (action.type) {
     case Constants.CHANGE_TITLE:
       return { ...state, title: action.payload.newTitle };

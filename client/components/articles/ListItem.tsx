@@ -15,7 +15,7 @@ export const ListItem: React.SFC<ListItemProps> = (props) => {
   const { article, onPlay, onDelete } = props;
 
   return (
-    <li className="column is-4">
+    <li className="column is-12-mobile is-6-tablet is-4-desktop">
       <div className="card">
         <div className="card-content">
           <ListItemHeadline article={article} />
