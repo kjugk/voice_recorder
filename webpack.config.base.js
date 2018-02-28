@@ -1,4 +1,5 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const WebpackShellPlugin = require('webpack-shell-plugin');
 
 let clearOptions = {
   root:     __dirname + '/public',
@@ -49,7 +50,10 @@ let config = {
   },
 
   plugins: [
-    new CleanWebpackPlugin('javascripts', clearOptions)
+    new CleanWebpackPlugin('javascripts', clearOptions),
+    new WebpackShellPlugin({
+      onBuildExit: ['node_modules/gulp/bin/gulp.js']
+    })
   ]
 }
 

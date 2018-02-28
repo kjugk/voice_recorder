@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "build:all:prod": "NODE_ENV=production npm-run-all build:server:prod build:client:prod",
     "build:server:dev": "NODE_ENV=dev tsc --w --p server/tsconfig.json",
     "build:server:prod": "NODE_ENV=production tsc --p server/tsconfig.json",
     "build:client:dev": "NODE_ENV=dev webpack --config webpack.config.dev.js",
@@ -34,13 +35,14 @@
     "redux": "^3.7.2",
     "redux-saga": "^0.16.0",
     "serve-favicon": "~2.4.5",
-    "shortid": "^2.2.8"
+    "shortid": "^2.2.8",
+    "webpack-shell-plugin": "^0.5.0"
   },
   "devDependencies": {
-    "@types/express": "^4.11.1",
     "@types/classnames": "^2.2.3",
     "@types/cookie-parser": "^1.4.1",
     "@types/d3": "^5.0.0",
+    "@types/express": "^4.11.1",
     "@types/jest": "^22.1.2",
     "@types/morgan": "^1.7.35",
     "@types/pretty-bytes": "^4.0.0",
@@ -53,6 +55,7 @@
     "awesome-typescript-loader": "^3.4.1",
     "clean-webpack-plugin": "^0.1.18",
     "css-loader": "^0.28.9",
+    "gulp": "^3.9.1",
     "jest": "^22.3.0",
     "node-sass": "^4.7.2",
     "nodemon": "^1.15.0",
@@ -61,6 +64,7 @@
     "sass-loader": "^6.0.6",
     "source-map-loader": "^0.2.3",
     "style-loader": "^0.19.1",
+    "sw-precache": "^5.2.1",
     "ts-jest": "^22.0.4",
     "tslint": "^5.8.0",
     "typescript": "^2.7.1",
