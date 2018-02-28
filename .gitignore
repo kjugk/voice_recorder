@@ -2,3 +2,5 @@ node_modules
 public/javascripts/bundle.js*
 .DS_Store
 dist
+public/_sw.js
+public/service-worker.js
