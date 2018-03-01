@@ -1,7 +1,9 @@
 {
-  "short_name": "Voice Recorder",
+  "short_name": "vrecorder",
+  "display": "standalone",
   "name": "Voice Recorder",
   "start_url": "/",
+  "theme_color": "#0F5291",
   "icons": [
     {
       "src": "/android-icon-36x36.png",

@@ -28,4 +28,7 @@ resources:
 
 skip_files:
 - node_modules/
+
+handlers:
+- secure: always
 # [END app_yaml]
