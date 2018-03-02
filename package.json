@@ -4,16 +4,18 @@
   "private": true,
   "scripts": {
     "build:all:prod": "NODE_ENV=production npm-run-all build:server:prod build:client:prod",
-    "build:server:dev": "NODE_ENV=dev tsc --w --p server/tsconfig.json",
-    "build:server:prod": "NODE_ENV=production tsc --p server/tsconfig.json",
     "build:client:dev": "NODE_ENV=dev webpack --config webpack.config.dev.js",
     "build:client:prod": "NODE_ENV=production webpack --config webpack.config.prod.js",
+    "build:server:dev": "NODE_ENV=dev tsc --w --p server/tsconfig.json",
+    "build:server:prod": "NODE_ENV=production tsc --p server/tsconfig.json",
     "launch:server:dev": "nodemon ./bin/www",
-    "start:dev": "npm-run-all --parallel build:server:dev build:client:dev launch:server:dev",
     "start": "node ./bin/www",
+    "start:dev": "npm-run-all --parallel build:server:dev build:client:dev launch:server:dev",
     "test": "jest"
   },
   "dependencies": {
+    "@types/enzyme": "^3.1.9",
+    "@types/enzyme-adapter-react-16": "^1.0.2",
     "body-parser": "~1.18.2",
     "bulma": "^0.6.2",
     "classnames": "^2.2.5",
@@ -21,6 +23,8 @@
     "d3": "^4.13.0",
     "debug": "~2.6.9",
     "dexie": "^2.0.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "express": "^4.16.2",
     "moment": "^2.20.1",
     "morgan": "~1.9.0",
@@ -73,6 +77,11 @@
     "webpack-merge": "^4.1.1"
   },
   "jest": {
+    "globals": {
+      "ts-jest": {
+        "tsConfigFile": "./client/tsconfig.json"
+      }
+    },
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
