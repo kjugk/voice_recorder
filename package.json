@@ -17,14 +17,11 @@
     "@types/enzyme": "^3.1.9",
     "@types/enzyme-adapter-react-16": "^1.0.2",
     "body-parser": "~1.18.2",
-    "bulma": "^0.6.2",
     "classnames": "^2.2.5",
     "cookie-parser": "~1.4.3",
     "d3": "^4.13.0",
     "debug": "~2.6.9",
     "dexie": "^2.0.1",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
     "express": "^4.16.2",
     "moment": "^2.20.1",
     "morgan": "~1.9.0",
@@ -39,8 +36,7 @@
     "redux": "^3.7.2",
     "redux-saga": "^0.16.0",
     "serve-favicon": "~2.4.5",
-    "shortid": "^2.2.8",
-    "webpack-shell-plugin": "^0.5.0"
+    "shortid": "^2.2.8"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.3",
@@ -57,8 +53,11 @@
     "@types/react-router-dom": "^4.2.3",
     "@types/shortid": "0.0.29",
     "awesome-typescript-loader": "^3.4.1",
+    "bulma": "^0.6.2",
     "clean-webpack-plugin": "^0.1.18",
     "css-loader": "^0.28.9",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "gulp": "^3.9.1",
     "jest": "^22.3.0",
     "node-sass": "^4.7.2",
@@ -74,7 +73,8 @@
     "typescript": "^2.7.1",
     "uglifyjs-webpack-plugin": "^1.1.8",
     "webpack": "^3.10.0",
-    "webpack-merge": "^4.1.1"
+    "webpack-merge": "^4.1.1",
+    "webpack-shell-plugin": "^0.5.0"
   },
   "jest": {
     "globals": {
