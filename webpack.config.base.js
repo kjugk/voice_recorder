@@ -69,7 +69,7 @@ let config = {
   plugins: [
     new CleanWebpackPlugin('javascripts', clearOptions),
     new WebpackShellPlugin({
-      onBuildExit: ['node_modules/gulp/bin/gulp.js']
+      onBuildExit: ['node_modules/.bin/gulp']
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
