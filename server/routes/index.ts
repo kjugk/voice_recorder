@@ -12,7 +12,7 @@ router.get('/new', (req, res, next) => {
 });
 
 router.get('/license', (req, res, next) => {
-  const file = path.join(__dirname, '../', 'LICENSE.txt');
+  const file = path.join(__dirname, '../../', 'LICENSE.txt');
   const text = fs.readFileSync(file);
 
   res.header('Content-Type', 'text/plain;charset=utf-8');
