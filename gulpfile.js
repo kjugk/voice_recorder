@@ -14,7 +14,8 @@ gulp.task('generate-service-worker', function(callback) {
       staticFileGlobs: [rootDir + '/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff}'],
       dynamicUrlToDependencies: {
         '/': ['views/layout.pug', 'views/index.pug'],
-        '/new': ['views/layout.pug', 'views/index.pug']
+        '/articles': ['views/layout.pug', 'views/index.pug'],
+        '/articles/new': ['views/layout.pug', 'views/index.pug']
       },
       stripPrefix: rootDir,
       maximumFileSizeToCacheInBytes: 3500000

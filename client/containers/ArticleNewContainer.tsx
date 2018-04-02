@@ -38,7 +38,7 @@ class NewArticleContainer extends React.Component<NewArticleContainerProps> {
 
   public render() {
     if (this.props.form.submitted) {
-      return <Redirect to="/" />;
+      return <Redirect to="/articles" />;
     }
 
     return (

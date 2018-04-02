@@ -7,7 +7,11 @@ router.get('/', (req, res, next) => {
   res.render('index', { title: 'Voice Recorder' });
 });
 
-router.get('/new', (req, res, next) => {
+router.get('/articles', (req, res, next) => {
+  res.render('index', { title: 'Voice Recorder' });
+});
+
+router.get('/articles/new', (req, res, next) => {
   res.render('index', { title: 'Voice Recorder' });
 });
 
