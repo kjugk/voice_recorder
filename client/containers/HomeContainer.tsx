@@ -28,7 +28,7 @@ class HomeContainer extends React.Component<ArticleIndexContainerProps> {
     const { articles } = this.props;
 
     if (!articles.isInitialized) {
-      return <Loader />;
+      return null;
     }
 
     if (articles.items.length >= 1) {

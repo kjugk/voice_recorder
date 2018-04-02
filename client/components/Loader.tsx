@@ -18,8 +18,8 @@ export const Loader: React.SFC<LoaderProps> = (props) => {
   }
 
   const c = classnames('fas fa-spin fa-spinner', {
-    'fa-2x': props.size === LoaderSize.SMALL,
-    'fa-3x': props.size === LoaderSize.LARGE
+    'fa-1x': props.size === LoaderSize.SMALL,
+    'fa-2x': props.size === LoaderSize.LARGE
   });
 
   return (
@@ -27,7 +27,7 @@ export const Loader: React.SFC<LoaderProps> = (props) => {
       <span className="icon">
         <i className={c} />
       </span>
-      {!!props.text && <h5 className="loader-text is-5 has-text-weight-bold">{props.text}</h5>}
+      {!!props.text && <span className="loader-text">{props.text}</span>}
     </div>
   );
 };
