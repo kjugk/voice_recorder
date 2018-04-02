@@ -5,18 +5,9 @@ export class WelcomeMessage extends React.Component {
   public render() {
     return (
       <React.Fragment>
-        <div
-          style={{
-            height: 'calc(100% - 3.25rem)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
-        >
+        <div className="l-hero">
           <div className="has-text-centered">
-            <h2 className="c-hero-title has-text-primary">
-              Record your voice anywhere
-            </h2>
+            <h2 className="l-hero-title has-text-primary">Record your voice anywhere</h2>
             <p className="subtitle is-5" style={{ marginTop: '.1rem' }}>
               A simple voice recorder app for modern browsers.
             </p>
@@ -66,7 +57,7 @@ export class WelcomeMessage extends React.Component {
             </ul>
           </div>
 
-          <div style={{marginTop: '1rem'}}>
+          <div style={{ marginTop: '1rem' }}>
             <h6 className="title is-6">Mobile</h6>
             <ul>
               <li>

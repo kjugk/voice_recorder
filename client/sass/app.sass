@@ -21,13 +21,7 @@ html,body
   box-sizing: border-box;
 
 #app
-  display: flex;
-  flex-direction: column;
   height: 100%;
-
-.section-main
-  flex: 1;
-  position: relative;
 
 .has-align-center
   align-items: center
@@ -149,7 +143,13 @@ html,body
     .bar
       fill: $danger;
 
-.c-hero-title
+.l-hero
+  align-items: center;
+  display: flex;
+  height: calc(100% - 3.25rem);
+  justify-content: center;
+
+.l-hero-title
   font-size: 3.6rem;
   @include mobile
     font-size: 2.5rem;

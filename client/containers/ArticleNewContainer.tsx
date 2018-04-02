@@ -42,13 +42,15 @@ class NewArticleContainer extends React.Component<NewArticleContainerProps> {
     }
 
     return (
-      <>
-        <Helmet>
-          <title>New Article | Voice Recorder</title>
-          <meta name="robots" content="noindex" />
-        </Helmet>
-        {this.renderContents()}
-      </>
+      <section className="section">
+        <div className="container">
+          <Helmet>
+            <title>New Article | Voice Recorder</title>
+            <meta name="robots" content="noindex" />
+          </Helmet>
+          {this.renderContents()}
+        </div>
+      </section>
     );
   }
 

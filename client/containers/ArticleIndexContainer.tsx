@@ -43,19 +43,21 @@ class ArticleIndexContainer extends React.Component<ArticleIndexContainerProps> 
     }
 
     return (
-      <>
-        <Helmet>
-          <title>Voice Recorder | Articles</title>
-        </Helmet>
+      <section className="section">
+        <div className="container">
+          <Helmet>
+            <title>Voice Recorder | Articles</title>
+          </Helmet>
 
-        {articles.isFetching && <Loader />}
-        {!articles.isFetching && (
-          <List articles={articles} onItemPlay={selectArticle} onItemDelete={deleteArticle} />
-        )}
+          {articles.isFetching && <Loader />}
+          {!articles.isFetching && (
+            <List articles={articles} onItemPlay={selectArticle} onItemDelete={deleteArticle} />
+          )}
 
-        <Fab className={fabClassName} linkTo="/articles/new" title="start recording" />
-        <PlayerContainer />
-      </>
+          <Fab className={fabClassName} linkTo="/articles/new" title="start recording" />
+          <PlayerContainer />
+        </div>
+      </section>
     );
   }
 }

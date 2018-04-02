@@ -27,10 +27,8 @@ class App extends React.Component<AppProps> {
         <>
           <Header />
           <Route exact path="/" component={HomeContainer} />
-          <MainSection>
-            <Route exact path="/articles" component={ArticleIndexContainer} />
-            <Route exact path="/articles/new" component={ArticleNewContainer} />
-          </MainSection>
+          <Route exact path="/articles" component={ArticleIndexContainer} />
+          <Route exact path="/articles/new" component={ArticleNewContainer} />
           <SnackBar message={this.props.message.body} />
           <ErrorMessageModal
             message={this.props.message.errorMessage}
