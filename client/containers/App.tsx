@@ -1,20 +1,22 @@
 import * as React from 'react';
-import * as Types from '../types';
+import * as types from '../types';
 import { connect, Dispatch } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import ArticleIndexContainer from '../containers/ArticleIndexContainer';
 import ArticleNewContainer from '../containers/ArticleNewContainer';
+import HomeContainer from '../containers/HomeContainer';
 
 import { Header } from '../components/layout/Header';
 import { MainSection } from '../components/layout/MainSection';
 import { Footer } from '../components/layout/Footer';
 import { ErrorMessageModal } from '../components/modal/ErrorMessageModal';
+import { SnackBar } from '../components/SnackBar';
 
 import * as messageActions from '../actions/messageActions';
 
 interface AppProps {
-  errorMessage: string;
+  message: types.MessageState;
   onErrorMessageClose: () => any;
 }
 
@@ -24,13 +26,12 @@ class App extends React.Component<AppProps> {
       <Router>
         <>
           <Header />
-          <MainSection>
-            <Route exact path="/" component={ArticleIndexContainer} />
-            <Route exact path="/new" component={ArticleNewContainer} />
-          </MainSection>
-          <Footer />
+          <Route exact path="/" component={HomeContainer} />
+          <Route exact path="/articles" component={ArticleIndexContainer} />
+          <Route exact path="/articles/new" component={ArticleNewContainer} />
+          <SnackBar message={this.props.message.body} />
           <ErrorMessageModal
-            message={this.props.errorMessage}
+            message={this.props.message.errorMessage}
             onCloseClick={this.props.onErrorMessageClose.bind(this)}
           />
         </>
@@ -39,9 +40,9 @@ class App extends React.Component<AppProps> {
   }
 }
 
-const mapStateToProps = (state: Types.AppState) => {
+const mapStateToProps = (state: types.AppState) => {
   return {
-    errorMessage: state.message.errorMessage
+    message: state.message
   };
 };
 

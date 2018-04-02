@@ -3,7 +3,7 @@ import * as React from 'react';
 export class Footer extends React.Component {
   public render() {
     return (
-      <footer className="footer">
+      <footer className="footer has-text-centered">
         <div className="container">
           <h5 className="title is-5">Voice Recorder(Ver 1.0.0)</h5>
           <div><a href="/license">MIT License</a></div>

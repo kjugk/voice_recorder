@@ -10,7 +10,6 @@ $family-primary: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI"
 $modal-background-background-color: rgba(0, 0, 0, 0.6);
 $primary: #0F5291;
 $danger: #FF2A4F;
-
 @import "~bulma/bulma.sass";
 
 $color-background: $white;
@@ -22,13 +21,7 @@ html,body
   box-sizing: border-box;
 
 #app
-  display: flex;
-  flex-direction: column;
   height: 100%;
-
-.section-main
-  flex: 1;
-  position: relative;
 
 .has-align-center
   align-items: center
@@ -46,7 +39,7 @@ html,body
 .c-player
   background: $color-background;
   border-top: 1px solid $color-border;
-  box-shadow: 2px -3px rgba(10, 10, 10, 0.1);
+  box-shadow: 0 -2px 8px 0 rgba(0,0,0,.0785);
   padding: $size-6;
   padding-bottom: $size-1;
 
@@ -68,42 +61,44 @@ html,body
   position: fixed;
   transform: translate3D(0,0,0);
   transition: all 200ms ease-in;
-  min-width: 300px;
-  max-width: 300px;
+  width: 300px;
   z-index: 100;
   &.hidden
     opacity: 0;
     transform: translate3D(0,-100%,0);
 
   +mobile
-    width: 100vh;
+    width: 100%;
     right: 0;
     left: 0;
     text-align: center;
 
 .c-loader
-  padding-top: $size-1;
-  text-align: center;
+  align-items: center;
+  color: $primary;
+  display: flex;
+  font-weight: 800;
+  margin-top: 1.6rem;
   .loader-text
-    margin-top: 1rem;
+    margin-left: 1rem;
 
 .c-fab
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
-  font-size: 1.8rem;
   border-radius: 50%;
+  bottom: 3rem;
+  font-size: 1.8rem;
   position: fixed;
   right: 4rem;
-  bottom: 3rem;
-  z-index: 1000;
   transform: bottom .5s;
+  z-index: 1000;
   &.shifted
     bottom: 9.8rem;
   +mobile
     right: 1.5rem;
 
 .c-error-container
-  text-align: center;
   padding: 2rem;
+  text-align: center;
 
 .c-brand
   font-size: 1.6rem;
@@ -145,17 +140,17 @@ html,body
   background: $light;
   .bar
     fill: $primary;
-
   &.on
     .bar
       fill: $danger;
 
-.hoge
-  transform: translate3d(0, 0, 0);
-  transition: all .4s ease-in-out;
-  opacity: 1;
-  transform: translateY(-200px);
+.l-hero
+  align-items: center;
+  display: flex;
+  height: calc(100% - 3.25rem);
+  justify-content: center;
 
-.shifted
-  transform: translateY(100px);
-  opacity: 0;
+.l-hero-title
+  font-size: 3.6rem;
+  @include mobile
+    font-size: 2.5rem;
