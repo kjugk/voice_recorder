@@ -10,7 +10,6 @@ $family-primary: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI"
 $modal-background-background-color: rgba(0, 0, 0, 0.6);
 $primary: #0F5291;
 $danger: #FF2A4F;
-
 @import "~bulma/bulma.sass";
 
 $color-background: $white;
@@ -46,7 +45,7 @@ html,body
 .c-player
   background: $color-background;
   border-top: 1px solid $color-border;
-  box-shadow: 2px -3px rgba(10, 10, 10, 0.1);
+  box-shadow: 0 -2px 8px 0 rgba(0,0,0,.0785);
   padding: $size-6;
   padding-bottom: $size-1;
 
@@ -150,12 +149,7 @@ html,body
     .bar
       fill: $danger;
 
-// .hoge
-//   transform: translate3d(0, 0, 0);
-//   transition: all .4s ease-in-out;
-//   opacity: 1;
-//   transform: translateY(-200px);
-
-// .shifted
-//   transform: translateY(100px);
-//   opacity: 0;
+.c-hero-title
+  font-size: 3.6rem;
+  @include mobile
+    font-size: 2.5rem;

@@ -53,7 +53,7 @@ class ArticleIndexContainer extends React.Component<ArticleIndexContainerProps> 
           <List articles={articles} onItemPlay={selectArticle} onItemDelete={deleteArticle} />
         )}
 
-        <Fab className={fabClassName} linkTo="/new" title="start recording" />
+        <Fab className={fabClassName} linkTo="/articles/new" title="start recording" />
         <PlayerContainer />
       </>
     );
