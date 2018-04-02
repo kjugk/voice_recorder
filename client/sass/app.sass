@@ -61,15 +61,14 @@ html,body
   position: fixed;
   transform: translate3D(0,0,0);
   transition: all 200ms ease-in;
-  min-width: 300px;
-  max-width: 300px;
+  width: 300px;
   z-index: 100;
   &.hidden
     opacity: 0;
     transform: translate3D(0,-100%,0);
 
   +mobile
-    width: 100vh;
+    width: 100%;
     right: 0;
     left: 0;
     text-align: center;
@@ -85,21 +84,21 @@ html,body
 
 .c-fab
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
-  font-size: 1.8rem;
   border-radius: 50%;
+  bottom: 3rem;
+  font-size: 1.8rem;
   position: fixed;
   right: 4rem;
-  bottom: 3rem;
-  z-index: 1000;
   transform: bottom .5s;
+  z-index: 1000;
   &.shifted
     bottom: 9.8rem;
   +mobile
     right: 1.5rem;
 
 .c-error-container
-  text-align: center;
   padding: 2rem;
+  text-align: center;
 
 .c-brand
   font-size: 1.6rem;
@@ -141,7 +140,6 @@ html,body
   background: $light;
   .bar
     fill: $primary;
-
   &.on
     .bar
       fill: $danger;
