@@ -1,6 +1,7 @@
-const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const WebpackShellPlugin = require('webpack-shell-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 let clearOptions = {
   root: __dirname + '/public',
@@ -10,25 +11,12 @@ let clearOptions = {
 
 let config = {
   entry: {
-    client: './client/index.tsx',
-    vendor: [
-      'react',
-      'react-dom',
-      'react-router-dom',
-      'redux',
-      'react-redux',
-      'react-helmet',
-      'redux-saga',
-      'moment',
-      'dexie',
-      'classnames',
-      'shortid',
-      'd3'
-    ]
+    main: './client/index.tsx'
   },
   output: {
-    filename: '[name].js',
-    path: __dirname + '/public/javascripts/'
+    filename: '[name].[contenthash].js',
+    publicPath: '/dist',
+    path: __dirname + '/public/dist/'
   },
 
   resolve: {
@@ -45,35 +33,19 @@ let config = {
         options: {
           configFileName: 'client/tsconfig.json'
         }
-      },
-      {
-        test: /\.(scss|sass)$/,
-        use: [
-          {
-            loader: 'style-loader' // creates style nodes from JS strings
-          },
-          {
-            loader: 'css-loader' // translates CSS into CommonJS
-          },
-          {
-            loader: 'postcss-loader'
-          },
-          {
-            loader: 'sass-loader' // compiles Sass to CSS
-          }
-        ]
       }
     ]
   },
 
   plugins: [
-    new CleanWebpackPlugin('javascripts', clearOptions),
-    new WebpackShellPlugin({
-      onBuildExit: ['node_modules/.bin/gulp']
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: Infinity
+    new CleanWebpackPlugin('dist', clearOptions),
+    // new WebpackShellPlugin({
+    //   onBuildExit: ['node_modules/.bin/gulp']
+    // }),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: path.resolve(__dirname, './client/assets/index.html'),
+      minify: true
     })
   ]
 };

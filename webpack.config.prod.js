@@ -1,17 +1,40 @@
-const webpack = require('webpack');
 const merge = require('webpack-merge');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const baseConfig = require('./webpack.config.base').config
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 const config = merge(baseConfig, {
   plugins: [
-    new UglifyJsPlugin({
-      sourceMap: false
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css'
     }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-    }),
-  ]
+    new CompressionPlugin({
+      test: /\.(css)|(js)$/
+    })
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.(scss|sass)$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          { loader: 'css-loader', options: { minimize: true } },
+          'sass-loader'
+        ]
+      }
+    ]
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all'
+        }
+      }
+    }
+  }
 })
 
 module.exports = config
