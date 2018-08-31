@@ -15,7 +15,7 @@ const config = merge(baseConfig, {
   module: {
     rules: [
       {
-        test: /\.(scss|sass)$/,
+        test: /\.(css|scss|sass)$/,
         use: [
           MiniCssExtractPlugin.loader,
           { loader: 'css-loader', options: { minimize: true } },

@@ -1,12 +1,9 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
-import * as classnames from 'classnames';
 import * as Types from '../types';
 import * as articleActions from '../actions/articleActions';
-
 import { Redirect } from 'react-router-dom';
 import { WelcomeMessage } from '../components/messages/WelcomeMessage';
-import { Loader } from '../components/Loader';
 import { Helmet } from 'react-helmet';
 import { Footer } from '../components/layout/Footer';
 

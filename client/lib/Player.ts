@@ -1,5 +1,4 @@
 import * as Api from '../lib/Api';
-
 const AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext;
 
 export default class Player {
@@ -71,7 +70,7 @@ export const getDurationFromFile = (audio: Blob): Promise<number> => {
 
     fr.onload = () => {
       const context = Player.getContext();
-      context.decodeAudioData(fr.result, (decodeAudioData: AudioBuffer) => {
+      context.decodeAudioData(fr.result as ArrayBuffer, (decodeAudioData: AudioBuffer) => {
         resolve(decodeAudioData.duration);
       });
     };

@@ -78,7 +78,7 @@ export const getTrackFromStorage = (id: string) => {
       .then((article: any) => {
         const fr = new FileReader();
         fr.onload = () => {
-          resolve(fr.result);
+          resolve(fr.result as ArrayBuffer);
         };
         fr.readAsArrayBuffer(article.audio);
       });

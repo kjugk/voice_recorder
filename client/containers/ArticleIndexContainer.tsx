@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import * as classnames from 'classnames';
-
 import * as Types from '../types';
 import * as articleActions from '../actions/articleActions';
-
 import PlayerContainer from './PlayerContainer';
 import { List } from '../components/articles/List';
 import { SnackBar } from '../components/SnackBar';

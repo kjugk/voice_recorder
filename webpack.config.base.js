@@ -1,5 +1,4 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const WebpackShellPlugin = require('webpack-shell-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
@@ -33,15 +32,21 @@ let config = {
         options: {
           configFileName: 'client/tsconfig.json'
         }
+      },
+      {
+        test: [/\.eot$/, /\.ttf$/, /\.svg$/, /\.woff$/, /\.woff2$/],
+        loader: 'file-loader',
+        options: {
+          outputPath: './fonts',
+          publicPath: (path) => '/dist/fonts/' + path,
+          name: '[name].[hash:8].[ext]'
+        }
       }
     ]
   },
 
   plugins: [
     new CleanWebpackPlugin('dist', clearOptions),
-    // new WebpackShellPlugin({
-    //   onBuildExit: ['node_modules/.bin/gulp']
-    // }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: path.resolve(__dirname, './client/assets/index.html'),

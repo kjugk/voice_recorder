@@ -27,9 +27,7 @@ export const requestMicPermission = (): Promise<MediaStream> => {
         mstream = stream;
         resolve(stream);
       })
-      .catch(() => {
-        reject();
-      });
+      .catch(() => reject());
   });
 };
 

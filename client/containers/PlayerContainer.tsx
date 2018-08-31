@@ -1,9 +1,17 @@
 import * as React from 'react';
-import { AppState, ArticlesState, ArticleItemState, PlayerState } from '../types/index';
+import { AppState, ArticleItemState, PlayerState } from '../types/index';
+import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
 import * as playerActions from '../actions/playerActions';
-
 import { Player } from '../components/player/Player';
+
+// selector
+const getSelectedArticle = (
+  articles: ArticleItemState[],
+  selectedId?: string
+): ArticleItemState | undefined => {
+  return articles.find((article) => article.id === selectedId);
+};
 
 interface PlayerContainerProps {
   player: PlayerState;
@@ -71,20 +79,18 @@ const mapStateToProps = (state: AppState) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) => {
-  return {
-    pause: () => dispatch(playerActions.pause()),
-    play: () => dispatch(playerActions.play()),
-    loadTrack: (url: string) => dispatch(playerActions.loadTrack(url)),
-    resetPlayer: () => dispatch(playerActions.resetPlayer())
-  };
-};
+const mapDispatchToProps = (dispatch: Dispatch<any>) =>
+  bindActionCreators(
+    {
+      pause: () => playerActions.pause(),
+      play: () => playerActions.play(),
+      loadTrack: (url: string) => playerActions.loadTrack(url),
+      resetPlayer: () => playerActions.resetPlayer()
+    },
+    dispatch
+  );
 
-const getSelectedArticle = (
-  articles: ArticleItemState[],
-  selectedId?: string
-): ArticleItemState | undefined => {
-  return articles.find((article) => article.id === selectedId);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(PlayerContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PlayerContainer);
