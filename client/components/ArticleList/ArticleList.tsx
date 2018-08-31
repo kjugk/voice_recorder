@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as Types from '../../types';
-import { ListItem } from './ListItem';
+import { ArticleListItem } from '../ArticleListItem/ArticleListItem';
 
 interface ListProps {
   articles: Types.ArticlesState;
@@ -8,12 +8,12 @@ interface ListProps {
   onItemDelete: (id: string) => any;
 }
 
-export const List: React.SFC<ListProps> = (props) => {
+export const ArticleList: React.SFC<ListProps> = (props) => {
   return (
     <ul className="columns is-multiline">
       {props.articles.items.map((article) => {
         return (
-          <ListItem
+          <ArticleListItem
             key={article.id}
             article={article}
             onPlay={props.onItemPlay}

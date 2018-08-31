@@ -11,7 +11,7 @@ interface ListItemProps {
   onDelete: (id: string) => any;
 }
 
-export const ListItem: React.SFC<ListItemProps> = (props) => {
+export const ArticleListItem: React.SFC<ListItemProps> = (props) => {
   const { article, onPlay, onDelete } = props;
 
   return (

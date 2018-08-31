@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-interface BaseModalProps {
+interface ModalProps {
   onCloseClick?: () => void;
   show: boolean;
   children: React.ReactNode;
 }
 
-export const BaseModal: React.SFC<BaseModalProps> = (props) => {
+export const Modal: React.SFC<ModalProps> = (props) => {
   if (!props.show) {
     return null;
   }

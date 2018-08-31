@@ -3,20 +3,20 @@ import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
 import * as Types from '../types';
 import * as FormActions from '../actions/articleFormActions';
-import { Form } from '../components/articles/Form';
+import { ArticleForm } from '../components/ArticleForm/ArticleForm';
 
-interface FormContainerProps {
+interface Props {
   form: Types.ArticleFormState;
   changeTitle(title: string): any;
   submitForm(): any;
 }
 
-class FormContainer extends React.Component<FormContainerProps> {
+class ArticleFormContainer extends React.Component<Props> {
   public render() {
     const { submitForm, changeTitle, form } = this.props;
 
     return (
-      <Form
+      <ArticleForm
         duration={form.duration}
         onSubmit={submitForm}
         onTitleChange={changeTitle}
@@ -45,4 +45,4 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(FormContainer);
+)(ArticleFormContainer);

@@ -3,7 +3,7 @@ import { connect, Dispatch } from 'react-redux';
 import * as Types from '../types';
 import * as articleActions from '../actions/articleActions';
 import { Redirect } from 'react-router-dom';
-import { WelcomeMessage } from '../components/messages/WelcomeMessage';
+import { WelcomeMessage } from '../components/message/WelcomeMessage';
 import { Helmet } from 'react-helmet';
 import { Footer } from '../components/layout/Footer';
 
@@ -12,7 +12,7 @@ interface ArticleIndexContainerProps {
   fetchArticles: () => any;
 }
 
-class HomeContainer extends React.Component<ArticleIndexContainerProps> {
+class HomeScreenContainer extends React.Component<ArticleIndexContainerProps> {
   public componentDidMount() {
     const { articles, fetchArticles } = this.props;
 
@@ -56,4 +56,4 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreenContainer);

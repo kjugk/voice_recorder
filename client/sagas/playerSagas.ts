@@ -1,9 +1,9 @@
-import { all, call, fork, put, select, takeEvery, takeLatest } from 'redux-saga/effects';
+import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import * as Constants from '../constants';
 import * as playerActions from '../actions/playerActions';
-
 import Player from '../lib/Player';
+
 const player = new Player();
 const PROGRESS_INTERVAL = 250;
 

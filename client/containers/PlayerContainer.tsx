@@ -3,7 +3,7 @@ import { AppState, ArticleItemState, PlayerState } from '../types/index';
 import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
 import * as playerActions from '../actions/playerActions';
-import { Player } from '../components/player/Player';
+import { Player } from '../components/Player/Player';
 
 // selector
 const getSelectedArticle = (
