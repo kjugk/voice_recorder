@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Timer } from './Timer';
-import { Loader, LoaderSize } from '../Loader';
+import { Loader, LoaderSize } from '../Loader/Loader';
 
 export interface PlayerProps {
   isLoading: boolean;
@@ -14,7 +14,7 @@ export interface PlayerProps {
 
 export class Player extends React.Component<PlayerProps> {
   public render() {
-    const { title, isLoading, isPlaying, curPos, duration } = this.props;
+    const { title, isLoading, curPos, duration } = this.props;
     const progress = curPos / duration * 100;
 
     return (

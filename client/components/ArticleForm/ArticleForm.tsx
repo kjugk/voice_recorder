@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { TotalTimeField } from './form/TotalTimeField';
-import { FileSizeField } from './form/FileSizeField';
-import { TitleInput } from './form/TitleInput';
+import { TotalTimeField } from './TotalTimeField';
+import { FileSizeField } from './FileSizeField';
+import { TitleInput } from './TitleInput';
 
 interface FormProps {
   duration: number;
@@ -15,7 +15,7 @@ interface FormState {
   titleIsValid: boolean;
 }
 
-export class Form extends React.Component<FormProps, FormState> {
+export class ArticleForm extends React.Component<FormProps, FormState> {
   private static TITLE_MAX_LENGTH = 20;
 
   constructor(props: FormProps) {
@@ -36,7 +36,7 @@ export class Form extends React.Component<FormProps, FormState> {
             value={title}
             isValid={this.state.titleIsValid}
             onChange={this.handleTitleChange.bind(this)}
-            maxLength={Form.TITLE_MAX_LENGTH}
+            maxLength={ArticleForm.TITLE_MAX_LENGTH}
           />
           <div className="field">
             <div className="control">
@@ -76,7 +76,7 @@ export class Form extends React.Component<FormProps, FormState> {
     evt.stopPropagation();
 
     const newTitle: string = evt.currentTarget.value;
-    this.setState({ titleIsValid: newTitle.length <= Form.TITLE_MAX_LENGTH });
+    this.setState({ titleIsValid: newTitle.length <= ArticleForm.TITLE_MAX_LENGTH });
     this.props.onTitleChange(evt.currentTarget.value);
   }
 }

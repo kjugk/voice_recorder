@@ -1,21 +1,22 @@
 import * as React from 'react';
+import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
 import * as Types from '../types';
 import * as FormActions from '../actions/articleFormActions';
-import { Form } from '../components/articles/Form';
+import { ArticleForm } from '../components/ArticleForm/ArticleForm';
 
-interface FormContainerProps {
+interface Props {
   form: Types.ArticleFormState;
-  changeTitle: (title: string) => any;
-  submitForm: () => any;
+  changeTitle(title: string): any;
+  submitForm(): any;
 }
 
-class FormContainer extends React.Component<FormContainerProps> {
+class ArticleFormContainer extends React.Component<Props> {
   public render() {
     const { submitForm, changeTitle, form } = this.props;
 
     return (
-      <Form
+      <ArticleForm
         duration={form.duration}
         onSubmit={submitForm}
         onTitleChange={changeTitle}
@@ -32,15 +33,16 @@ const mapStateToProps = (state: Types.AppState) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) => {
-  return {
-    changeTitle: (title: string) => {
-      dispatch(FormActions.changeTitle(title));
+const mapDispatchToProps = (dispatch: Dispatch<any>) =>
+  bindActionCreators(
+    {
+      changeTitle: (title: string) => FormActions.changeTitle(title),
+      submitForm: () => FormActions.submitForm()
     },
-    submitForm: () => {
-      dispatch(FormActions.submitForm());
-    }
-  };
-};
+    dispatch
+  );
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ArticleFormContainer);

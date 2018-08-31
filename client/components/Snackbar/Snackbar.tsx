@@ -1,11 +1,11 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
 
-interface SnackBarProps {
+interface Props {
   message: string;
 }
 
-export class SnackBar extends React.Component<SnackBarProps> {
+export class Snackbar extends React.Component<Props> {
   public render() {
     const { message } = this.props;
     const c = classnames('notification is-primary c-snackbar', { hidden: message === '' });

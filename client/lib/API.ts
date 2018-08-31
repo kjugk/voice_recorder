@@ -56,19 +56,6 @@ export const deleteArticle = (id: string) => {
   });
 };
 
-export const getTrack = (url: string) => {
-  return new Promise((resolve) => {
-    const xhr = new XMLHttpRequest();
-
-    xhr.open('GET', url, true);
-    xhr.responseType = 'arraybuffer';
-    xhr.onload = () => {
-      resolve(xhr.response);
-    };
-    xhr.send();
-  });
-};
-
 export const getTrackFromStorage = (id: string) => {
   return new Promise((resolve) => {
     db.articles
@@ -78,7 +65,7 @@ export const getTrackFromStorage = (id: string) => {
       .then((article: any) => {
         const fr = new FileReader();
         fr.onload = () => {
-          resolve(fr.result);
+          resolve(fr.result as ArrayBuffer);
         };
         fr.readAsArrayBuffer(article.audio);
       });

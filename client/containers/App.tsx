@@ -1,39 +1,34 @@
 import * as React from 'react';
 import * as types from '../types';
-import { connect, Dispatch } from 'react-redux';
+import { Dispatch, bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-
-import ArticleIndexContainer from '../containers/ArticleIndexContainer';
-import ArticleNewContainer from '../containers/ArticleNewContainer';
-import HomeContainer from '../containers/HomeContainer';
-
+import ArticlesScreenContainer from './ArticlesScreenContainer';
+import RecordingScreenContainer from './RecordingScreenContainer';
+import HomeScreenContainer from './HomeScreenContainer';
 import { Header } from '../components/layout/Header';
-import { MainSection } from '../components/layout/MainSection';
-import { Footer } from '../components/layout/Footer';
 import { ErrorMessageModal } from '../components/modal/ErrorMessageModal';
-import { SnackBar } from '../components/SnackBar';
-
+import { Snackbar } from '../components/Snackbar/Snackbar';
 import * as messageActions from '../actions/messageActions';
 
 interface AppProps {
   message: types.MessageState;
-  onErrorMessageClose: () => any;
+  onErrorMessageClose(): any;
 }
 
 class App extends React.Component<AppProps> {
   public render() {
+    const { message, onErrorMessageClose } = this.props;
+
     return (
       <Router>
         <>
           <Header />
-          <Route exact path="/" component={HomeContainer} />
-          <Route exact path="/articles" component={ArticleIndexContainer} />
-          <Route exact path="/articles/new" component={ArticleNewContainer} />
-          <SnackBar message={this.props.message.body} />
-          <ErrorMessageModal
-            message={this.props.message.errorMessage}
-            onCloseClick={this.props.onErrorMessageClose.bind(this)}
-          />
+          <Route exact path="/" component={HomeScreenContainer} />
+          <Route exact path="/articles" component={ArticlesScreenContainer} />
+          <Route exact path="/articles/new" component={RecordingScreenContainer} />
+          <Snackbar message={message.body} />
+          <ErrorMessageModal message={message.errorMessage} onCloseClick={onErrorMessageClose} />
         </>
       </Router>
     );
@@ -46,10 +41,15 @@ const mapStateToProps = (state: types.AppState) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) => {
-  return {
-    onErrorMessageClose: () => dispatch(messageActions.setErrorMessage(''))
-  };
-};
+const mapDispatchToProps = (dispatch: Dispatch<any>) =>
+  bindActionCreators(
+    {
+      onErrorMessageClose: () => messageActions.setErrorMessage('')
+    },
+    dispatch
+  );
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

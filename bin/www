@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-var app = require('../dist/app');
+var app = require('../server/app');
 var debug = require('debug')('voice-recorder:server');
 var http = require('http');
 

@@ -1,10 +1,10 @@
 import * as React from 'react';
+import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
 import * as Types from '../types';
 import * as recorderActions from '../actions/recorderActions';
-
-import { Recorder } from '../components/recorder/Recorder';
-import { Loader } from '../components/Loader';
+import { Recorder } from '../components/Recorder/Recorder';
+import { Loader } from '../components/Loader/Loader';
 
 interface RecorderContainerProps {
   media: Types.MediaState;
@@ -40,15 +40,16 @@ const mapStateToProps = (state: Types.AppState) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) => {
-  return {
-    startRecording: () => {
-      dispatch(recorderActions.startRecording());
+const mapDispatchToProps = (dispatch: Dispatch<any>) =>
+  bindActionCreators(
+    {
+      startRecording: () => recorderActions.startRecording(),
+      stopRecording: () => recorderActions.stopRecording()
     },
-    stopRecording: () => {
-      dispatch(recorderActions.stopRecording());
-    }
-  };
-};
+    dispatch
+  );
 
-export default connect(mapStateToProps, mapDispatchToProps)(RecorderContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RecorderContainer);

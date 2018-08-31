@@ -1,32 +1,29 @@
 import * as React from 'react';
+import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-
 import * as Types from '../types';
 import * as formActions from '../actions/articleFormActions';
 import * as mediaActions from '../actions/mediaActions';
-import * as messageActions from '../actions/messageActions';
 import * as recorderActions from '../actions/recorderActions';
-
-import RecorderContainer from '../containers/RecorderContainer';
-import FormContainer from '../containers/FormContainer';
-import { MicPermissionDeniedMessage } from '../components/messages/MicPermissionDeniedMessage';
-import { NotSupportedMessage } from '../components/messages/NotSupportedMessage';
-import { Loader } from '../components/Loader';
-
+import RecorderContainer from './RecorderContainer';
+import ArticleFormContainer from './ArticleFormContainer';
+import { MicPermissionDeniedMessage } from '../components/message/MicPermissionDeniedMessage';
+import { NotSupportedMessage } from '../components/message/NotSupportedMessage';
+import { Loader } from '../components/Loader/Loader';
 import { Helmet } from 'react-helmet';
 
-interface NewArticleContainerProps {
+interface Props {
   form: Types.ArticleFormState;
   media: Types.MediaState;
   message: Types.MessageState;
   recorder: Types.RecorderState;
-  requestMicPermission: () => void;
-  resetForm: () => any;
-  resetRecorder: () => any;
+  requestMicPermission(): any;
+  resetForm(): any;
+  resetRecorder(): any;
 }
 
-class NewArticleContainer extends React.Component<NewArticleContainerProps> {
+class RecordingScreenContainer extends React.Component<Props> {
   public componentDidMount() {
     this.props.requestMicPermission();
   }
@@ -42,20 +39,20 @@ class NewArticleContainer extends React.Component<NewArticleContainerProps> {
     }
 
     return (
-      <section className="section">
-        <div className="container">
-          <Helmet>
-            <title>New Article | Voice Recorder</title>
-            <meta name="robots" content="noindex" />
-          </Helmet>
-          {this.renderContents()}
-        </div>
-      </section>
+      <>
+        <Helmet>
+          <title>New Article | Voice Recorder</title>
+          <meta name="robots" content="noindex" />
+        </Helmet>
+        <section className="section">
+          <div className="container">{this.renderContents()}</div>
+        </section>
+      </>
     );
   }
 
   private renderContents() {
-    const { form, media, recorder } = this.props;
+    const { media, recorder } = this.props;
 
     if (media.permission === Types.MediaPermissionState.NOT_CHECKED) {
       return <Loader />;
@@ -72,7 +69,7 @@ class NewArticleContainer extends React.Component<NewArticleContainerProps> {
     return (
       <>
         {!recorder.recordingCompleted && <RecorderContainer />}
-        {recorder.recordingCompleted && <FormContainer />}
+        {recorder.recordingCompleted && <ArticleFormContainer />}
       </>
     );
   }
@@ -87,18 +84,17 @@ const mapStateToProps = (state: Types.AppState) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) => {
-  return {
-    requestMicPermission: () => {
-      dispatch(mediaActions.requestMicPermission());
+const mapDispatchToProps = (dispatch: Dispatch<any>) =>
+  bindActionCreators(
+    {
+      requestMicPermission: () => mediaActions.requestMicPermission(),
+      resetForm: () => formActions.resetForm(),
+      resetRecorder: () => recorderActions.resetRecorder()
     },
-    resetForm: () => {
-      dispatch(formActions.resetForm());
-    },
-    resetRecorder: () => {
-      dispatch(recorderActions.resetRecorder());
-    }
-  };
-};
+    dispatch
+  );
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewArticleContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RecordingScreenContainer);
