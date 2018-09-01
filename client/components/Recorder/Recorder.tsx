@@ -3,7 +3,7 @@ import { formatDurationToTime } from '../../lib/Player';
 import * as Types from '../../types';
 import * as classnames from 'classnames';
 
-import { MicVisualizer } from '../../components/recorder/MicVisualizer';
+import { MicVisualizer } from '../../components/Recorder/MicVisualizer';
 import { RECORDING_LIMIT } from '../../lib/Recorder';
 
 interface RecorderProps {
