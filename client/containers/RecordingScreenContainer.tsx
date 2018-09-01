@@ -45,7 +45,9 @@ class RecordingScreenContainer extends React.Component<Props> {
           <meta name="robots" content="noindex" />
         </Helmet>
         <section className="section">
-          <div className="container">{this.renderContents()}</div>
+          <div className="container">
+            {this.renderContents()}
+          </div>
         </section>
       </>
     );
