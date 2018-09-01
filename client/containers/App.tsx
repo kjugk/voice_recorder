@@ -7,7 +7,7 @@ import ArticlesScreenContainer from './ArticlesScreenContainer';
 import RecordingScreenContainer from './RecordingScreenContainer';
 import HomeScreenContainer from './HomeScreenContainer';
 import { Header } from '../components/layout/Header';
-import { ErrorMessageModal } from '../components/modal/ErrorMessageModal';
+import { ErrorMessageModal } from '../components/Modal/ErrorMessageModal';
 import { Snackbar } from '../components/Snackbar/Snackbar';
 import * as messageActions from '../actions/messageActions';
 
