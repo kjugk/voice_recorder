@@ -1,4 +1,4 @@
-import * as Api from '../lib/Api';
+import * as Api from './Api';
 const AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext;
 
 export default class Player {
