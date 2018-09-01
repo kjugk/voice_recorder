@@ -3,7 +3,7 @@ import { connect, Dispatch } from 'react-redux';
 import * as Types from '../types';
 import * as articleActions from '../actions/articleActions';
 import { Redirect } from 'react-router-dom';
-import { WelcomeMessage } from '../components/message/WelcomeMessage';
+import { Home } from '../components/Home/Home';
 import { Helmet } from 'react-helmet';
 import { Footer } from '../components/layout/Footer';
 
@@ -33,13 +33,12 @@ class HomeScreenContainer extends React.Component<ArticleIndexContainerProps> {
     }
 
     return (
-      <div style={{height: '100%'}}>
+      <>
         <Helmet>
           <title>Voice Recorder</title>
         </Helmet>
-        <WelcomeMessage />
-        <Footer />
-      </div>
+        <Home />
+      </>
     );
   }
 }

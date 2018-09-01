@@ -10,6 +10,7 @@ import { Header } from '../components/layout/Header';
 import { ErrorMessageModal } from '../components/Modal/ErrorMessageModal';
 import { Snackbar } from '../components/Snackbar/Snackbar';
 import * as messageActions from '../actions/messageActions';
+import { Footer } from '../components/layout/Footer';
 
 interface AppProps {
   message: types.MessageState;
@@ -22,14 +23,17 @@ class App extends React.Component<AppProps> {
 
     return (
       <Router>
-        <>
+        <div style={{height: '100%', display: 'flex', flexDirection: 'column'}}>
           <Header />
-          <Route exact path="/" component={HomeScreenContainer} />
-          <Route exact path="/articles" component={ArticlesScreenContainer} />
-          <Route exact path="/articles/new" component={RecordingScreenContainer} />
+          <div style={{flex: 1}}>
+            <Route exact path="/" component={HomeScreenContainer} />
+            <Route exact path="/articles" component={ArticlesScreenContainer} />
+            <Route exact path="/articles/new" component={RecordingScreenContainer} />
+          </div>
+          <Footer />
           <Snackbar message={message.body} />
           <ErrorMessageModal message={message.errorMessage} onCloseClick={onErrorMessageClose} />
-        </>
+        </div>
       </Router>
     );
   }
