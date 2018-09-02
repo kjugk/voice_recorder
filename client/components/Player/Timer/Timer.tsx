@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { formatDurationToTime } from '../../lib/Player';
+import { formatDurationToTime } from '../../../lib/Player';
 
 interface TimerProps {
   curPos: number;

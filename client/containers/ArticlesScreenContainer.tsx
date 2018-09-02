@@ -4,7 +4,7 @@ import * as classnames from 'classnames';
 import * as Types from '../types';
 import * as articleActions from '../actions/articleActions';
 import PlayerContainer from './PlayerContainer';
-import { ArticleList } from '../components/ArticleList/ArticleList';
+import { ArticleList } from '../components/article/ArticleList/ArticleList';
 import { Loader } from '../components/Loader/Loader';
 import { Fab } from '../components/Fab/Fab';
 import { Helmet } from 'react-helmet';

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Timer } from './Timer';
+import { Timer } from './Timer/Timer';
 import { Loader, LoaderSize } from '../Loader/Loader';
 
 export interface PlayerProps {

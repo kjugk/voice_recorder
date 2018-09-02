@@ -1,13 +1,13 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
 import * as d3 from 'd3';
-import Player from '../../lib/Player';
+import Player from '../../../lib/Player';
 
-interface MicVisualizerProps {
+interface VisualizerProps {
   stream?: MediaStream;
   isRecording: boolean;
 }
-export class MicVisualizer extends React.Component<MicVisualizerProps> {
+export class Visualizer extends React.Component<VisualizerProps> {
   private static BAR_SPACE = 0.1;
   private static SVG_HEIGHT = 150;
   private static FFT_SIZE = 128;
@@ -21,12 +21,12 @@ export class MicVisualizer extends React.Component<MicVisualizerProps> {
     }
 
     const width = this.containerElem.offsetWidth;
-    const height = MicVisualizer.SVG_HEIGHT;
+    const height = Visualizer.SVG_HEIGHT;
     const svg = d3.select('svg');
     const audioCtx = Player.getContext();
     const analyser = audioCtx.createAnalyser();
 
-    analyser.fftSize = MicVisualizer.FFT_SIZE;
+    analyser.fftSize = Visualizer.FFT_SIZE;
     audioCtx.createMediaStreamSource(stream).connect(analyser);
 
     const bufferLength = analyser.frequencyBinCount;
@@ -35,12 +35,12 @@ export class MicVisualizer extends React.Component<MicVisualizerProps> {
     const x = d3
       .scaleBand()
       .range([0, width])
-      .padding(MicVisualizer.BAR_SPACE);
+      .padding(Visualizer.BAR_SPACE);
 
     const y = d3.scaleLinear().rangeRound([height, 0]);
 
     const ar = [];
-    for (let i = 0; i < MicVisualizer.FFT_SIZE / 2; i++) {
+    for (let i = 0; i < Visualizer.FFT_SIZE / 2; i++) {
       ar.push('' + i);
     }
 

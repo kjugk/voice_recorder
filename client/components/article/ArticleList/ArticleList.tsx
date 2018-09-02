@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as Types from '../../types';
+import * as Types from '../../../types';
 import { ArticleListItem } from '../ArticleListItem/ArticleListItem';
 
 interface ListProps {

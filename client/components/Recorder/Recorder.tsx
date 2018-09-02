@@ -2,8 +2,7 @@ import * as React from 'react';
 import { formatDurationToTime } from '../../lib/Player';
 import * as Types from '../../types';
 import * as classnames from 'classnames';
-
-import { MicVisualizer } from '../../components/Recorder/MicVisualizer';
+import { Visualizer } from './Visualizer/Visualizer';
 import { RECORDING_LIMIT } from '../../lib/Recorder';
 
 interface RecorderProps {
@@ -34,7 +33,7 @@ export class Recorder extends React.Component<RecorderProps> {
           <div>{formatDurationToTime(RECORDING_LIMIT / 1000)}</div>
         </div>
 
-        <MicVisualizer stream={media.stream} isRecording={isRecording} />
+        <Visualizer stream={media.stream} isRecording={isRecording} />
 
         <div className="columns is-mobile  has-align-center" style={{marginTop: '.6rem'}}>
           <div className="column is-narrow">{this.renderButton()}</div>
