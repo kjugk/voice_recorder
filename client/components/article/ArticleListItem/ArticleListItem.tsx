@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { MouseEvent } from 'react';
-import * as Types from '../../types';
+import * as Types from '../../../types';
 
 import { ListItemHeadline } from './ListItemHeadline';
 import { ListItemControl } from './ListItemControl';

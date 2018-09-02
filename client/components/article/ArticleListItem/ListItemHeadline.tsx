@@ -1,8 +1,8 @@
 import * as React from 'react';
-import * as Types from '../../types';
+import * as Types from '../../../types';
 import * as prettyBytes from 'pretty-bytes';
 import * as moment from 'moment';
-import { formatDurationToTime } from '../../lib/Player';
+import { formatDurationToTime } from '../../../lib/Player';
 
 interface ListIteamHeadlineProps {
   article: Types.ArticleItemState;

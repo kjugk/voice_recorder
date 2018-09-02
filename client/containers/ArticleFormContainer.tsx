@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
 import * as Types from '../types';
 import * as FormActions from '../actions/articleFormActions';
-import { ArticleForm } from '../components/ArticleForm/ArticleForm';
+import { ArticleForm } from '../components/article/ArticleForm/ArticleForm';
 
 interface Props {
   form: Types.ArticleFormState;
