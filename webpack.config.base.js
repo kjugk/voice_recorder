@@ -10,7 +10,7 @@ let clearOptions = {
 
 let config = {
   entry: {
-    main: './client/index.tsx'
+    main: './src/index.tsx'
   },
   output: {
     filename: '[name].[contenthash].js',
@@ -46,7 +46,7 @@ let config = {
     new CleanWebpackPlugin('dist', clearOptions),
     new HtmlWebpackPlugin({
       filename: '../index.html',
-      template: path.resolve(__dirname, './client/assets/index.html'),
+      template: path.resolve(__dirname, './src/assets/index.html'),
       minify: true
     })
   ]
