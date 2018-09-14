@@ -45,7 +45,7 @@ let config = {
   plugins: [
     new CleanWebpackPlugin('dist', clearOptions),
     new HtmlWebpackPlugin({
-      filename: 'index.html',
+      filename: '../index.html',
       template: path.resolve(__dirname, './client/assets/index.html'),
       minify: true
     })
