@@ -10,7 +10,7 @@ let clearOptions = {
 
 let config = {
   entry: {
-    main: './client/index.tsx'
+    main: './src/index.tsx'
   },
   output: {
     filename: '[name].[contenthash].js',
@@ -28,10 +28,7 @@ let config = {
       // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
       {
         test: /\.tsx?$/,
-        loader: 'awesome-typescript-loader',
-        options: {
-          configFileName: 'client/tsconfig.json'
-        }
+        loader: 'awesome-typescript-loader'
       },
       {
         test: [/\.eot$/, /\.ttf$/, /\.svg$/, /\.woff$/, /\.woff2$/],
@@ -48,8 +45,8 @@ let config = {
   plugins: [
     new CleanWebpackPlugin('dist', clearOptions),
     new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: path.resolve(__dirname, './client/assets/index.html'),
+      filename: '../index.html',
+      template: path.resolve(__dirname, './src/assets/index.html'),
       minify: true
     })
   ]
