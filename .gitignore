@@ -2,5 +2,8 @@ node_modules
 public/javascripts/*
 .DS_Store
 dist
+public/index.html
 public/_sw.js
 public/service-worker.js
+.firebase/hosting.*.cache
+firebase-debug.log
