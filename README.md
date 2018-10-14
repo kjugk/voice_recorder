@@ -11,9 +11,12 @@ Node.js 8+
 
 ## Local running for development
 1. Clone the project.
-2. Run `npm install`.
-3. Run `npm run start:dev`.
-4. Access localhost:8080.
+2. Run `npm i -g firebase-tools`.
+3. Run `firebase login`
+4. Run `npm install`.
+5. Run `npm run start:dev`.
+6. Run `firebase serve`.
+7. Access `localhost:5000`.
 
 ## License
 This software is released under the MIT License, see LICENSE.txt.
